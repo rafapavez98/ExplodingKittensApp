@@ -1,0 +1,30 @@
+package com.example.explodingkittensapp
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import androidx.navigation.Navigation
+
+
+class HomeScreenFragment : Fragment() {
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val view = inflater.inflate(R.layout.fragment_home_screen, container, false)
+
+        val logoutbtn : Button = view.findViewById(R.id.logoutbtn)
+
+        logoutbtn.setOnClickListener { Navigation.findNavController(view).navigate(R.id.action_homeScreenFragment_to_loginFragment)}
+
+        return view
+
+    }
+
+
+}
