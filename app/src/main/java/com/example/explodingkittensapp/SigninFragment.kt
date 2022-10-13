@@ -35,9 +35,12 @@ class SigninFragment : Fragment() {
 
 
         signinbtn.setOnClickListener {
-            val email = signinmail.text.toString().trim()
-            val username = signinusername.text.toString().trim()
-            val password = signinpassword.text.toString().trim()
+            val email = signinmail.text.toString()
+            val username = signinusername.text.toString()
+            val password = signinpassword.text.toString()
+            val total_matches = 0
+            val winrate = 100
+
             if(email.isEmpty()){
                 signinmail.error = "Email required"
                 signinmail.requestFocus()
@@ -57,8 +60,8 @@ class SigninFragment : Fragment() {
                 email,
                 username,
                 password,
-                total_matches = 0,
-                winrate = 100,
+                total_matches,
+                winrate,
                 friends = listOf()
             ).enqueue(object: Callback<SigninResponse>{
                 override fun onFailure(call: Call<SigninResponse>, t: Throwable) {
@@ -66,11 +69,10 @@ class SigninFragment : Fragment() {
                 }
                 override fun onResponse(call: Call<SigninResponse>,response: Response<SigninResponse>) {
                     Toast.makeText(activity, response.body()?.msg, Toast.LENGTH_LONG).show()
+                    Navigation.findNavController(view).navigate(R.id.action_signinFragment_to_loginFragment)
                 }
-
             })
         }
-
         return view
     }
 
