@@ -54,7 +54,14 @@
         android:id="@+id/newGameFragment"
         android:name="com.example.explodingkittensapp.NewGameFragment"
         android:label="fragment_new_game"
-        tools:layout="@layout/fragment_new_game" />
+        tools:layout="@layout/fragment_new_game">
+        <action
+            android:id="@+id/action_newGameFragment_to_homeScreenFragment"
+            app:destination="@+id/homeScreenFragment"/>
+        <action
+            android:id="@+id/action_newGameFragment_to_friendsFragment"
+            app:destination="@+id/friendsFragment"/>
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.explodingkittensapp.ProfileFragment"
