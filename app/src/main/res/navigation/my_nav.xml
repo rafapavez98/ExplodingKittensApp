@@ -69,7 +69,7 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/friendsFragment"
-        android:name="com.example.explodingkittensapp.FriendsFragment"
+        android:name="com.example.explodingkittensapp.friend.FriendFragment"
         android:label="fragment_friends"
         tools:layout="@layout/fragment_friends" />
     <fragment

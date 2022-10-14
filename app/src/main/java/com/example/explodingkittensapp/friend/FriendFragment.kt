@@ -1,13 +1,14 @@
-package com.example.explodingkittensapp
+package com.example.explodingkittensapp.friend
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.explodingkittensapp.R
 
 
-class FriendsFragment : Fragment() {
+class FriendFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
