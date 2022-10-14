@@ -27,7 +27,9 @@ import java.util.concurrent.Executors
 class UserViewModel(application: Application) : AndroidViewModel(application) {
 
     val app = application
-
+    var emailLiveData = MutableLiveData("")
+    var passwordLiveData = MutableLiveData("")
+    var credentialsAreValid : MutableLiveData<Boolean> = MutableLiveData()
     var users: MutableList<UserModel> = mutableListOf()
     var usersLiveData = MutableLiveData<MutableList<UserModel>>()
     var idLast = 0
@@ -100,5 +102,15 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
                 }
             }
         })
+    }
+
+    fun verifyUser() {
+        val user = users?.find { it.email == emailLiveData.value }
+
+        if (user?.password == passwordLiveData.value) {
+            credentialsAreValid.value = true
+            return
+        }
+        credentialsAreValid.value = false
     }
 }

@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.explodingkittensapp.databinding.ActivityMainBinding
 
+var isLoggedIn = false
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivityMainBinding

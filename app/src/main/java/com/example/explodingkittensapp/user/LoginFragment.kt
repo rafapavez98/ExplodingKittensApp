@@ -10,9 +10,12 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.explodingkittensapp.APImodels.Bodies.APILogin
 import com.example.explodingkittensapp.APImodels.Bodies.APIUser
+import com.example.explodingkittensapp.APImodels.Responses.APILoginResponse
 import com.example.explodingkittensapp.R
+import com.example.explodingkittensapp.activities.isLoggedIn
 
 
 class LoginFragment : Fragment() {
@@ -41,7 +44,19 @@ class LoginFragment : Fragment() {
 
             val newAPILogin = APILogin(lemail, lpassword)
             viewModel.loginUserAPI(newAPILogin, view)
-            Toast.makeText(activity, "Welcome", Toast.LENGTH_LONG).show()
+
+            viewModel.credentialsAreValid.observe(viewLifecycleOwner) { areValid ->
+                areValid?.let {
+                    if (it) {
+                        isLoggedIn = true
+                        Toast.makeText(activity, "Welcome", Toast.LENGTH_LONG).show()
+                        Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_homeScreenFragment)
+
+                    } else {
+                        Toast.makeText(context, "Credenciales inválidas", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
         }
         return view
     }
