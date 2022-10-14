@@ -1,10 +1,13 @@
 package com.example.explodingkittensapp.user
 
 import android.app.Application
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.Navigation
 import com.example.explodingkittensapp.*
+import com.example.explodingkittensapp.APImodels.Bodies.APILogin
 import com.example.explodingkittensapp.APImodels.Bodies.APIUser
 import com.example.explodingkittensapp.APImodels.Responses.APILoginResponse
 import com.example.explodingkittensapp.APImodels.Responses.APISigninResponse
@@ -74,6 +77,25 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
                     val userAPI = response.body()
                     if (userAPI != null) {
                         println(userAPI)
+                    }
+                }
+            }
+        })
+    }
+
+    fun loginUserAPI(loginUser: APILogin, view: View){
+        val service = getRetrofit().create(UserRepository::class.java)
+        val call =  service.loginUser(loginUser)
+        call.enqueue(object :  Callback<APILoginResponse> {
+            override fun onFailure(call: Call<APILoginResponse>, t: Throwable) {
+                println(t.message)
+            }
+            override fun onResponse(call: Call<APILoginResponse>, response: Response<APILoginResponse>) {
+                if(response.body() != null){
+                    val userAPI = response.body()
+                    if (userAPI != null) {
+                        println(userAPI)
+                        Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_homeScreenFragment)
                     }
                 }
             }
