@@ -71,7 +71,11 @@
         android:id="@+id/friendsFragment"
         android:name="com.example.explodingkittensapp.friend.FriendFragment"
         android:label="fragment_friends"
-        tools:layout="@layout/fragment_friends" />
+        tools:layout="@layout/fragment_friends" >
+        <action
+            android:id="@+id/action_friendsFragment_to_friendDetails"
+            app:destination="@id/friendDetails" />
+    </fragment>
     <fragment
         android:id="@+id/joinGameFragment"
         android:name="com.example.explodingkittensapp.JoinGameFragment"
@@ -82,4 +86,13 @@
         android:name="com.example.explodingkittensapp.MyGamesFragment"
         android:label="fragment_my_games"
         tools:layout="@layout/fragment_my_games" />
+    <fragment
+        android:id="@+id/friendDetails"
+        android:name="com.example.explodingkittensapp.friend.FriendDetails"
+        tools:layout="@layout/friend_details_fragment" >
+        <argument
+            android:name="friendId"
+            android:defaultValue="Friend"
+            app:argType="string" />
+    </fragment>
 </navigation>

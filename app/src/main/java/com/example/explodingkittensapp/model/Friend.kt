@@ -1,7 +1,6 @@
 package com.example.explodingkittensapp.model
 
 open class Friend(
-    var id: String,
     var email: String,
     var username: String,
     var password: String,
