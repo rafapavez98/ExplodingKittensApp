@@ -19,7 +19,7 @@
         android:id="@+id/joingamebtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Unirse a partida"
+        android:text="Join Match"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +29,7 @@
         android:id="@+id/newgamebtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Crear partida"
+        android:text="Create Match"
         app:layout_constraintBottom_toTopOf="@+id/joingamebtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -38,7 +38,7 @@
         android:id="@+id/mygamesbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mis partidas"
+        android:text="My Matches"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/joingamebtn" />
@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Perfil"
+        android:text="Profile"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Cerrar Sesion"
+        android:text="Logout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -69,7 +69,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Amigos"
+        android:text="Friends"
+        app:layout_constraintEnd_toStartOf="@+id/logoutbtn"
         app:layout_constraintStart_toEndOf="@+id/profilebtn"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewGameFragment">
+    tools:context=".matches.NewGameFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Amigos"
+        android:text="Friends"
         app:layout_constraintStart_toStartOf="@+id/AppNameTextView2"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="Crear Partida"
+        android:text="Create Match"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/homebtn"
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
 
         android:layout_marginEnd="13dp"
-        android:text="Numero de Jugadores"
+        android:text="N° of Players"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/button2"
         app:layout_constraintEnd_toStartOf="@+id/button2"
@@ -110,7 +110,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="18dp"
-        android:text="Agregar amigos a la partida"
+        android:text="Invite Friends"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/buttonAddPlayer1"
         app:layout_constraintEnd_toStartOf="@+id/buttonAddPlayer1"
@@ -180,7 +180,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="37dp"
-        android:text="Crear Partida"
+        android:text="Create Match"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

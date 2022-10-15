@@ -1,6 +1,6 @@
 package com.example.explodingkittensapp.APImodels.Bodies
 
 data class APILogin(
-    var email: String,
+    var username: String,
     var password: String,
 )

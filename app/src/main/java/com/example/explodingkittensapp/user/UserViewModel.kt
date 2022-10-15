@@ -1,8 +1,10 @@
 package com.example.explodingkittensapp.user
 
+import android.app.Activity
 import android.app.Application
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.Navigation
@@ -32,9 +34,8 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     var credentialsAreValid : MutableLiveData<Boolean> = MutableLiveData()
     var users: MutableList<UserModel> = mutableListOf()
     var usersLiveData = MutableLiveData<MutableList<UserModel>>()
-    var idLast = 0
-    lateinit var token: String
     lateinit var uname: String
+    lateinit var id: String
 
     var database: UserDao
     private val executor: ExecutorService = Executors.newSingleThreadExecutor()
@@ -51,7 +52,6 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
             database.insertUser(UserEntityMapper().mapToCached(user))
             users.add(user)
             usersLiveData.postValue(users)
-            idLast ++
         }
     }
 
@@ -79,13 +79,15 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
                     val userAPI = response.body()
                     if (userAPI != null) {
                         println(userAPI)
+                        val usr = UserModel(userAPI.id,userAPI.email,userAPI.username,userAPI.password,userAPI.total_matches,userAPI.winrate,userAPI.friends)
+                        saveUser(usr)
                     }
                 }
             }
         })
     }
 
-    fun loginUserAPI(loginUser: APILogin, view: View){
+    fun loginUserAPI(loginUser: APILogin, view: View, activity: FragmentActivity?){
         val service = getRetrofit().create(UserRepository::class.java)
         val call =  service.loginUser(loginUser)
         call.enqueue(object :  Callback<APILoginResponse> {
@@ -97,6 +99,9 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
                     val userAPI = response.body()
                     if (userAPI != null) {
                         println(userAPI)
+                        uname = userAPI.username
+                        id = userAPI.id
+                        Toast.makeText(activity, "Welcome $uname", Toast.LENGTH_LONG).show()
                         Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_homeScreenFragment)
                     }
                 }

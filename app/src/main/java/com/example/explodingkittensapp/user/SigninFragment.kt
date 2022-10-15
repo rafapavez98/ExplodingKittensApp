@@ -57,9 +57,6 @@ class SigninFragment : Fragment() {
                 signinpassword.requestFocus()
                 return@setOnClickListener
             }
-            val id = "0"
-            val newUser = UserModel(id,semail,susername,spassword,stotal_matches,swinrate,sfriends)
-            viewModel.saveUser(newUser)
             val newAPIUser = APIUser(semail,susername,spassword,stotal_matches,swinrate,sfriends)
             viewModel.addUserAPI(newAPIUser)
             Toast.makeText(activity, "User Created", Toast.LENGTH_LONG).show()

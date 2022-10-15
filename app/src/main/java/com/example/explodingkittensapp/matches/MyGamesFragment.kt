@@ -1,24 +1,26 @@
-package com.example.explodingkittensapp
+package com.example.explodingkittensapp.matches
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.explodingkittensapp.R
 
 
-class JoinGameFragment : Fragment() {
+class MyGamesFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_join_game, container, false)
+        val view = inflater.inflate(R.layout.fragment_my_games, container, false)
 
 
 
         return view
     }
+
 
 }

@@ -1,5 +1,6 @@
 package com.example.explodingkittensapp.APImodels.Responses
 
 data class APILoginResponse(
-    val msg: String
+    val id: String,
+    val username: String
 )
