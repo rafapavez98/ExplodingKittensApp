@@ -1,6 +1,10 @@
 package com.example.explodingkittensapp.APImodels.Responses
 
-data class APILoginResponse(
-    val id: String,
-    val username: String
-)
+import android.os.Parcelable
+import com.example.explodingkittensapp.model.UserModel
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class APIFriendsResponse(
+    val friends: MutableList<UserModel>
+): Parcelable

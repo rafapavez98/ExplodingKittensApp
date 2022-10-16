@@ -55,8 +55,6 @@ class FriendRecyclerViewAdapter(override val onClickListener: OnClickListener): 
         fun bindView(item: UserModel){
             val userNameTextView: TextView = view.findViewById(R.id.userName)
             userNameTextView.text = item.username
-
-
         }
 
     }
