@@ -1,6 +1,5 @@
 package com.example.explodingkittensapp.user
 
-import android.app.Activity
 import android.app.Application
 import android.view.View
 import android.widget.Toast
@@ -17,7 +16,7 @@ import com.example.explodingkittensapp.database.DatabaseRepository
 import com.example.explodingkittensapp.database.UserDao
 import com.example.explodingkittensapp.database.UserEntityMapper
 import com.example.explodingkittensapp.model.*
-import com.example.explodingkittensapp.networking.UserRepository
+import com.example.explodingkittensapp.networking.UsersRemoteRepository
 import com.example.explodingkittensapp.networking.getRetrofit
 import retrofit2.Call
 import retrofit2.Callback
@@ -43,7 +42,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     init{
         database = DatabaseRepository(application).postUserDao()
         loadUsers()
-        val service = getRetrofit().create(UserRepository::class.java)
+        val service = getRetrofit().create(UsersRemoteRepository::class.java)
     }
 
     //DB Methods
@@ -68,7 +67,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
 
     //API Methods
     fun addUserAPI(newUser: APIUser){
-        val service = getRetrofit().create(UserRepository::class.java)
+        val service = getRetrofit().create(UsersRemoteRepository::class.java)
         val call =  service.createUser(newUser)
         call.enqueue(object :  Callback<APISigninResponse> {
             override fun onFailure(call: Call<APISigninResponse>, t: Throwable) {
@@ -88,7 +87,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun loginUserAPI(loginUser: APILogin, view: View, activity: FragmentActivity?){
-        val service = getRetrofit().create(UserRepository::class.java)
+        val service = getRetrofit().create(UsersRemoteRepository::class.java)
         val call =  service.loginUser(loginUser)
         call.enqueue(object :  Callback<APILoginResponse> {
             override fun onFailure(call: Call<APILoginResponse>, t: Throwable) {

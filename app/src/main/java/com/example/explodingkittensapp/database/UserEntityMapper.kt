@@ -23,7 +23,7 @@ class UserEntityMapper : EntityMapper<UserEntity, UserModel> {
             type.password,
             type.total_matches,
             type.winrate,
-            type.friends,
+            type.friends as MutableList<String>,
         )
     }
 }

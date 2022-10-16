@@ -1,121 +1,54 @@
 package com.example.explodingkittensapp.friend
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.os.bundleOf
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.explodingkittensapp.R
-import com.example.explodingkittensapp.databinding.FragmentFriendsBinding
-import com.example.explodingkittensapp.model.Friend
-import com.example.explodingkittensapp.model.Friends
+import com.example.explodingkittensapp.activities.MainActivity
+import com.example.explodingkittensapp.activities.OnClickListener
+import com.example.explodingkittensapp.model.UserModel
 
 
-class FriendFragment : Fragment(), FriendItemAdapter.ActionListener {
+class FriendFragment : Fragment(), OnClickListener {
 
-    private lateinit var friendItemAdapter: FriendItemAdapter
-    private lateinit var viewModel: FriendViewModel
-    private val allFriends = Friends.createFriendList()
-    private var _binding: FragmentFriendsBinding? = null
-    private val binding get() = _binding!!
+    lateinit var adapter: FriendRecyclerViewAdapter
+    lateinit var recyclerView: RecyclerView
+    private val viewModel: FriendViewModel by activityViewModels()
 
-    private var mLastClickTime = System.currentTimeMillis()
-    private val CLICK_TIME_INTERVAL: Long = 300
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.setNavigator(activity as MainActivity)
+        setHasOptionsMenu(true)
+    }
+
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentFriendsBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this)[FriendViewModel::class.java]
-
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewModel.refresh()
-
-        friendItemAdapter = FriendItemAdapter(mutableListOf(), this)
-
-        binding.friendViewModel = viewModel
-
-        binding.friendListView.apply {
-            layoutManager = GridLayoutManager(context, 1)
-            adapter = friendItemAdapter
-        }
-
-        observeViewModel()
-    }
-
-    private fun observeViewModel() {
-        viewModel.friendsLiveData.observe(viewLifecycleOwner) { friends ->
-            friends?.let {
-                binding.friendListView.visibility = View.VISIBLE
-                friendItemAdapter.updateFriends(friends)
-            }
-        }
-
-        viewModel.loadingLiveData.observe(viewLifecycleOwner) { isLoading ->
-            isLoading?.let {
-                if (it) {
-                    binding.friendListView.visibility = View.GONE
-                }
-            }
-
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        binding.editTextSearchFriend.addTextChangedListener(object: TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {  }
-
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                var searchText = p0.toString().lowercase()
-                filterFriends(searchText)
-            }
+        val view = inflater.inflate(R.layout.fragment_friends, container, false)
+        viewModel.getUsers()
+        recyclerView = view.findViewById(R.id.friendRecyclerView)
+        adapter = FriendRecyclerViewAdapter(this)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = GridLayoutManager(activity,2, LinearLayoutManager.VERTICAL,false)
+        viewModel.usersLiveData.observe(viewLifecycleOwner, Observer {
+            adapter.set(it)
         })
+        return view
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
-
-    private fun filterFriends(searchText: String) {
-        val filteredFriends = allFriends.filter {
-            it.username!!
-                .lowercase()
-                .contains(searchText)
+    override fun onClickItem(item: Any) {
+        if (item is UserModel){
+            viewModel.select(item)
+            viewModel.navigator.navigateToFriendDetail()
         }
-
-        friendItemAdapter.updateFriends(filteredFriends)
-    }
-
-    override fun goToFriendDetails(friend: Friend) {
-        Toast.makeText(context, "hola! hiciste click en el ${friend.username}", Toast.LENGTH_LONG).show()
-
-        val now = System.currentTimeMillis()
-        if (now - mLastClickTime < CLICK_TIME_INTERVAL) {
-            return;
-        }
-
-        mLastClickTime = now;
-
-        val bundle = bundleOf("friendId" to friend.username.toString())
-
-        findNavController().navigate(R.id.action_friendsFragment_to_friendDetails, bundle)
     }
 
 }

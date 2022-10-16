@@ -3,26 +3,38 @@ package com.example.explodingkittensapp.friend
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import com.example.explodingkittensapp.model.Friend
-import com.example.explodingkittensapp.model.Friends
-import kotlinx.coroutines.launch
+import com.example.explodingkittensapp.activities.MainActivity
+import com.example.explodingkittensapp.model.UserModel
+import com.example.explodingkittensapp.repository.UserRepository
 
-class FriendViewModel(application: Application): AndroidViewModel(application) {
-    private val allFriends = Friends.createFriendList()
+class FriendViewModel(application: Application) : AndroidViewModel(application) {
 
-    internal val friendsLiveData = MutableLiveData<MutableList<Friend>>()
-    internal val loadingLiveData = MutableLiveData(true)
+    private val repository: UserRepository
 
-    fun refresh() {
-        loadFriends()
-        loadingLiveData.value = false
+    init {
+        repository = UserRepository(application)
+    }
+    val app = application
+    var usersLiveData = MutableLiveData<List<UserModel>>()
+    var selected = UserModel("1","user1@gmail.com","user1","Description",0,100, mutableListOf())
+
+    lateinit var navigator: com.example.explodingkittensapp.navigation.Navigator
+
+
+    fun getUsers() {
+        val users = repository.getUsers()
+        usersLiveData = users as MutableLiveData<List<UserModel>>
     }
 
-    private fun loadFriends() {
-        viewModelScope.launch {
-            friendsLiveData.postValue(allFriends.toMutableList())
-        }
+    fun select(user: UserModel){
+        selected = user
     }
+
+    fun setNavigator(activity: MainActivity?) {
+        navigator = com.example.explodingkittensapp.navigation.Navigator(activity)
+    }
+
+
+
 
 }

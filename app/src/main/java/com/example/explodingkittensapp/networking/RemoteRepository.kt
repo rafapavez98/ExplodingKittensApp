@@ -29,4 +29,4 @@ fun getRetrofit(): Retrofit {
     return retrofit
 }
 
-fun UsersApi(retrofit: Retrofit): UserRepository = retrofit.create(UserRepository::class.java)
+fun UsersApi(retrofit: Retrofit): UsersRemoteRepository = retrofit.create(UsersRemoteRepository::class.java)
