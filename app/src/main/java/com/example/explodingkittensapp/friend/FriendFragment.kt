@@ -2,9 +2,11 @@ package com.example.explodingkittensapp.friend
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -41,6 +43,11 @@ class FriendFragment : Fragment(), OnClickListener {
         viewModel.usersLiveData.observe(viewLifecycleOwner, Observer {
             adapter.set(it)
         })
+
+        val addFriendsbtn : Button = view.findViewById(R.id.addFriendsbtn)
+
+        addFriendsbtn.setOnClickListener { Navigation.findNavController(view).navigate(R.id.action_friendsFragment_to_addFriendsFragment)}
+
         return view
     }
 

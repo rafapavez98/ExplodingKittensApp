@@ -75,6 +75,9 @@
         <action
             android:id="@+id/action_friendsFragment_to_friendDetails"
             app:destination="@id/friendDetails" />
+        <action
+            android:id="@+id/action_friendsFragment_to_addFriendsFragment"
+            app:destination="@id/addFriendsFragment" />
     </fragment>
     <fragment
         android:id="@+id/joinGameFragment"
@@ -95,4 +98,9 @@
             android:defaultValue="Friend"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/addFriendsFragment"
+        android:name="com.example.explodingkittensapp.AddFriendsFragment"
+        android:label="fragment_add_friends"
+        tools:layout="@layout/fragment_add_friends" />
 </navigation>

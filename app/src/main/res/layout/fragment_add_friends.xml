@@ -27,7 +27,7 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Unirse a una Partida"
+            android:text="Añadir amigos"
             android:textSize="34sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/guideline7"
@@ -36,7 +36,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editTextSearchJoinMatch"
+            android:id="@+id/editTextSearchFriend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -47,14 +47,14 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/joinMatchRecyclerView"
+            android:id="@+id/friendRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="427dp"
             android:layout_marginTop="16dp"
             app:layout_constraintBottom_toTopOf="@+id/guideline21"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextSearchJoinMatch"
+            app:layout_constraintTop_toBottomOf="@+id/editTextSearchFriend"
             />
 
         <androidx.constraintlayout.widget.Guideline
