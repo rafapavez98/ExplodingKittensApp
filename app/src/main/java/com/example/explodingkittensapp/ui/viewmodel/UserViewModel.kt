@@ -79,7 +79,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
                     if (userAPI != null) {
                         println(userAPI)
                         val usr = UserModel(userAPI.id,userAPI.email,userAPI.username,userAPI.password,userAPI.total_matches,userAPI.winrate,userAPI.friends)
-                        saveUser(usr)
+                        //saveUser(usr)
                     }
                 }
             }

@@ -103,7 +103,9 @@ class FriendViewModel(application: Application) : AndroidViewModel(application) 
                                 friends.add(user)
                                 //saveFriend(user)
                             }
-
+                        }
+                        if(friends.size != 0) {
+                            friendsLiveData.postValue(friends)
                         }
                         //friends2 = friendsAPI
                     }

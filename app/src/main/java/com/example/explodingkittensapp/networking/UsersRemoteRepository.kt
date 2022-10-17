@@ -19,4 +19,7 @@ interface UsersRemoteRepository {
     @GET("friends/{username}")
     fun getFriends(@Path("username") username: String): Call<List<UserModel>>
 
+    @GET("notfriends/{username}")
+    fun getNotFriends(@Path("username") username: String): Call<List<UserModel>>
+
 }
