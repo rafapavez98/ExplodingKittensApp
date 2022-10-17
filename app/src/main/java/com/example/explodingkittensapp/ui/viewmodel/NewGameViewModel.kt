@@ -3,7 +3,10 @@ package com.example.explodingkittensapp.ui.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.example.explodingkittensapp.APImodels.Bodies.APIAcceptMatchInvite
+import com.example.explodingkittensapp.APImodels.Bodies.APIMinvite
 import com.example.explodingkittensapp.APImodels.Bodies.APIUser
+import com.example.explodingkittensapp.APImodels.Responses.APIMessageResponse
 import com.example.explodingkittensapp.APImodels.Responses.APISigninResponse
 import com.example.explodingkittensapp.activities.MainActivity
 import com.example.explodingkittensapp.database.DatabaseRepository
@@ -11,6 +14,7 @@ import com.example.explodingkittensapp.database.UserDao
 import com.example.explodingkittensapp.database.UserEntityMapper
 import com.example.explodingkittensapp.model.UserModel
 import com.example.explodingkittensapp.navigation.Navigator
+import com.example.explodingkittensapp.networking.MatchInviteRemoteRepository
 import com.example.explodingkittensapp.networking.UsersRemoteRepository
 import com.example.explodingkittensapp.networking.getRetrofit
 import retrofit2.Call
@@ -25,6 +29,8 @@ class NewGameViewModel(application: Application) : AndroidViewModel(application)
     var newGame: MutableList<UserModel> = mutableListOf()
     var newGameLiveData = MutableLiveData<MutableList<UserModel>>()
     val chosenNewGame = MutableLiveData<UserModel>()
+
+    var invites: MutableList<String> = mutableListOf()
 
     lateinit var navigator: Navigator
 
@@ -117,6 +123,25 @@ class NewGameViewModel(application: Application) : AndroidViewModel(application)
         println(chosenNewGame)
     }
 
+    fun createInviteMatchAPI(newMatchInvite: APIMinvite) {
+        val service = getRetrofit().create(MatchInviteRemoteRepository::class.java)
+        val call =  service.createMatchInvite(newMatchInvite)
+        call.enqueue(object : Callback<APIMessageResponse> {
+            override fun onFailure(call: Call<APIMessageResponse>, t: Throwable) {
+                println(t.message)
+            }
+            override fun onResponse(call: Call<APIMessageResponse>, response: Response<APIMessageResponse>) {
+                if(response.body() != null){
+                    val userAPI = response.body()
+                    if (userAPI != null) {
+                        println(userAPI)
+                        //val usr = UserModel(userAPI.id,userAPI.email,userAPI.username,userAPI.password,userAPI.total_matches,userAPI.winrate,userAPI.friends)
+                        //saveFriend(usr)
+                    }
+                }
+            }
+        })
+    }
 
 
 }

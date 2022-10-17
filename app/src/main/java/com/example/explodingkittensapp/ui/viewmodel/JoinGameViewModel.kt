@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.Navigation
 import com.example.explodingkittensapp.APImodels.Bodies.*
@@ -33,6 +34,8 @@ class JoinGameViewModel(application: Application) : AndroidViewModel(application
     var joinGame: MutableList<MatchInviteModel> = mutableListOf()
     var joinGameLiveData = MutableLiveData<MutableList<MatchInviteModel>>()
     val chosenJoinGame = MutableLiveData<MatchInviteModel>()
+
+    lateinit var gameName: String
 
     lateinit var navigator: Navigator
 
@@ -124,8 +127,10 @@ class JoinGameViewModel(application: Application) : AndroidViewModel(application
         call.enqueue(object : Callback<APIMessageResponse> {
             override fun onFailure(call: Call<APIMessageResponse>, t: Throwable) {
                 println(t.message)
+
             }
             override fun onResponse(call: Call<APIMessageResponse>, response: Response<APIMessageResponse>) {
+
                 if(response.body() != null){
                     val friendsAPI = response.body()
                     if (friendsAPI != null) {

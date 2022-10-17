@@ -23,36 +23,15 @@
             app:layout_constraintGuide_begin="114dp"
             app:layout_constraintGuide_percent="0.2" />
 
-        <Button
-            android:id="@+id/homebtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="home"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/friendsbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="Friends"
-            app:layout_constraintStart_toStartOf="@+id/AppNameTextView2"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/AppNameTextView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:text="Create Game"
             android:textSize="34sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/homebtn"
-            app:layout_constraintTop_toBottomOf="@+id/homebtn" />
+            tools:layout_editor_absoluteX="97dp"
+            tools:layout_editor_absoluteY="30dp" />
 
         <TextView
             android:id="@+id/textView2"
@@ -136,6 +115,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/newGameRecyclerView" />
 
+        <EditText
+            android:id="@+id/GameNameEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Game Name"
+            android:inputType="text"
+            app:layout_constraintBottom_toTopOf="@+id/button2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/AppNameTextView2" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

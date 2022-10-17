@@ -53,7 +53,7 @@ class MyGamesRecyclerViewAdapter(override val onClickListener: OnClickListener):
 
         fun bindView(item: MatchModel){
             val userNameTextView: TextView = view.findViewById(R.id.myGamesUserName)
-            userNameTextView.text = item.id
+            userNameTextView.text = item.gamename
         }
 
     }

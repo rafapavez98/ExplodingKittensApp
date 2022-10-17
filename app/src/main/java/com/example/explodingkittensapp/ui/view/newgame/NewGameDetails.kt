@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -34,6 +35,8 @@ class NewGameDetails : Fragment() {
         val winrate = view.findViewById<TextView>(R.id.NewGameUserWinrate)
         val email = view.findViewById<TextView>(R.id.NewGameUserEmail)
         val matches= view.findViewById<TextView>(R.id.NewGameUserMatches)
+
+        //val invittomatchbtn: Button = view.findViewById<Button>(R.id.)
 
         if (selected != null) {
             username.text = selected.username

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.explodingkittensapp.APImodels.Bodies.APIMatch
+import com.example.explodingkittensapp.APImodels.Bodies.APIMinvite
+import com.example.explodingkittensapp.APImodels.Bodies.APIRejectInvite
 import com.example.explodingkittensapp.R
 import com.example.explodingkittensapp.activities.MainActivity
 import com.example.explodingkittensapp.activities.OnClickListener
@@ -20,6 +23,7 @@ import com.example.explodingkittensapp.model.UserModel
 import com.example.explodingkittensapp.ui.viewmodel.JoinGameViewModel
 import com.example.explodingkittensapp.ui.viewmodel.NewGameViewModel
 import com.example.explodingkittensapp.ui.viewmodel.UserViewModel
+import kotlin.concurrent.thread
 
 
 class NewGameFragment : Fragment(), OnClickListener {
@@ -53,32 +57,42 @@ class NewGameFragment : Fragment(), OnClickListener {
             adapter.set(it)
         })
 
-        val homebtn : Button = view.findViewById(R.id.homebtn)
+        //val homebtn : Button = view.findViewById(R.id.homebtn)
 
-        homebtn.setOnClickListener { Navigation.findNavController(view).navigate(R.id.action_newGameFragment_to_homeScreenFragment)}
+        //homebtn.setOnClickListener { Navigation.findNavController(view).navigate(R.id.action_newGameFragment_to_homeScreenFragment)}
 
-        val friendsbtn : Button = view.findViewById(R.id.friendsbtn)
+        //val friendsbtn : Button = view.findViewById(R.id.friendsbtn)
         val createbtn : Button = view.findViewById(R.id.createGamebtn)
 
-        friendsbtn.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_newGameFragment_to_friendsFragment)
-        }
+        val nameedittext: EditText = view.findViewById<EditText>(R.id.GameNameEditText)
+
+        //friendsbtn.setOnClickListener {Navigation.findNavController(view).navigate(R.id.action_newGameFragment_to_friendsFragment)}
 
         createbtn.setOnClickListener {
             val settings = mutableListOf<String>()
             val participants = mutableListOf<String>()
             participants.add(userViewModel.uname)
 
-            val newMatch = APIMatch(userViewModel.uname, settings, participants)
+            val invites = newGameViewModel.invites
+
+            val newMatch = APIMatch(nameedittext.text.toString(),userViewModel.uname,settings, participants)
             viewModel.createMatchAPI(newMatch, activity, view)
+
+            for (username in invites){
+                var newInvite = APIMinvite(nameedittext.text.toString(), username, userViewModel.uname)
+                newGameViewModel.createInviteMatchAPI(newInvite)
+            }
         }
 
         return view
     }
     override fun onClickItem(item: Any) {
         if (item is UserModel){
-            newGameViewModel.selectNewGame(item)
-            newGameViewModel.navigator.navigateToNewGameDetail()
+            newGameViewModel.invites.add(item.username)
+            newGameViewModel.newGame.remove(item)
+            newGameViewModel.newGameLiveData.value = newGameViewModel.newGame
+            //newGameViewModel.selectNewGame(item)
+            //newGameViewModel.navigator.navigateToNewGameDetail()
         }
     }
 

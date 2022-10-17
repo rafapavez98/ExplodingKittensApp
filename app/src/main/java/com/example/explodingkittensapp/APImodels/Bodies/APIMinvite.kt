@@ -1,7 +1,7 @@
 package com.example.explodingkittensapp.APImodels.Bodies
 
 data class APIMinvite(
-    var matchid: String,
+    var gamename: String,
     var invited: String,
     var invitor: String,
 )
