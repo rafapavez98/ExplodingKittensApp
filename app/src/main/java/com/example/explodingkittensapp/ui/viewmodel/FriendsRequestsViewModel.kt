@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.Navigation
 import com.example.explodingkittensapp.APImodels.Bodies.APIAcceptInvite
+import com.example.explodingkittensapp.APImodels.Bodies.APIRejectInvite
 import com.example.explodingkittensapp.APImodels.Bodies.APIUser
 import com.example.explodingkittensapp.APImodels.Responses.APIMessageResponse
 import com.example.explodingkittensapp.APImodels.Responses.APISigninResponse
@@ -81,6 +82,26 @@ class FriendsRequestsViewModel(application: Application) : AndroidViewModel(appl
                     val userAPI = response.body()
                     if (userAPI != null) {
                         Toast.makeText(activity, "User "+ newAccepted.invitor + " acepted", Toast.LENGTH_LONG).show()
+                        Navigation.findNavController(view).popBackStack()
+                        Navigation.findNavController(view).popBackStack()
+                    }
+                }
+            }
+        })
+    }
+
+    fun rejectInviteAPI(newRejected: APIRejectInvite, activity: Activity?, view: View){
+        val service = getRetrofit().create(FriendInviteRemoteRepository::class.java)
+        val call =  service.rejectInvite(newRejected)
+        call.enqueue(object : Callback<APIMessageResponse> {
+            override fun onFailure(call: Call<APIMessageResponse>, t: Throwable) {
+                println(t.message)
+            }
+            override fun onResponse(call: Call<APIMessageResponse>, response: Response<APIMessageResponse>) {
+                if(response.body() != null){
+                    val userAPI = response.body()
+                    if (userAPI != null) {
+                        Toast.makeText(activity, "User Rejected", Toast.LENGTH_LONG).show()
                         Navigation.findNavController(view).popBackStack()
                         Navigation.findNavController(view).popBackStack()
                     }

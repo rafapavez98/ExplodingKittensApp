@@ -13,7 +13,7 @@ interface FriendInviteRemoteRepository {
     @POST("acceptfinvite")
     fun acceptUserInvite(@Body login: APIAcceptInvite): Call<APIMessageResponse>
 
-    @POST("rejectfinvite")
+    @POST("deletefinvite")
     fun rejectInvite(@Body login: APIRejectInvite): Call<APIMessageResponse>
 
     @GET("finvite/{username}")
