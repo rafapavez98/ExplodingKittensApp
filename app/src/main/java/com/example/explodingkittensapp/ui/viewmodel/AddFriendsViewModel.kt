@@ -19,47 +19,37 @@ import retrofit2.Response
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-class FriendViewModel(application: Application) : AndroidViewModel(application) {
+class AddFriendsViewModel(application: Application) : AndroidViewModel(application) {
 
     val app = application
-    var friends: MutableList<UserModel> = mutableListOf()
-    var friendsLiveData = MutableLiveData<MutableList<UserModel>>()
-    val chosenFriend = MutableLiveData<UserModel>()
+    var addfriends: MutableList<UserModel> = mutableListOf()
+    var addFriendsLiveData = MutableLiveData<MutableList<UserModel>>()
+    val chosenAddFriends = MutableLiveData<UserModel>()
+    lateinit var uname: String
 
     lateinit var navigator: Navigator
-
-    //lateinit var navigator: Navigator
 
     var database: UserDao
     private val executor: ExecutorService = Executors.newSingleThreadExecutor()
 
     init{
         database = DatabaseRepository(application).postUserDao()
-        loadFriends()
-        val service = getRetrofit().create(UsersRemoteRepository::class.java)
+        loadAddFriends()
     }
 
     fun setNavigator(activity: MainActivity?) {
         navigator = Navigator(activity)
     }
 
-    //DB Methods
-    fun saveFriend(user: UserModel) {
-        executor.execute {
-            database.insertUser(UserEntityMapper().mapToCached(user))
-            friends.add(user)
-            friendsLiveData.postValue(friends)
-        }
-    }
 
-    fun loadFriends() {
+    fun loadAddFriends() {
         executor.execute {
-            friends = database.getAllUsers().map {
+            addfriends = database.getAllUsers().map {
                 UserEntityMapper().mapFromCached(it)
             } as MutableList<UserModel>
-            println(friends)
-            if(friends.size != 0) {
-                friendsLiveData.postValue(friends)
+            println(addfriends)
+            if(addfriends.size != 0) {
+                addFriendsLiveData.postValue(addfriends)
             }
         }
     }
@@ -85,7 +75,7 @@ class FriendViewModel(application: Application) : AndroidViewModel(application) 
         })
     }
 
-    fun friendsAPI(username: String){
+    fun addFriendsAPI(username: String){
         val service = getRetrofit().create(UsersRemoteRepository::class.java)
         val call =  service.getFriends(username)
         call.enqueue(object : Callback<List<UserModel>> {
@@ -97,26 +87,24 @@ class FriendViewModel(application: Application) : AndroidViewModel(application) 
                     val friendsAPI = response.body()
                     if (friendsAPI != null) {
                         for (user in friendsAPI){
-                            if (!friends.contains(user)){
-                                friends.add(user)
+                            if (!addfriends.contains(user)){
+                                addfriends.add(user)
                                 //saveFriend(user)
                             }
                         }
-                        if(friends.size != 0) {
-                            friendsLiveData.postValue(friends)
+                        if(addfriends.size != 0) {
+                            addFriendsLiveData.postValue(addfriends)
                         }
-                        //friends2 = friendsAPI
+
                     }
                 }
             }
         })
     }
 
-    fun selectFriend(item: UserModel){
-        chosenFriend.value = item
-        println(chosenFriend)
+    fun selectAddFriends(item: UserModel){
+        chosenAddFriends.value = item
+        println(chosenAddFriends)
     }
-
-
 
 }

@@ -6,8 +6,8 @@
 
     <data>
         <variable
-            name="friendViewModel"
-            type="com.example.explodingkittensapp.ui.viewmodel.FriendViewModel" />
+            name="AddfriendsViewModel"
+            type="com.example.explodingkittensapp.ui.viewmodel.AddFriendsViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
 
@@ -36,7 +36,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editTextSearchFriend"
+            android:id="@+id/editTextSearchAddFriends"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -47,14 +47,14 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/friendRecyclerView"
+            android:id="@+id/addFriendsRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="427dp"
             android:layout_marginTop="16dp"
             app:layout_constraintBottom_toTopOf="@+id/guideline21"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextSearchFriend"
+            app:layout_constraintTop_toBottomOf="@+id/editTextSearchAddFriends"
             />
 
         <androidx.constraintlayout.widget.Guideline

@@ -103,12 +103,25 @@
     </fragment>
     <fragment
         android:id="@+id/addFriendsFragment"
-        android:name="com.example.explodingkittensapp.ui.view.AddFriendsFragment"
+        android:name="com.example.explodingkittensapp.ui.view.addfriend.AddFriendsFragment"
         android:label="fragment_add_friends"
-        tools:layout="@layout/fragment_add_friends" />
+        tools:layout="@layout/fragment_add_friends" >
+        <action
+            android:id="@+id/action_addFriendsFragment_to_addFriendsDetails"
+            app:destination="@id/addFriendsDetails" />
+    </fragment>
     <fragment
         android:id="@+id/friendsRequestsFragment"
         android:name="com.example.explodingkittensapp.ui.view.FriendsRequestsFragment"
         android:label="fragment_friends_requests"
         tools:layout="@layout/fragment_friends_requests" />
+    <fragment
+        android:id="@+id/addFriendsDetails"
+        android:name="com.example.explodingkittensapp.ui.view.addfriend.AddFriendsDetails"
+        tools:layout="@layout/friend_details_fragment" >
+        <argument
+            android:name="addFriendId"
+            android:defaultValue="AddFriend"
+            app:argType="string" />
+    </fragment>
 </navigation>
