@@ -1,16 +1,24 @@
 package com.example.explodingkittensapp.ui.viewmodel
 
+import android.app.Activity
 import android.app.Application
+import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.Navigation
+import com.example.explodingkittensapp.APImodels.Bodies.APIFinvite
 import com.example.explodingkittensapp.APImodels.Bodies.APIUser
+import com.example.explodingkittensapp.APImodels.Responses.APIMessageResponse
 import com.example.explodingkittensapp.APImodels.Responses.APISigninResponse
+import com.example.explodingkittensapp.R
 import com.example.explodingkittensapp.activities.MainActivity
 import com.example.explodingkittensapp.database.DatabaseRepository
 import com.example.explodingkittensapp.database.UserDao
 import com.example.explodingkittensapp.database.UserEntityMapper
 import com.example.explodingkittensapp.model.UserModel
 import com.example.explodingkittensapp.navigation.Navigator
+import com.example.explodingkittensapp.networking.FriendInviteRemoteRepository
 import com.example.explodingkittensapp.networking.UsersRemoteRepository
 import com.example.explodingkittensapp.networking.getRetrofit
 import retrofit2.Call
@@ -55,29 +63,29 @@ class AddFriendsViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     //API Methods
-    fun addFriendAPI(newUser: APIUser){
-        val service = getRetrofit().create(UsersRemoteRepository::class.java)
-        val call =  service.createUser(newUser)
-        call.enqueue(object : Callback<APISigninResponse> {
-            override fun onFailure(call: Call<APISigninResponse>, t: Throwable) {
+    fun createInviteAPI(newInvite: APIFinvite,activity: Activity?, view: View){
+        val service = getRetrofit().create(FriendInviteRemoteRepository::class.java)
+        val call =  service.createInvite(newInvite)
+        call.enqueue(object : Callback<APIMessageResponse> {
+            override fun onFailure(call: Call<APIMessageResponse>, t: Throwable) {
                 println(t.message)
             }
-            override fun onResponse(call: Call<APISigninResponse>, response: Response<APISigninResponse>) {
+            override fun onResponse(call: Call<APIMessageResponse>, response: Response<APIMessageResponse>) {
                 if(response.body() != null){
                     val userAPI = response.body()
                     if (userAPI != null) {
                         println(userAPI)
-                        val usr = UserModel(userAPI.id,userAPI.email,userAPI.username,userAPI.password,userAPI.total_matches,userAPI.winrate,userAPI.friends)
-                        //saveFriend(usr)
+                        Toast.makeText(activity, "Friend request send to "+ newInvite.invited, Toast.LENGTH_LONG).show()
+                        Navigation.findNavController(view).popBackStack()
                     }
                 }
             }
         })
     }
 
-    fun addFriendsAPI(username: String){
+    fun getFriendsAPI(username: String){
         val service = getRetrofit().create(UsersRemoteRepository::class.java)
-        val call =  service.getFriends(username)
+        val call =  service.getNotFriends(username)
         call.enqueue(object : Callback<List<UserModel>> {
             override fun onFailure(call: Call<List<UserModel>>, t: Throwable) {
                 println(t.message)

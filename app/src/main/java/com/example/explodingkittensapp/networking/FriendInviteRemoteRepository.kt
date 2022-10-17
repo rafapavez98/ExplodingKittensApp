@@ -10,11 +10,11 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface FriendInviteRemoteRepository {
-    @POST("finivte")
+    @POST("finvite")
     fun createInvite(@Body invite: APIFinvite): Call<APIMessageResponse>
 
     @POST("acceptinvite")
-    fun acceptInvite(@Body login: APIAcceptInvite): Call<APIMessageResponse>
+    fun accepuser1tInvite(@Body login: APIAcceptInvite): Call<APIMessageResponse>
 
     @POST("rejectinvite")
     fun rejectInvite(@Body login: APIRejectInvite): Call<APIMessageResponse>
