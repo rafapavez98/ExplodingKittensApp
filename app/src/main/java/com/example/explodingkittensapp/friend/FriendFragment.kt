@@ -48,9 +48,13 @@ class FriendFragment : Fragment(), OnClickListener {
         })
 
         val addFriendsbtn : Button = view.findViewById(R.id.addFriendsbtn)
+        val friendRequestsbtn : Button = view.findViewById(R.id.friendRequestsbtn)
 
         addFriendsbtn.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_friendsFragment_to_addFriendsFragment)
+        }
+        friendRequestsbtn.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_friendsFragment_to_friendsRequestsFragment)
         }
 
         return view

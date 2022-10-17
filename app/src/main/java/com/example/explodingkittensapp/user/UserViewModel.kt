@@ -91,7 +91,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         val call =  service.loginUser(loginUser)
         call.enqueue(object :  Callback<APILoginResponse> {
             override fun onFailure(call: Call<APILoginResponse>, t: Throwable) {
-                println(t.message)
+                //println(t.message)
             }
             override fun onResponse(call: Call<APILoginResponse>, response: Response<APILoginResponse>) {
                 if(response.body() != null){
