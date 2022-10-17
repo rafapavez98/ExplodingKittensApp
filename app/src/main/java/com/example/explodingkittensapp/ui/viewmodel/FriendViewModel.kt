@@ -103,7 +103,7 @@ class FriendViewModel(application: Application) : AndroidViewModel(application) 
                             }
                         }
                         if(friends.size != 0) {
-                            friendsLiveData.postValue(friends)
+                            friendsLiveData.value =(friends)
                         }
                         //friends2 = friendsAPI
                     }

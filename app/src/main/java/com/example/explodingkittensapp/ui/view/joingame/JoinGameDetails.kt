@@ -9,10 +9,12 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import com.example.explodingkittensapp.APImodels.Bodies.APIAcceptInvite
+import com.example.explodingkittensapp.APImodels.Bodies.APIAcceptMatchInvite
 import com.example.explodingkittensapp.APImodels.Bodies.APIRejectInvite
 import com.example.explodingkittensapp.R
 import com.example.explodingkittensapp.activities.MainActivity
 import com.example.explodingkittensapp.model.FriendInviteModel
+import com.example.explodingkittensapp.model.MatchInviteModel
 import com.example.explodingkittensapp.ui.viewmodel.FriendViewModel
 import com.example.explodingkittensapp.ui.viewmodel.FriendsRequestsViewModel
 import com.example.explodingkittensapp.ui.viewmodel.JoinGameViewModel
@@ -22,6 +24,8 @@ import com.example.explodingkittensapp.ui.viewmodel.UserViewModel
 class JoinGameDetails : Fragment() {
 
     private val viewModel: JoinGameViewModel by activityViewModels()
+    private val userViewModel: UserViewModel by activityViewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,15 +42,46 @@ class JoinGameDetails : Fragment() {
         val selected = viewModel.chosenJoinGame.value
 
         val username = view.findViewById<TextView>(R.id.joinGameName)
-        val winrate = view.findViewById<TextView>(R.id.joinGameUserWinrate)
-        val email = view.findViewById<TextView>(R.id.joinGameUserEmail)
-        val matches= view.findViewById<TextView>(R.id.joinGameUserMatches)
+        val mid = view.findViewById<TextView>(R.id.joinGameMatchId)
+
+        val acceptmatchbtn : Button = view.findViewById(R.id.joinGameAccept)
+        val rejectmatchbtn : Button = view.findViewById(R.id.joinGameReject)
 
         if (selected != null) {
-            username.text = selected.username
-            winrate.text = selected.winrate.toString()
-            email.text = selected.email
-            matches.text = selected.total_matches.toString()
+            username.text = selected.invitor
+            mid.text = selected.matchid
+        }
+
+
+        acceptmatchbtn.setOnClickListener {
+            val inviteid = selected?.id
+            //val invitedusr = userViewModel.uname
+
+            val invite = APIAcceptMatchInvite(inviteid.toString())
+
+            viewModel.acceptMatchInviteAPI(invite,activity,view)
+
+            for (item: MatchInviteModel in viewModel.joinGame) {
+                if (item.id == selected?.id){
+                    viewModel.joinGame.remove(item)
+                    viewModel.joinGameLiveData.value = viewModel.joinGame
+                }
+            }
+        }
+
+        rejectmatchbtn.setOnClickListener {
+            val inviteid = selected?.id
+
+            val invite = APIRejectInvite(inviteid.toString())
+
+            viewModel.rejectMatchInviteAPI(invite,activity,view)
+
+            for (item: MatchInviteModel in viewModel.joinGame) {
+                if (item.id == selected?.id){
+                    viewModel.joinGame.remove(item)
+                    viewModel.joinGameLiveData.value = viewModel.joinGame
+                }
+            }
         }
 
         return view

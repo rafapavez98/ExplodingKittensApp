@@ -8,13 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.explodingkittensapp.R
 import com.example.explodingkittensapp.activities.AdapterView
 import com.example.explodingkittensapp.activities.OnClickListener
-import com.example.explodingkittensapp.model.FriendInviteModel
+import com.example.explodingkittensapp.model.MatchInviteModel
 import com.example.explodingkittensapp.model.UserModel
-import com.example.explodingkittensapp.ui.view.friend.FriendRecyclerViewAdapter
-import com.example.explodingkittensapp.ui.view.friendsrequests.FriendsRequestsRecyclerViewAdapter
 
 class JoinGameRecyclerViewAdapter(override val onClickListener: OnClickListener): RecyclerView.Adapter<JoinGameRecyclerViewAdapter.UserViewHolder>(), AdapterView {
-    var data = listOf<UserModel>()
+    var data = listOf<MatchInviteModel>()
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -40,13 +38,13 @@ class JoinGameRecyclerViewAdapter(override val onClickListener: OnClickListener)
 
 
     override fun addItem(item: Any) {
-        if (item is UserModel){
+        if (item is MatchInviteModel){
             notifyDataSetChanged()
         }
         this.notifyDataSetChanged()
     }
 
-    fun set(users: List<UserModel>){
+    fun set(users: List<MatchInviteModel>){
         this.data = users
         this.notifyDataSetChanged()
     }
@@ -54,9 +52,11 @@ class JoinGameRecyclerViewAdapter(override val onClickListener: OnClickListener)
 
     inner class UserViewHolder(private val view: View): RecyclerView.ViewHolder(view){
 
-        fun bindView(item: UserModel){
+        fun bindView(item: MatchInviteModel){
             val userNameTextView: TextView = view.findViewById(R.id.joinGameName)
-            userNameTextView.text = item.username
+            val idTextView: TextView = view.findViewById(R.id.joinGameID)
+            userNameTextView.text = item.invitor
+            idTextView.text = item.matchid
         }
 
     }

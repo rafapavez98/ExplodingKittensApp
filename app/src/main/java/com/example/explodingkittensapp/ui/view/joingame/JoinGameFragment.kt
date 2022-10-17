@@ -16,6 +16,7 @@ import com.example.explodingkittensapp.R
 import com.example.explodingkittensapp.activities.MainActivity
 import com.example.explodingkittensapp.activities.OnClickListener
 import com.example.explodingkittensapp.model.FriendInviteModel
+import com.example.explodingkittensapp.model.MatchInviteModel
 import com.example.explodingkittensapp.model.UserModel
 import com.example.explodingkittensapp.ui.view.friend.FriendRecyclerViewAdapter
 import com.example.explodingkittensapp.ui.view.friendsrequests.FriendsRequestsRecyclerViewAdapter
@@ -61,7 +62,7 @@ class JoinGameFragment : Fragment(), OnClickListener {
     }
 
     override fun onClickItem(item: Any) {
-        if (item is UserModel){
+        if (item is MatchInviteModel){
             joinGameViewModel.selectJoinGame(item)
             joinGameViewModel.navigator.navigateToJoinGameDetail()
         }

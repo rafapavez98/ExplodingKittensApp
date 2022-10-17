@@ -19,7 +19,7 @@
         android:id="@+id/joingamebtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Join Match"
+        android:text="Game Invites"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,16 +29,16 @@
         android:id="@+id/newgamebtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create Match"
+        android:text="Create Game"
         app:layout_constraintBottom_toTopOf="@+id/joingamebtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/mygamesbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="My Matches"
+        android:layout_width="143dp"
+        android:layout_height="50dp"
+        android:text="My Games"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/joingamebtn" />

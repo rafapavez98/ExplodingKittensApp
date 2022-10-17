@@ -101,7 +101,7 @@ class AddFriendsViewModel(application: Application) : AndroidViewModel(applicati
                             }
                         }
                         if(addfriends.size != 0) {
-                            addFriendsLiveData.postValue(addfriends)
+                            addFriendsLiveData.value = (addfriends)
                         }
 
                     }

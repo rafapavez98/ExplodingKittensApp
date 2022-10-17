@@ -31,3 +31,4 @@ fun getRetrofit(): Retrofit {
 
 fun UsersApi(retrofit: Retrofit): UsersRemoteRepository = retrofit.create(UsersRemoteRepository::class.java)
 fun FriendsApi(retrofit: Retrofit): FriendInviteRemoteRepository = retrofit.create(FriendInviteRemoteRepository::class.java)
+fun MatchApi(retrofit: Retrofit): MatchInviteRemoteRepository = retrofit.create(MatchInviteRemoteRepository::class.java)

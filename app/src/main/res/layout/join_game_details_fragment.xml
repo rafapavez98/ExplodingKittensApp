@@ -12,58 +12,28 @@
         android:id="@+id/joinGameName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:gravity="center_horizontal"
         android:text="Game"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/joinGameUserEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline23" />
 
+
     <TextView
-        android:id="@+id/joinGameUserEmail"
+        android:id="@+id/joinGameMatchId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="16dp"
-        android:text="Email"
+        android:text="MatchID"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/joinGameName" />
-
-    <TextView
-        android:id="@+id/joinGameUserMatches"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="16dp"
-        android:text="Total Matches"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/joinGameUserEmail" />
-
-    <TextView
-        android:id="@+id/joinGameUserWinrate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="16dp"
-        android:text="Winrate"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/joinGameUserMatches" />
-
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline23"
@@ -74,16 +44,28 @@
         app:layout_constraintGuide_percent="0.1"/>
 
     <Button
-        android:id="@+id/joinGamebtn"
+        android:id="@+id/joinGameAccept"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Join Game"
+        android:layout_marginBottom="416dp"
+        android:text="Acept Game Invite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/joinGameName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/joinGameReject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="416dp"
+        android:text="Reject Game Invite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/joinGameUserWinrate"
-        app:layout_constraintVertical_bias="0.217" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/joinGameName"
+        app:layout_constraintTop_toBottomOf="@+id/joinGameName"
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
