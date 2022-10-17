@@ -1,12 +1,14 @@
-package com.example.explodingkittensapp.ui.view.addfriend
+package com.example.explodingkittensapp.ui.view.friendsrequests
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,20 +16,22 @@ import com.example.explodingkittensapp.R
 import com.example.explodingkittensapp.activities.MainActivity
 import com.example.explodingkittensapp.activities.OnClickListener
 import com.example.explodingkittensapp.model.UserModel
-import com.example.explodingkittensapp.ui.viewmodel.AddFriendsViewModel
+import com.example.explodingkittensapp.ui.view.friend.FriendRecyclerViewAdapter
+import com.example.explodingkittensapp.ui.viewmodel.FriendViewModel
+import com.example.explodingkittensapp.ui.viewmodel.FriendsRequestsViewModel
 import com.example.explodingkittensapp.ui.viewmodel.UserViewModel
 
 
-class AddFriendsFragment : Fragment(), OnClickListener {
+class FriendsRequestsFragment : Fragment(), OnClickListener {
 
-    lateinit var adapter: AddFriendsRecyclerViewAdapter
+    lateinit var adapter: FriendsRequestsRecyclerViewAdapter
     lateinit var recyclerView: RecyclerView
-    private val addFriendsViewModel: AddFriendsViewModel by activityViewModels()
+    private val friendsRequestsViewModel: FriendsRequestsViewModel by activityViewModels()
     private val userViewModel: UserViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        addFriendsViewModel.setNavigator(activity as MainActivity)
+        friendsRequestsViewModel.setNavigator(activity as MainActivity)
     }
 
     override fun onCreateView(
@@ -36,18 +40,17 @@ class AddFriendsFragment : Fragment(), OnClickListener {
     ): View? {
 
         val uname = userViewModel.uname
-        val view = inflater.inflate(R.layout.fragment_add_friends, container, false)
-        addFriendsViewModel.getFriendsAPI(uname)
-        //println(friendViewModel.friends)
-        recyclerView = view.findViewById(R.id.addFriendsRecyclerView)
-        adapter = AddFriendsRecyclerViewAdapter(this)
+        val view = inflater.inflate(R.layout.fragment_friends_requests, container, false)
+        friendsRequestsViewModel.friendsRequestsAPI(uname)
+
+        recyclerView = view.findViewById(R.id.friendsRequestsRecyclerView)
+        adapter = FriendsRequestsRecyclerViewAdapter(this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(activity,1, LinearLayoutManager.VERTICAL,false)
 
-        addFriendsViewModel.addFriendsLiveData.observe(viewLifecycleOwner, Observer {
+        friendsRequestsViewModel.friendsRequestsLiveData.observe(viewLifecycleOwner, Observer {
             adapter.set(it)
         })
-
 
 
         return view
@@ -55,8 +58,8 @@ class AddFriendsFragment : Fragment(), OnClickListener {
 
     override fun onClickItem(item: Any) {
         if (item is UserModel){
-            addFriendsViewModel.selectAddFriends(item)
-            addFriendsViewModel.navigator.navigateToAddFriendsDetail()
+            friendsRequestsViewModel.selectFriendsRequests(item)
+            friendsRequestsViewModel.navigator.navigateToFriendsRequestsDetail()
         }
     }
 

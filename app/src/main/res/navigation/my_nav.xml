@@ -103,7 +103,7 @@
     </fragment>
     <fragment
         android:id="@+id/addFriendsFragment"
-        android:name="com.example.explodingkittensapp.ui.view.addfriend.AddFriendsFragment"
+        android:name="com.example.explodingkittensapp.ui.view.addfriends.AddFriendsFragment"
         android:label="fragment_add_friends"
         tools:layout="@layout/fragment_add_friends" >
         <action
@@ -112,16 +112,29 @@
     </fragment>
     <fragment
         android:id="@+id/friendsRequestsFragment"
-        android:name="com.example.explodingkittensapp.ui.view.FriendsRequestsFragment"
+        android:name="com.example.explodingkittensapp.ui.view.friendsrequests.FriendsRequestsFragment"
         android:label="fragment_friends_requests"
-        tools:layout="@layout/fragment_friends_requests" />
+        tools:layout="@layout/fragment_friends_requests" >
+        <action
+            android:id="@+id/action_friendsRequestsFragment_to_friendsRequestsDetails"
+            app:destination="@id/friendsRequestsDetails" />
+    </fragment>
     <fragment
         android:id="@+id/addFriendsDetails"
-        android:name="com.example.explodingkittensapp.ui.view.addfriend.AddFriendsDetails"
-        tools:layout="@layout/friend_details_fragment" >
+        android:name="com.example.explodingkittensapp.ui.view.addfriends.AddFriendsDetails"
+        tools:layout="@layout/add_friends_details_fragment" >
         <argument
-            android:name="addFriendId"
-            android:defaultValue="AddFriend"
+            android:name="addFriendsId"
+            android:defaultValue="AddFriends"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/friendsRequestsDetails"
+        android:name="com.example.explodingkittensapp.ui.view.friendsrequests.FriendsRequestsDetails"
+        tools:layout="@layout/friends_requests_details_fragment" >
+        <argument
+            android:name="friendsRequestsId"
+            android:defaultValue="FriendsRequests"
             app:argType="string" />
     </fragment>
 </navigation>

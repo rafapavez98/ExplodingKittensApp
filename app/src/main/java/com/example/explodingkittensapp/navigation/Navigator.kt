@@ -14,4 +14,7 @@ class Navigator(val activity: MainActivity?) {
     fun navigateToAddFriendsDetail(){
         activity?.findNavController(R.id.fragment)?.navigate(R.id.action_addFriendsFragment_to_addFriendsDetails)
     }
+    fun navigateToFriendsRequestsDetail(){
+        activity?.findNavController(R.id.fragment)?.navigate(R.id.action_friendsRequestsFragment_to_friendsRequestsDetails)
+    }
 }

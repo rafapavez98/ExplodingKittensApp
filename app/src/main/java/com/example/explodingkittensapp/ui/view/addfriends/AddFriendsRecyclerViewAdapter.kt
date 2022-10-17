@@ -1,4 +1,4 @@
-package com.example.explodingkittensapp.ui.view.addfriend
+package com.example.explodingkittensapp.ui.view.addfriends
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +9,6 @@ import com.example.explodingkittensapp.R
 import com.example.explodingkittensapp.activities.AdapterView
 import com.example.explodingkittensapp.activities.OnClickListener
 import com.example.explodingkittensapp.model.UserModel
-import com.example.explodingkittensapp.ui.view.friend.FriendRecyclerViewAdapter
 
 class AddFriendsRecyclerViewAdapter(override val onClickListener: OnClickListener): RecyclerView.Adapter<AddFriendsRecyclerViewAdapter.UserViewHolder>(),
     AdapterView {
@@ -18,7 +17,7 @@ class AddFriendsRecyclerViewAdapter(override val onClickListener: OnClickListene
         parent: ViewGroup,
         viewType: Int
     ): UserViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.friend_item,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.add_friends_item,parent,false)
         return UserViewHolder(view)
     }
 
@@ -54,7 +53,7 @@ class AddFriendsRecyclerViewAdapter(override val onClickListener: OnClickListene
     inner class UserViewHolder(private val view: View): RecyclerView.ViewHolder(view){
 
         fun bindView(item: UserModel){
-            val userNameTextView: TextView = view.findViewById(R.id.userName)
+            val userNameTextView: TextView = view.findViewById(R.id.addFriendsUserName)
             userNameTextView.text = item.username
         }
 

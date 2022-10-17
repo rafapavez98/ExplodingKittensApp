@@ -13,7 +13,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.view.friend.FriendFragment">
+        tools:context=".ui.view.friend.AddFriendsFragment">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline7"
@@ -27,7 +27,7 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Añadir amigos"
+            android:text="Add Friends"
             android:textSize="34sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/guideline7"

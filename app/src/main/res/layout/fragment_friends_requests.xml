@@ -6,14 +6,14 @@
 
     <data>
         <variable
-            name="friendViewModel"
-            type="com.example.explodingkittensapp.ui.viewmodel.FriendViewModel" />
+            name="friendRequestsViewModel"
+            type="com.example.explodingkittensapp.ui.viewmodel.FriendsRequestsViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.view.friend.FriendFragment">
+        tools:context=".ui.view.friend.FriendsRequestsFragment">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline7"
@@ -27,7 +27,7 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Solicitudes de amistad"
+            android:text="Friends Requests"
             android:textSize="34sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/guideline7"
@@ -47,7 +47,7 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/friendRecyclerView"
+            android:id="@+id/friendsRequestsRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="427dp"
             android:layout_marginTop="16dp"
