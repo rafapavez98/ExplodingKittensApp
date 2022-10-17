@@ -20,4 +20,5 @@ class Navigator(val activity: MainActivity?) {
     fun navigateToJoinGameDetail(){
         activity?.findNavController(R.id.fragment)?.navigate(R.id.action_joinGameFragment_to_joinGameDetails)
     }
+
 }

@@ -93,9 +93,10 @@
     </fragment>
     <fragment
         android:id="@+id/myGamesFragment"
-        android:name="com.example.explodingkittensapp.ui.view.matches.MyGamesFragment"
+        android:name="com.example.explodingkittensapp.ui.view.mygames.MyGamesFragment"
         android:label="fragment_my_games"
-        tools:layout="@layout/fragment_my_games" />
+        tools:layout="@layout/fragment_my_games" >
+    </fragment>
     <fragment
         android:id="@+id/friendDetails"
         android:name="com.example.explodingkittensapp.ui.view.friend.FriendDetails"
