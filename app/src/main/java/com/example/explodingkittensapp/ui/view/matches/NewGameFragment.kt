@@ -1,4 +1,4 @@
-package com.example.explodingkittensapp.matches
+package com.example.explodingkittensapp.ui.view.matches
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

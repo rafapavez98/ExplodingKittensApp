@@ -7,13 +7,13 @@
     <data>
         <variable
             name="friendViewModel"
-            type="com.example.explodingkittensapp.friend.FriendViewModel" />
+            type="com.example.explodingkittensapp.ui.viewmodel.FriendViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".friend.FriendFragment">
+        tools:context=".ui.view.friend.FriendFragment">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline7"

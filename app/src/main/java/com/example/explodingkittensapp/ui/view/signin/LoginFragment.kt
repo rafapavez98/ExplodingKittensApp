@@ -1,4 +1,4 @@
-package com.example.explodingkittensapp.user
+package com.example.explodingkittensapp.ui.view.signin
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,11 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.example.explodingkittensapp.APImodels.Bodies.APILogin
 import com.example.explodingkittensapp.R
+import com.example.explodingkittensapp.ui.viewmodel.UserViewModel
 
 
 class LoginFragment : Fragment() {

@@ -1,4 +1,4 @@
-package com.example.explodingkittensapp.friend
+package com.example.explodingkittensapp.ui.view.friend
 
 
 import android.view.LayoutInflater

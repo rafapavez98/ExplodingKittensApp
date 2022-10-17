@@ -1,4 +1,4 @@
-package com.example.explodingkittensapp.user
+package com.example.explodingkittensapp.ui.viewmodel
 
 import android.app.Application
 import android.view.View

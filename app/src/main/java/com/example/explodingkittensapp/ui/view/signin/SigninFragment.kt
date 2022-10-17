@@ -1,4 +1,4 @@
-package com.example.explodingkittensapp.user
+package com.example.explodingkittensapp.ui.view.signin
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,7 +13,7 @@ import androidx.navigation.Navigation
 import com.example.explodingkittensapp.APImodels.Bodies.APIUser
 import com.example.explodingkittensapp.R
 import com.example.explodingkittensapp.databinding.FragmentSigninBinding
-import com.example.explodingkittensapp.model.UserModel
+import com.example.explodingkittensapp.ui.viewmodel.UserViewModel
 
 
 class SigninFragment : Fragment() {

@@ -4,7 +4,7 @@ import androidx.fragment.app.commit
 import androidx.navigation.findNavController
 import com.example.explodingkittensapp.R
 import com.example.explodingkittensapp.activities.MainActivity
-import com.example.explodingkittensapp.friend.FriendFragment
+import com.example.explodingkittensapp.ui.view.friend.FriendFragment
 
 class Navigator(val activity: MainActivity?) {
 

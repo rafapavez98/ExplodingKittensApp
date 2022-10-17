@@ -1,4 +1,4 @@
-package com.example.explodingkittensapp.friend
+package com.example.explodingkittensapp.ui.view.friend
 
 import android.os.Bundle
 import android.view.*
@@ -14,7 +14,8 @@ import com.example.explodingkittensapp.R
 import com.example.explodingkittensapp.activities.MainActivity
 import com.example.explodingkittensapp.activities.OnClickListener
 import com.example.explodingkittensapp.model.UserModel
-import com.example.explodingkittensapp.user.UserViewModel
+import com.example.explodingkittensapp.ui.viewmodel.FriendViewModel
+import com.example.explodingkittensapp.ui.viewmodel.UserViewModel
 
 
 class FriendFragment : Fragment(), OnClickListener {

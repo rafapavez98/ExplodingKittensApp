@@ -1,4 +1,4 @@
-package com.example.explodingkittensapp.friend
+package com.example.explodingkittensapp.ui.view.friend
 
 import android.os.Bundle
 import android.view.*
@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.explodingkittensapp.R
 import com.example.explodingkittensapp.activities.MainActivity
+import com.example.explodingkittensapp.ui.viewmodel.FriendViewModel
 
 class FriendDetails : Fragment() {
 
