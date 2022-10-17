@@ -9,8 +9,10 @@ import com.example.explodingkittensapp.activities.MainActivity
 import com.example.explodingkittensapp.database.DatabaseRepository
 import com.example.explodingkittensapp.database.UserDao
 import com.example.explodingkittensapp.database.UserEntityMapper
+import com.example.explodingkittensapp.model.MatchModel
 import com.example.explodingkittensapp.model.UserModel
 import com.example.explodingkittensapp.navigation.Navigator
+import com.example.explodingkittensapp.networking.MatchInviteRemoteRepository
 import com.example.explodingkittensapp.networking.UsersRemoteRepository
 import com.example.explodingkittensapp.networking.getRetrofit
 import retrofit2.Call
@@ -22,19 +24,19 @@ import java.util.concurrent.Executors
 class MyGamesViewModel(application: Application) : AndroidViewModel(application) {
 
     val app = application
-    var myGames: MutableList<UserModel> = mutableListOf()
-    var myGamesLiveData = MutableLiveData<MutableList<UserModel>>()
-    val chosenMyGames = MutableLiveData<UserModel>()
+    var myGames: MutableList<MatchModel> = mutableListOf()
+    var myGamesLiveData = MutableLiveData<MutableList<MatchModel>>()
+    val chosenMyGames = MutableLiveData<MatchModel>()
 
     lateinit var navigator: Navigator
 
     //lateinit var navigator: Navigator
 
-    var database: UserDao
+    //var database: UserDao
     private val executor: ExecutorService = Executors.newSingleThreadExecutor()
 
     init{
-        database = DatabaseRepository(application).postUserDao()
+        //database = DatabaseRepository(application).postUserDao()
         loadMyGames()
         val service = getRetrofit().create(UsersRemoteRepository::class.java)
     }
@@ -44,23 +46,17 @@ class MyGamesViewModel(application: Application) : AndroidViewModel(application)
     }
 
     //DB Methods
-    fun saveMyGames(user: UserModel) {
+    fun saveMyGames(user: MatchModel) {
         executor.execute {
-            database.insertUser(UserEntityMapper().mapToCached(user))
+            //database.insertUser(UserEntityMapper().mapToCached(user))
             myGames.add(user)
             myGamesLiveData.postValue(myGames)
         }
     }
 
     fun loadMyGames() {
-        executor.execute {
-            myGames = database.getAllUsers().map {
-                UserEntityMapper().mapFromCached(it)
-            } as MutableList<UserModel>
-            println(myGames)
-            if(myGames.size != 0) {
-                myGamesLiveData.postValue(myGames)
-            }
+        if(myGames.size != 0) {
+            myGamesLiveData.postValue(myGames)
         }
     }
 
@@ -86,13 +82,13 @@ class MyGamesViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun myGamesAPI(username: String){
-        val service = getRetrofit().create(UsersRemoteRepository::class.java)
-        val call =  service.getFriends(username) //se queda como friends
-        call.enqueue(object : Callback<List<UserModel>> {
-            override fun onFailure(call: Call<List<UserModel>>, t: Throwable) {
+        val service = getRetrofit().create(MatchInviteRemoteRepository::class.java)
+        val call =  service.getMatches(username) //se queda como friends
+        call.enqueue(object : Callback<List<MatchModel>> {
+            override fun onFailure(call: Call<List<MatchModel>>, t: Throwable) {
                 println(t.message)
             }
-            override fun onResponse(call: Call<List<UserModel>>, response: Response<List<UserModel>>) {
+            override fun onResponse(call: Call<List<MatchModel>>, response: Response<List<MatchModel>>) {
                 if(response.body() != null){
                     val myGamesAPI = response.body() //revisar si cambiar
                     if (myGamesAPI != null) {
@@ -112,7 +108,7 @@ class MyGamesViewModel(application: Application) : AndroidViewModel(application)
         })
     }
 
-    fun selectMyGames(item: UserModel){
+    fun selectMyGames(item: MatchModel){
         chosenMyGames.value = item
         println(chosenMyGames)
     }
