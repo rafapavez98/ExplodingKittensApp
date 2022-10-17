@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.explodingkittensapp.R
 import com.example.explodingkittensapp.activities.AdapterView
 import com.example.explodingkittensapp.activities.OnClickListener
+import com.example.explodingkittensapp.model.FriendInviteModel
 import com.example.explodingkittensapp.model.UserModel
-import com.example.explodingkittensapp.ui.view.friend.FriendRecyclerViewAdapter
 
 class FriendsRequestsRecyclerViewAdapter(override val onClickListener: OnClickListener): RecyclerView.Adapter<FriendsRequestsRecyclerViewAdapter.UserViewHolder>(),
     AdapterView {
-    var data = listOf<UserModel>()
+    var data = listOf<FriendInviteModel>()
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -45,7 +45,7 @@ class FriendsRequestsRecyclerViewAdapter(override val onClickListener: OnClickLi
         this.notifyDataSetChanged()
     }
 
-    fun set(users: List<UserModel>){
+    fun set(users: MutableList<FriendInviteModel>){
         this.data = users
         this.notifyDataSetChanged()
     }
@@ -53,9 +53,9 @@ class FriendsRequestsRecyclerViewAdapter(override val onClickListener: OnClickLi
 
     inner class UserViewHolder(private val view: View): RecyclerView.ViewHolder(view){
 
-        fun bindView(item: UserModel){
+        fun bindView(item: FriendInviteModel){
             val userNameTextView: TextView = view.findViewById(R.id.friendsRequestsUserName)
-            userNameTextView.text = item.username
+            userNameTextView.text = item.invitor
         }
 
     }

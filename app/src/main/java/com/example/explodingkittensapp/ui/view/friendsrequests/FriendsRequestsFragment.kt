@@ -5,19 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.explodingkittensapp.R
 import com.example.explodingkittensapp.activities.MainActivity
 import com.example.explodingkittensapp.activities.OnClickListener
-import com.example.explodingkittensapp.model.UserModel
-import com.example.explodingkittensapp.ui.view.friend.FriendRecyclerViewAdapter
-import com.example.explodingkittensapp.ui.viewmodel.FriendViewModel
+import com.example.explodingkittensapp.model.FriendInviteModel
 import com.example.explodingkittensapp.ui.viewmodel.FriendsRequestsViewModel
 import com.example.explodingkittensapp.ui.viewmodel.UserViewModel
 
@@ -57,7 +53,7 @@ class FriendsRequestsFragment : Fragment(), OnClickListener {
     }
 
     override fun onClickItem(item: Any) {
-        if (item is UserModel){
+        if (item is FriendInviteModel){
             friendsRequestsViewModel.selectFriendsRequests(item)
             friendsRequestsViewModel.navigator.navigateToFriendsRequestsDetail()
         }

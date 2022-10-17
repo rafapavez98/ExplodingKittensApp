@@ -10,4 +10,8 @@ class DatabaseRepository(application: Application) {
     fun postUserDao(): UserDao {
         return database.userDao()
     }
+
+    fun postFriendInviteDao(): FriendInviteDao {
+        return database.friendInviteDao()
+    }
 }

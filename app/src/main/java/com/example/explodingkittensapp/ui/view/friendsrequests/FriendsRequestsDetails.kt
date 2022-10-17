@@ -4,16 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.explodingkittensapp.APImodels.Bodies.APIAcceptInvite
+import com.example.explodingkittensapp.APImodels.Bodies.APIFinvite
 import com.example.explodingkittensapp.R
 import com.example.explodingkittensapp.activities.MainActivity
 import com.example.explodingkittensapp.ui.viewmodel.FriendsRequestsViewModel
+import com.example.explodingkittensapp.ui.viewmodel.UserViewModel
 
 class FriendsRequestsDetails : Fragment() {
 
     private val viewModel: FriendsRequestsViewModel by activityViewModels()
+    private val userViewModel: UserViewModel by activityViewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,15 +36,22 @@ class FriendsRequestsDetails : Fragment() {
         val selected = viewModel.chosenFriendsRequests.value
 
         val username = view.findViewById<TextView>(R.id.friendsRequestsUserName)
-        val winrate = view.findViewById<TextView>(R.id.friendsRequestsUserWinrate)
-        val email = view.findViewById<TextView>(R.id.friendsRequestsUserEmail)
-        val matches= view.findViewById<TextView>(R.id.friendsRequestsUserMatches)
+
+        val acceptfriendbtn : Button = view.findViewById(R.id.acceptfriendbtn)
 
         if (selected != null) {
-            username.text = selected.username
-            winrate.text = selected.winrate.toString()
-            email.text = selected.email
-            matches.text = selected.total_matches.toString()
+            username.text = selected.invitor
+        }
+
+
+        acceptfriendbtn.setOnClickListener {
+            val inviteid = selected?.id
+            val invitedusr = userViewModel.uname
+            val invitorusr = selected?.invitor
+
+            val invite = APIAcceptInvite(inviteid.toString(), invitedusr, invitorusr.toString())
+
+            viewModel.acceptInviteAPI(invite,activity,view)
         }
 
         return view
