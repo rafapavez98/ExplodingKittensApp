@@ -13,6 +13,7 @@ import com.example.explodingkittensapp.APImodels.Bodies.APIFinvite
 import com.example.explodingkittensapp.APImodels.Bodies.APIRejectInvite
 import com.example.explodingkittensapp.R
 import com.example.explodingkittensapp.activities.MainActivity
+import com.example.explodingkittensapp.model.FriendInviteModel
 import com.example.explodingkittensapp.ui.viewmodel.FriendsRequestsViewModel
 import com.example.explodingkittensapp.ui.viewmodel.UserViewModel
 
@@ -54,6 +55,13 @@ class FriendsRequestsDetails : Fragment() {
             val invite = APIAcceptInvite(inviteid.toString(), invitedusr, invitorusr.toString())
 
             viewModel.acceptInviteAPI(invite,activity,view)
+
+            for (item: FriendInviteModel in viewModel.friendsRequests) {
+                if (item.id == selected?.id){
+                    viewModel.friendsRequests.remove(item)
+                    viewModel.friendsRequestsLiveData.value = viewModel.friendsRequests
+                }
+            }
         }
 
         rejectfriendbtn.setOnClickListener {
@@ -62,6 +70,13 @@ class FriendsRequestsDetails : Fragment() {
             val invite = APIRejectInvite(inviteid.toString())
 
             viewModel.rejectInviteAPI(invite,activity,view)
+
+            for (item: FriendInviteModel in viewModel.friendsRequests) {
+                if (item.id == selected?.id){
+                    viewModel.friendsRequests.remove(item)
+                    viewModel.friendsRequestsLiveData.value = viewModel.friendsRequests
+                }
+            }
         }
 
         return view

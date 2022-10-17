@@ -11,6 +11,8 @@ import androidx.fragment.app.activityViewModels
 import com.example.explodingkittensapp.APImodels.Bodies.APIFinvite
 import com.example.explodingkittensapp.R
 import com.example.explodingkittensapp.activities.MainActivity
+import com.example.explodingkittensapp.model.FriendInviteModel
+import com.example.explodingkittensapp.model.UserModel
 import com.example.explodingkittensapp.ui.viewmodel.AddFriendsViewModel
 import com.example.explodingkittensapp.ui.viewmodel.UserViewModel
 
@@ -47,7 +49,6 @@ class AddFriendsDetails : Fragment() {
             matches.text = selected.total_matches.toString()
         }
 
-
         addfriendbtn.setOnClickListener {
             val invitedusr = selected?.username
             val invitorusr = userViewModel.uname
@@ -55,10 +56,14 @@ class AddFriendsDetails : Fragment() {
             val newInvite = APIFinvite(invitedusr.toString(),invitorusr)
 
             addFriendsViewModel.createInviteAPI(newInvite,activity,view)
+
+            for (item: UserModel in addFriendsViewModel.addfriends) {
+                if (item.id == selected?.id){
+                    addFriendsViewModel.addfriends.remove(item)
+                    addFriendsViewModel.addFriendsLiveData.value = addFriendsViewModel.addfriends
+                }
+            }
         }
-
-
-
         return view
     }
 
