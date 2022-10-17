@@ -84,9 +84,13 @@
     </fragment>
     <fragment
         android:id="@+id/joinGameFragment"
-        android:name="com.example.explodingkittensapp.ui.view.matches.JoinGameFragment"
+        android:name="com.example.explodingkittensapp.ui.view.joingame.JoinGameFragment"
         android:label="fragment_join_game"
-        tools:layout="@layout/fragment_join_game" />
+        tools:layout="@layout/fragment_join_game" >
+        <action
+            android:id="@+id/action_joinGameFragment_to_joinGameDetails"
+            app:destination="@id/joinGameDetails" />
+    </fragment>
     <fragment
         android:id="@+id/myGamesFragment"
         android:name="com.example.explodingkittensapp.ui.view.matches.MyGamesFragment"
@@ -135,6 +139,16 @@
         <argument
             android:name="friendsRequestsId"
             android:defaultValue="FriendsRequests"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/joinGameDetails"
+        android:name="com.example.explodingkittensapp.ui.view.joingame.JoinGameDetails"
+        android:label="join_game_details_fragment"
+        tools:layout="@layout/join_game_details_fragment" >
+        <argument
+            android:name="joinGameId"
+            android:defaultValue="JoinGame"
             app:argType="string" />
     </fragment>
 </navigation>
