@@ -99,6 +99,9 @@
         android:name="com.example.explodingkittensapp.ui.view.mygames.MyGamesFragment"
         android:label="fragment_my_games"
         tools:layout="@layout/fragment_my_games" >
+        <action
+            android:id="@+id/action_myGamesFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
     </fragment>
     <fragment
         android:id="@+id/friendDetails"
@@ -165,4 +168,9 @@
             android:defaultValue="NewGame"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/gameFragment"
+        android:name="com.example.explodingkittensapp.GameFragment"
+        android:label="fragment_game"
+        tools:layout="@layout/fragment_game" />
 </navigation>
