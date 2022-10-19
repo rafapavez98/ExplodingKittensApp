@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_heightPercent="10%"/>
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/otherPlayersRecyclerView"
@@ -26,7 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gameName"
-        app:layout_heightPercent="30%" />
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/playedCardRecyclerView"
@@ -36,8 +36,7 @@
         app:layout_constraintEnd_toStartOf="@+id/DeckRecyclerView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/otherPlayersRecyclerView"
-        app:layout_heightPercent="30%"
-        app:layout_widthPerent="50%" />
+         />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/DeckRecyclerView"
@@ -47,8 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toBottomOf="@+id/otherPlayersRecyclerView"
-        app:layout_heightPercent="30%"
-        app:layout_widthPerent="50%" />
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/playerDeckRecyclerView"
@@ -57,7 +55,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_heightPercent="30%" />
+         />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
