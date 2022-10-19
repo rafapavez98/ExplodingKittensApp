@@ -170,7 +170,7 @@
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
-        android:name="com.example.explodingkittensapp.GameFragment"
+        android:name="com.example.explodingkittensapp.ui.view.game.GameFragment"
         android:label="fragment_game"
         tools:layout="@layout/fragment_game" />
 </navigation>

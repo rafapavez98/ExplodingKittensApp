@@ -23,4 +23,7 @@ class Navigator(val activity: MainActivity?) {
     fun navigateToNewGameDetail(){
         activity?.findNavController(R.id.fragment)?.navigate(R.id.action_newGameFragment_to_newGameDetails)
     }
+    fun navigateToGame(){
+        activity?.findNavController(R.id.fragment)?.navigate(R.id.action_myGamesFragment_to_gameFragment)
+    }
 }
