@@ -28,29 +28,18 @@ class FriendViewModel(application: Application) : AndroidViewModel(application) 
 
     lateinit var navigator: Navigator
 
-    //lateinit var navigator: Navigator
-
     var database: UserDao
     private val executor: ExecutorService = Executors.newSingleThreadExecutor()
 
     init{
         database = DatabaseRepository(application).postUserDao()
         loadFriends()
-        val service = getRetrofit().create(UsersRemoteRepository::class.java)
     }
 
     fun setNavigator(activity: MainActivity?) {
         navigator = Navigator(activity)
     }
 
-    //DB Methods
-    fun saveFriend(user: UserModel) {
-        executor.execute {
-            database.insertUser(UserEntityMapper().mapToCached(user))
-            friends.add(user)
-            friendsLiveData.postValue(friends)
-        }
-    }
 
     fun loadFriends() {
         executor.execute {
@@ -64,26 +53,6 @@ class FriendViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
-    //API Methods
-    fun addFriendAPI(newUser: APIUser){
-        val service = getRetrofit().create(UsersRemoteRepository::class.java)
-        val call =  service.createUser(newUser)
-        call.enqueue(object : Callback<APISigninResponse> {
-            override fun onFailure(call: Call<APISigninResponse>, t: Throwable) {
-                println(t.message)
-            }
-            override fun onResponse(call: Call<APISigninResponse>, response: Response<APISigninResponse>) {
-                if(response.body() != null){
-                    val userAPI = response.body()
-                    if (userAPI != null) {
-                        println(userAPI)
-                        val usr = UserModel(userAPI.id,userAPI.email,userAPI.username,userAPI.password,userAPI.total_matches,userAPI.winrate,userAPI.friends)
-                        //saveFriend(usr)
-                    }
-                }
-            }
-        })
-    }
 
     fun friendsAPI(username: String){
         val service = getRetrofit().create(UsersRemoteRepository::class.java)
@@ -99,13 +68,11 @@ class FriendViewModel(application: Application) : AndroidViewModel(application) 
                         for (user in friendsAPI){
                             if (!friends.contains(user)){
                                 friends.add(user)
-                                //saveFriend(user)
                             }
                         }
                         if(friends.size != 0) {
                             friendsLiveData.value =(friends)
                         }
-                        //friends2 = friendsAPI
                     }
                 }
             }

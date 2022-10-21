@@ -2,9 +2,9 @@ package com.example.explodingkittensapp.networking
 
 import com.example.explodingkittensapp.APImodels.Bodies.APILogin
 import com.example.explodingkittensapp.APImodels.Bodies.APIUser
-import com.example.explodingkittensapp.APImodels.Responses.APIFriendsResponse
 import com.example.explodingkittensapp.APImodels.Responses.APILoginResponse
 import com.example.explodingkittensapp.APImodels.Responses.APISigninResponse
+import com.example.explodingkittensapp.model.CardModel
 import com.example.explodingkittensapp.model.UserModel
 import retrofit2.Call
 import retrofit2.http.*
@@ -22,4 +22,6 @@ interface UsersRemoteRepository {
     @GET("notfriends/{username}")
     fun getNotFriends(@Path("username") username: String): Call<List<UserModel>>
 
+    @GET("cards/{username}")
+    fun getUserCards(@Path("username") username: String): Call<List<CardModel>>
 }

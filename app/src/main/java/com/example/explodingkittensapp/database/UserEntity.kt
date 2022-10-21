@@ -14,6 +14,7 @@ data class UserEntity(
     @ColumnInfo(name = "total_matches") var total_matches: Int,
     @ColumnInfo(name = "winrate") var winrate: Int,
     @ColumnInfo(name = "friends") var friends: MutableList<String>,
+    @ColumnInfo(name = "cards") var cards: MutableList<String>,
 
 )
 

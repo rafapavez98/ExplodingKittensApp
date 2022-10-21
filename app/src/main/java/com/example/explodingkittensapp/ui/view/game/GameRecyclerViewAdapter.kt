@@ -8,13 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.explodingkittensapp.R
 import com.example.explodingkittensapp.activities.AdapterView
 import com.example.explodingkittensapp.activities.OnClickListener
-import com.example.explodingkittensapp.model.MatchModel
-import com.example.explodingkittensapp.model.UserModel
-import com.example.explodingkittensapp.ui.view.mygames.MyGamesRecyclerViewAdapter
+import com.example.explodingkittensapp.model.CardModel
 
 class GameRecyclerViewAdapter(override val onClickListener: OnClickListener): RecyclerView.Adapter<GameRecyclerViewAdapter.UserViewHolder>(),
     AdapterView {
-    var data = listOf<UserModel>()
+    var data = listOf<CardModel>()
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -38,13 +36,13 @@ class GameRecyclerViewAdapter(override val onClickListener: OnClickListener): Re
 
 
     override fun addItem(item: Any) {
-        if (item is UserModel){
+        if (item is CardModel){
             notifyDataSetChanged()
         }
         this.notifyDataSetChanged()
     }
 
-    fun set(users: List<UserModel>){
+    fun set(users: List<CardModel>){
         this.data = users
         this.notifyDataSetChanged()
     }
@@ -52,9 +50,9 @@ class GameRecyclerViewAdapter(override val onClickListener: OnClickListener): Re
 
     inner class UserViewHolder(private val view: View): RecyclerView.ViewHolder(view){
 
-        fun bindView(item: UserModel){
+        fun bindView(item: CardModel){
             val userNameTextView: TextView = view.findViewById(R.id.userName)
-            userNameTextView.text = item.username
+            userNameTextView.text = item.type
         }
 
     }

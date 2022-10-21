@@ -11,4 +11,5 @@ data class APIUser(
     var total_matches: Int,
     var winrate: Int,
     var friends: MutableList<String>,
+    var cards: MutableList<String>
 ): Parcelable

@@ -23,7 +23,8 @@ class GameFragment : Fragment(), OnClickListener {
 
     lateinit var gameAdapter: GameRecyclerViewAdapter
     lateinit var otherPlayersadapter: OtherPlayersRecyclerViewAdapter
-    lateinit var recyclerView: RecyclerView
+    lateinit var recyclerView1: RecyclerView
+    lateinit var recyclerView2: RecyclerView
     private val gameViewModel: GameViewModel by activityViewModels()
     private val userViewModel: UserViewModel by activityViewModels()
 
@@ -41,23 +42,23 @@ class GameFragment : Fragment(), OnClickListener {
         val view = inflater.inflate(R.layout.fragment_game, container, false)
         gameViewModel.gameAPI(uname)
 
-        recyclerView = view.findViewById(R.id.playerDeckRecyclerView)
+        recyclerView1 = view.findViewById(R.id.playerDeckRecyclerView)
         gameAdapter = GameRecyclerViewAdapter(this)
-        recyclerView.adapter = gameAdapter
-        recyclerView.layoutManager = GridLayoutManager(activity,1, LinearLayoutManager.HORIZONTAL,false)
+        recyclerView1.adapter = gameAdapter
+        recyclerView1.layoutManager = GridLayoutManager(activity,1, LinearLayoutManager.HORIZONTAL,false)
 
         gameViewModel.gameLiveData.observe(viewLifecycleOwner, Observer {
             gameAdapter.set(it)
         })
 
-        recyclerView = view.findViewById(R.id.otherPlayersRecyclerView)
+        /*recyclerView2 = view.findViewById(R.id.otherPlayersRecyclerView)
         otherPlayersadapter = OtherPlayersRecyclerViewAdapter(this)
-        recyclerView.adapter = otherPlayersadapter
-        recyclerView.layoutManager = GridLayoutManager(activity,1, LinearLayoutManager.HORIZONTAL,false)
+        recyclerView2.adapter = otherPlayersadapter
+        recyclerView2.layoutManager = GridLayoutManager(activity,1, LinearLayoutManager.HORIZONTAL,false)
 
         gameViewModel.gameLiveData.observe(viewLifecycleOwner, Observer {
             otherPlayersadapter.set(it)
-        })
+        })*/
 
         return view
     }
