@@ -21,7 +21,8 @@ import com.example.explodingkittensapp.ui.viewmodel.UserViewModel
 
 class GameFragment : Fragment(), OnClickListener {
 
-    lateinit var adapter: GameRecyclerViewAdapter
+    lateinit var gameAdapter: GameRecyclerViewAdapter
+    lateinit var otherPlayersadapter: OtherPlayersRecyclerViewAdapter
     lateinit var recyclerView: RecyclerView
     private val gameViewModel: GameViewModel by activityViewModels()
     private val userViewModel: UserViewModel by activityViewModels()
@@ -39,13 +40,23 @@ class GameFragment : Fragment(), OnClickListener {
         val uname = userViewModel.uname
         val view = inflater.inflate(R.layout.fragment_game, container, false)
         gameViewModel.gameAPI(uname)
+
         recyclerView = view.findViewById(R.id.playerDeckRecyclerView)
-        adapter = GameRecyclerViewAdapter(this)
-        recyclerView.adapter = adapter
+        gameAdapter = GameRecyclerViewAdapter(this)
+        recyclerView.adapter = gameAdapter
         recyclerView.layoutManager = GridLayoutManager(activity,1, LinearLayoutManager.HORIZONTAL,false)
 
         gameViewModel.gameLiveData.observe(viewLifecycleOwner, Observer {
-            adapter.set(it)
+            gameAdapter.set(it)
+        })
+
+        recyclerView = view.findViewById(R.id.otherPlayersRecyclerView)
+        otherPlayersadapter = OtherPlayersRecyclerViewAdapter(this)
+        recyclerView.adapter = otherPlayersadapter
+        recyclerView.layoutManager = GridLayoutManager(activity,1, LinearLayoutManager.HORIZONTAL,false)
+
+        gameViewModel.gameLiveData.observe(viewLifecycleOwner, Observer {
+            otherPlayersadapter.set(it)
         })
 
         return view
