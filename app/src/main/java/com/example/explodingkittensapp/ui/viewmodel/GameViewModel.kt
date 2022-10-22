@@ -3,21 +3,16 @@ package com.example.explodingkittensapp.ui.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.example.explodingkittensapp.APImodels.Bodies.APIUser
-import com.example.explodingkittensapp.APImodels.Responses.APISigninResponse
+import com.example.explodingkittensapp.APImodels.Bodies.APIGameParticipants
 import com.example.explodingkittensapp.activities.MainActivity
 import com.example.explodingkittensapp.model.CardModel
-import com.example.explodingkittensapp.model.MatchModel
 import com.example.explodingkittensapp.model.UserModel
 import com.example.explodingkittensapp.navigation.Navigator
-import com.example.explodingkittensapp.networking.MatchInviteRemoteRepository
 import com.example.explodingkittensapp.networking.UsersRemoteRepository
 import com.example.explodingkittensapp.networking.getRetrofit
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 
 class GameViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -74,9 +69,9 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
             }
         })
     }
-    fun playersAPI(username: String){
+    fun playersAPI(participants: APIGameParticipants){
         val service = getRetrofit().create(UsersRemoteRepository::class.java)
-        val call =  service.getFriends(username)
+        val call =  service.getGameParticipants(participants)
         call.enqueue(object : Callback<List<UserModel>> {
             override fun onFailure(call: Call<List<UserModel>>, t: Throwable) {
                 println(t.message)

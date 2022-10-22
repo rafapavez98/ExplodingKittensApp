@@ -28,6 +28,9 @@ class MyGamesRecyclerViewAdapter(override val onClickListener: OnClickListener):
     ) {
         val item = data[position]
         holder.bindView(item)
+        holder.itemView.setOnClickListener{
+            onClickListener.onClickItem(item)
+        }
 
     }
 

@@ -27,6 +27,7 @@ class MyGamesViewModel(application: Application) : AndroidViewModel(application)
     var myGames: MutableList<MatchModel> = mutableListOf()
     var myGamesLiveData = MutableLiveData<MutableList<MatchModel>>()
     val chosenMyGames = MutableLiveData<MatchModel>()
+    lateinit var gamename: String
 
     lateinit var navigator: Navigator
 
@@ -110,6 +111,7 @@ class MyGamesViewModel(application: Application) : AndroidViewModel(application)
 
     fun selectMyGames(item: MatchModel){
         chosenMyGames.value = item
+        gamename = item.gamename
         println(chosenMyGames)
     }
 

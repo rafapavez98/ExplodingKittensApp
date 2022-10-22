@@ -1,5 +1,6 @@
 package com.example.explodingkittensapp.networking
 
+import com.example.explodingkittensapp.APImodels.Bodies.APIGameParticipants
 import com.example.explodingkittensapp.APImodels.Bodies.APILogin
 import com.example.explodingkittensapp.APImodels.Bodies.APIUser
 import com.example.explodingkittensapp.APImodels.Responses.APILoginResponse
@@ -15,6 +16,9 @@ interface UsersRemoteRepository {
 
     @POST("login")
     fun loginUser(@Body login: APILogin): Call<APILoginResponse>
+
+    @POST("participants/")
+    fun getGameParticipants(@Body participants: APIGameParticipants): Call<List<UserModel>>
 
     @GET("friends/{username}")
     fun getFriends(@Path("username") username: String): Call<List<UserModel>>
