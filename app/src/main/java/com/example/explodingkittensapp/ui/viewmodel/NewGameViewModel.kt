@@ -50,13 +50,6 @@ class NewGameViewModel(application: Application) : AndroidViewModel(application)
     }
 
     //DB Methods
-    fun saveNewGame(user: UserModel) {
-        executor.execute {
-            database.insertUser(UserEntityMapper().mapToCached(user))
-            newGame.add(user)
-            newGameLiveData.postValue(newGame)
-        }
-    }
 
     fun loadNewGame() {
         executor.execute {
@@ -71,26 +64,6 @@ class NewGameViewModel(application: Application) : AndroidViewModel(application)
     }
 
     //API Methods
-    fun addNewGameAPI(newUser: APIUser){
-        val service = getRetrofit().create(UsersRemoteRepository::class.java)
-        val call =  service.createUser(newUser)
-        call.enqueue(object : Callback<APISigninResponse> {
-            override fun onFailure(call: Call<APISigninResponse>, t: Throwable) {
-                println(t.message)
-            }
-            override fun onResponse(call: Call<APISigninResponse>, response: Response<APISigninResponse>) {
-                if(response.body() != null){
-                    val userAPI = response.body()
-                    if (userAPI != null) {
-                        println(userAPI)
-                        //val usr = UserModel(userAPI.id,userAPI.email,userAPI.username,userAPI.password,userAPI.total_matches,userAPI.winrate,userAPI.friends)
-                        //saveFriend(usr)
-                    }
-                }
-            }
-        })
-    }
-
     fun newGameAPI(username: String){
         val service = getRetrofit().create(UsersRemoteRepository::class.java)
         val call =  service.getFriends(username)
@@ -143,6 +116,4 @@ class NewGameViewModel(application: Application) : AndroidViewModel(application)
             }
         })
     }
-
-
 }

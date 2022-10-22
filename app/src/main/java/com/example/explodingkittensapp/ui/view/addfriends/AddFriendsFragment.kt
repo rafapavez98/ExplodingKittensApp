@@ -38,7 +38,6 @@ class AddFriendsFragment : Fragment(), OnClickListener {
         val uname = userViewModel.uname
         val view = inflater.inflate(R.layout.fragment_add_friends, container, false)
         addFriendsViewModel.getFriendsAPI(uname)
-        //println(friendViewModel.friends)
         recyclerView = view.findViewById(R.id.addFriendsRecyclerView)
         adapter = AddFriendsRecyclerViewAdapter(this)
         recyclerView.adapter = adapter
@@ -47,8 +46,6 @@ class AddFriendsFragment : Fragment(), OnClickListener {
         addFriendsViewModel.addFriendsLiveData.observe(viewLifecycleOwner, Observer {
             adapter.set(it)
         })
-
-
 
         return view
     }
@@ -59,5 +56,4 @@ class AddFriendsFragment : Fragment(), OnClickListener {
             addFriendsViewModel.navigator.navigateToAddFriendsDetail()
         }
     }
-
 }

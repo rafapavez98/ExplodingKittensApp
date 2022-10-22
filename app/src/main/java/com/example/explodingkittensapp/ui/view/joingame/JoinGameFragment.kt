@@ -56,8 +56,6 @@ class JoinGameFragment : Fragment(), OnClickListener {
             adapter.set(it)
         })
 
-
-
         return view
     }
 

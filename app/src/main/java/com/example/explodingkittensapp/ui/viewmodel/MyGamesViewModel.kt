@@ -47,13 +47,6 @@ class MyGamesViewModel(application: Application) : AndroidViewModel(application)
     }
 
     //DB Methods
-    fun saveMyGames(user: MatchModel) {
-        executor.execute {
-            //database.insertUser(UserEntityMapper().mapToCached(user))
-            myGames.add(user)
-            myGamesLiveData.postValue(myGames)
-        }
-    }
 
     fun loadMyGames() {
         if(myGames.size != 0) {
@@ -62,26 +55,6 @@ class MyGamesViewModel(application: Application) : AndroidViewModel(application)
     }
 
     //API Methods
-    fun addMyGamesAPI(newUser: APIUser){
-        val service = getRetrofit().create(UsersRemoteRepository::class.java)
-        val call =  service.createUser(newUser)
-        call.enqueue(object : Callback<APISigninResponse> {
-            override fun onFailure(call: Call<APISigninResponse>, t: Throwable) {
-                println(t.message)
-            }
-            override fun onResponse(call: Call<APISigninResponse>, response: Response<APISigninResponse>) {
-                if(response.body() != null){
-                    val userAPI = response.body()
-                    if (userAPI != null) {
-                        println(userAPI)
-                        //val usr = UserModel(userAPI.id,userAPI.email,userAPI.username,userAPI.password,userAPI.total_matches,userAPI.winrate,userAPI.friends)
-                        //saveFriend(usr)
-                    }
-                }
-            }
-        })
-    }
-
     fun myGamesAPI(username: String){
         val service = getRetrofit().create(MatchInviteRemoteRepository::class.java)
         val call =  service.getMatches(username) //se queda como friends
@@ -115,7 +88,4 @@ class MyGamesViewModel(application: Application) : AndroidViewModel(application)
         gamename = item.gamename
         println(chosenMyGames)
     }
-
-
-
 }

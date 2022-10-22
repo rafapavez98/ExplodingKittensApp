@@ -41,7 +41,6 @@ class MyGamesFragment : Fragment(), OnClickListener {
         val uname = userViewModel.uname
         val view = inflater.inflate(R.layout.fragment_my_games, container, false)
         myGamesViewModel.myGamesAPI(uname)
-        //println(friendViewModel.friends)
         recyclerView = view.findViewById(R.id.myGamesRecyclerView)
         adapter = MyGamesRecyclerViewAdapter(this)
         recyclerView.adapter = adapter
@@ -65,6 +64,4 @@ class MyGamesFragment : Fragment(), OnClickListener {
             myGamesViewModel.navigator.navigateToGame()
         }
     }
-
-
 }

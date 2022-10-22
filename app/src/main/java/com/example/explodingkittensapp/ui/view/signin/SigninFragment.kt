@@ -31,6 +31,7 @@ class SigninFragment : Fragment() {
         val signinbtn : Button = view.findViewById(R.id.signinbtn)
         val signinusername : EditText = view.findViewById(R.id.signinusername)
         val signinpassword : EditText = view.findViewById(R.id.signinpassword)
+        val signinpassword2 : EditText = view.findViewById(R.id.signinrepeatpassword)
         val signinmail : EditText = view.findViewById(R.id.signinmail)
 
 
@@ -38,6 +39,7 @@ class SigninFragment : Fragment() {
             val semail = signinmail.text.toString()
             val susername = signinusername.text.toString()
             val spassword = signinpassword.text.toString()
+            val spassword2 = signinpassword2.text.toString()
             val stotal_matches = 0
             val swinrate = 100
             val sfriends = mutableListOf<String>()
@@ -56,6 +58,16 @@ class SigninFragment : Fragment() {
             if(spassword.isEmpty()){
                 signinpassword.error = "Password required"
                 signinpassword.requestFocus()
+                return@setOnClickListener
+            }
+            if(spassword2.isEmpty()){
+                signinpassword2.error = "Confirm Password required"
+                signinpassword2.requestFocus()
+                return@setOnClickListener
+            }
+            if(spassword2 != spassword){
+                signinpassword2.error = "Passwords do not Match"
+                signinpassword2.requestFocus()
                 return@setOnClickListener
             }
             val newAPIUser = APIUser(semail,susername,spassword,stotal_matches,swinrate,sfriends,scards)

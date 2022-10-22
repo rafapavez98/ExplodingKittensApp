@@ -22,13 +22,11 @@ class FriendsRequestsDetails : Fragment() {
     private val viewModel: FriendsRequestsViewModel by activityViewModels()
     private val userViewModel: UserViewModel by activityViewModels()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.setNavigator(activity as MainActivity)
         setHasOptionsMenu(true)
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +43,6 @@ class FriendsRequestsDetails : Fragment() {
         if (selected != null) {
             username.text = selected.invitor
         }
-
 
         acceptfriendbtn.setOnClickListener {
             val inviteid = selected?.id
@@ -81,6 +78,4 @@ class FriendsRequestsDetails : Fragment() {
 
         return view
     }
-
-
 }

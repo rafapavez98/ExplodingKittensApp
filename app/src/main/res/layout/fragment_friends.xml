@@ -49,7 +49,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/friendRecyclerView"
-            android:layout_width="410dp"
+            android:layout_width="match_parent"
             android:layout_height="532dp"
             app:layout_constraintBottom_toTopOf="@+id/addFriendsbtn"
             app:layout_constraintEnd_toEndOf="parent"
@@ -58,22 +58,22 @@
 
         <Button
             android:id="@+id/addFriendsbtn"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Search Friends"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/friendRequestsbtn"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/friendRecyclerView"
             app:layout_constraintVertical_bias="0.709" />
 
         <Button
             android:id="@+id/friendRequestsbtn"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Friend Requests"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/addFriendsbtn"

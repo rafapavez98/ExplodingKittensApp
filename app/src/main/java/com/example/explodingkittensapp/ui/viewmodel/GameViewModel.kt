@@ -25,26 +25,19 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     lateinit var navigator: Navigator
 
-
     init{
-
         loadGame()
-
     }
 
     fun setNavigator(activity: MainActivity?) {
         navigator = Navigator(activity)
     }
 
-
-
     fun loadGame() {
         if(cards.size != 0) {
             gameLiveData.postValue(cards)
         }
     }
-
-
 
     fun cardsAPI(username: String){
         val service = getRetrofit().create(UsersRemoteRepository::class.java)
@@ -99,7 +92,4 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         chosenGame.value = item
         println(chosenGame)
     }
-
-
-
 }

@@ -19,7 +19,6 @@ class FriendDetails : Fragment() {
         setHasOptionsMenu(true)
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,6 +40,4 @@ class FriendDetails : Fragment() {
 
         return view
     }
-
-
 }

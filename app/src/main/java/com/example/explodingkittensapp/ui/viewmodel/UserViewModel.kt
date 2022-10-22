@@ -28,13 +28,11 @@ import java.util.concurrent.Executors
 class UserViewModel(application: Application) : AndroidViewModel(application) {
 
     val app = application
-    var emailLiveData = MutableLiveData("")
-    var passwordLiveData = MutableLiveData("")
-    var credentialsAreValid : MutableLiveData<Boolean> = MutableLiveData()
     var users: MutableList<UserModel> = mutableListOf()
     var usersLiveData = MutableLiveData<MutableList<UserModel>>()
     lateinit var uname: String
     lateinit var id: String
+    var profile = UserModel("", "", "", "", 0, 0, listOf(), listOf())
 
     var database: UserDao
     private val executor: ExecutorService = Executors.newSingleThreadExecutor()
@@ -43,15 +41,6 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         database = DatabaseRepository(application).postUserDao()
         loadUsers()
         val service = getRetrofit().create(UsersRemoteRepository::class.java)
-    }
-
-    //DB Methods
-    fun saveUser(user: UserModel) {
-        executor.execute {
-            database.insertUser(UserEntityMapper().mapToCached(user))
-            users.add(user)
-            usersLiveData.postValue(users)
-        }
     }
 
     fun loadUsers() {
@@ -91,7 +80,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         val call =  service.loginUser(loginUser)
         call.enqueue(object :  Callback<APILoginResponse> {
             override fun onFailure(call: Call<APILoginResponse>, t: Throwable) {
-                //println(t.message)
+                println(t.message)
             }
             override fun onResponse(call: Call<APILoginResponse>, response: Response<APILoginResponse>) {
                 if(response.body() != null){
@@ -100,6 +89,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
                         println(userAPI)
                         uname = userAPI.username
                         id = userAPI.id
+                        getProfileAPI(userAPI.username)
                         Toast.makeText(activity, "Welcome $uname", Toast.LENGTH_LONG).show()
                         Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_homeScreenFragment)
                     }
@@ -108,13 +98,26 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         })
     }
 
-    fun verifyUser() {
-        val user = users?.find { it.email == emailLiveData.value }
-
-        if (user?.password == passwordLiveData.value) {
-            credentialsAreValid.value = true
-            return
-        }
-        credentialsAreValid.value = false
+    fun getProfileAPI(username: String){
+        val service = getRetrofit().create(UsersRemoteRepository::class.java)
+        val call =  service.getProfile(username)
+        call.enqueue(object :  Callback<UserModel> {
+            override fun onFailure(call: Call<UserModel>, t: Throwable) {
+                println(t.message)
+            }
+            override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
+                if(response.body() != null){
+                    val userAPI = response.body()
+                    if (userAPI != null) {
+                        println(userAPI)
+                        profile.id = userAPI.id
+                        profile.email = userAPI.email
+                        profile.username = userAPI.username
+                        profile.winrate = userAPI.winrate
+                        profile.total_matches = userAPI.total_matches
+                    }
+                }
+            }
+        })
     }
 }

@@ -6,14 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.view.HomeScreenFragment">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="121dp"
-        app:layout_constraintGuide_percent="0.5" />
-
     <Button
         android:id="@+id/joingamebtn"
         android:layout_width="241dp"

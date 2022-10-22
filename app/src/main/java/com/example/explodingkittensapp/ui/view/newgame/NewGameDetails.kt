@@ -23,7 +23,6 @@ class NewGameDetails : Fragment() {
         setHasOptionsMenu(true)
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,8 +35,6 @@ class NewGameDetails : Fragment() {
         val email = view.findViewById<TextView>(R.id.NewGameUserEmail)
         val matches= view.findViewById<TextView>(R.id.NewGameUserMatches)
 
-        //val invittomatchbtn: Button = view.findViewById<Button>(R.id.)
-
         if (selected != null) {
             username.text = selected.username
             winrate.text = selected.winrate.toString()
@@ -47,6 +44,4 @@ class NewGameDetails : Fragment() {
 
         return view
     }
-
-
 }

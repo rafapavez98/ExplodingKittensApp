@@ -49,7 +49,6 @@ class AddFriendsViewModel(application: Application) : AndroidViewModel(applicati
         navigator = Navigator(activity)
     }
 
-
     fun loadAddFriends() {
         executor.execute {
             addfriends = database.getAllUsers().map {
@@ -104,7 +103,6 @@ class AddFriendsViewModel(application: Application) : AndroidViewModel(applicati
                         if(addfriends.size != 0) {
                             addFriendsLiveData.value = (addfriends)
                         }
-
                     }
                 }
             }
@@ -115,5 +113,4 @@ class AddFriendsViewModel(application: Application) : AndroidViewModel(applicati
         chosenAddFriends.value = item
         println(chosenAddFriends)
     }
-
 }

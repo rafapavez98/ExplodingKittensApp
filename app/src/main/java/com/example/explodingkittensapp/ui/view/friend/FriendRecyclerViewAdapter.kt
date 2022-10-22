@@ -36,7 +36,6 @@ class FriendRecyclerViewAdapter(override val onClickListener: OnClickListener): 
         return data.size
     }
 
-
     override fun addItem(item: Any) {
         if (item is UserModel){
             notifyDataSetChanged()
@@ -49,13 +48,11 @@ class FriendRecyclerViewAdapter(override val onClickListener: OnClickListener): 
         this.notifyDataSetChanged()
     }
 
-
     inner class UserViewHolder(private val view: View): RecyclerView.ViewHolder(view){
 
         fun bindView(item: UserModel){
             val userNameTextView: TextView = view.findViewById(R.id.userName)
             userNameTextView.text = item.username
         }
-
     }
 }

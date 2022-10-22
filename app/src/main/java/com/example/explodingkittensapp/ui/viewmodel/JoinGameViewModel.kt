@@ -53,13 +53,6 @@ class JoinGameViewModel(application: Application) : AndroidViewModel(application
     }
 
     //DB Methods
-    fun saveJoinGame(user: MatchInviteModel) {
-        executor.execute {
-            joinGame.add(user)
-            joinGameLiveData.postValue(joinGame)
-        }
-    }
-
     fun loadJoinGame() {
         executor.execute {
             if(joinGame.size != 0) {
@@ -69,26 +62,6 @@ class JoinGameViewModel(application: Application) : AndroidViewModel(application
     }
 
     //API Methods
-    fun addJoinGameAPI(newUser: APIUser){
-        val service = getRetrofit().create(UsersRemoteRepository::class.java)
-        val call =  service.createUser(newUser)
-        call.enqueue(object : Callback<APISigninResponse> {
-            override fun onFailure(call: Call<APISigninResponse>, t: Throwable) {
-                println(t.message)
-            }
-            override fun onResponse(call: Call<APISigninResponse>, response: Response<APISigninResponse>) {
-                if(response.body() != null){
-                    val userAPI = response.body()
-                    if (userAPI != null) {
-                        println(userAPI)
-                        //val usr = UserModel(userAPI.id,userAPI.email,userAPI.username,userAPI.password,userAPI.total_matches,userAPI.winrate,userAPI.friends)
-                        //saveFriend(usr)
-                    }
-                }
-            }
-        })
-    }
-
     fun joinGameAPI(username: String){
         val service = getRetrofit().create(MatchInviteRemoteRepository::class.java)
         val call =  service.getMatchInvites(username)
@@ -182,6 +155,4 @@ class JoinGameViewModel(application: Application) : AndroidViewModel(application
             }
         })
     }
-
-
 }

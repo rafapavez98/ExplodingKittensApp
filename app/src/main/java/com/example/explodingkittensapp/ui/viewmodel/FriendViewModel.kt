@@ -40,7 +40,6 @@ class FriendViewModel(application: Application) : AndroidViewModel(application) 
         navigator = Navigator(activity)
     }
 
-
     fun loadFriends() {
         executor.execute {
             friends = database.getAllUsers().map {
@@ -84,7 +83,4 @@ class FriendViewModel(application: Application) : AndroidViewModel(application) 
         chosenFriend.value = item
         println(chosenFriend)
     }
-
-
-
 }

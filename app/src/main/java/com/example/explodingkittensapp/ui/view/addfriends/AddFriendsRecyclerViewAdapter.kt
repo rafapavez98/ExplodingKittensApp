@@ -49,7 +49,6 @@ class AddFriendsRecyclerViewAdapter(override val onClickListener: OnClickListene
         this.notifyDataSetChanged()
     }
 
-
     inner class UserViewHolder(private val view: View): RecyclerView.ViewHolder(view){
 
         fun bindView(item: UserModel){

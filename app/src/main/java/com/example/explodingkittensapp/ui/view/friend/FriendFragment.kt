@@ -67,5 +67,4 @@ class FriendFragment : Fragment(), OnClickListener {
             friendViewModel.navigator.navigateToFriendDetail()
         }
     }
-
 }

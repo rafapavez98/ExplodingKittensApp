@@ -57,17 +57,9 @@ class NewGameFragment : Fragment(), OnClickListener {
         newGameViewModel.newGameLiveData.observe(viewLifecycleOwner, Observer {
             adapter.set(it)
         })
-
-        //val homebtn : Button = view.findViewById(R.id.homebtn)
-
-        //homebtn.setOnClickListener { Navigation.findNavController(view).navigate(R.id.action_newGameFragment_to_homeScreenFragment)}
-
-        //val friendsbtn : Button = view.findViewById(R.id.friendsbtn)
         val createbtn : Button = view.findViewById(R.id.createGamebtn)
 
         val nameedittext: EditText = view.findViewById<EditText>(R.id.GameNameEditText)
-
-        //friendsbtn.setOnClickListener {Navigation.findNavController(view).navigate(R.id.action_newGameFragment_to_friendsFragment)}
 
         createbtn.setOnClickListener {
             val settings = mutableListOf<String>()
@@ -102,8 +94,6 @@ class NewGameFragment : Fragment(), OnClickListener {
                 newGameViewModel.invites.add(item.username)
                 newGameViewModel.newGame.remove(item)
                 newGameViewModel.newGameLiveData.value = newGameViewModel.newGame
-                //newGameViewModel.selectNewGame(item)
-                //newGameViewModel.navigator.navigateToNewGameDetail()
             }
             else{
                 Toast.makeText(activity, "Can not invite more than 4 players", Toast.LENGTH_LONG).show()

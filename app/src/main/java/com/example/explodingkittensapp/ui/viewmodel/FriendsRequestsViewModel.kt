@@ -142,5 +142,4 @@ class FriendsRequestsViewModel(application: Application) : AndroidViewModel(appl
         chosenFriendsRequests.value = item
         println(chosenFriendsRequests)
     }
-
 }

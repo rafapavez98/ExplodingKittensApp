@@ -57,6 +57,5 @@ class FriendsRequestsRecyclerViewAdapter(override val onClickListener: OnClickLi
             val userNameTextView: TextView = view.findViewById(R.id.friendsRequestsUserName)
             userNameTextView.text = item.invitor
         }
-
     }
 }

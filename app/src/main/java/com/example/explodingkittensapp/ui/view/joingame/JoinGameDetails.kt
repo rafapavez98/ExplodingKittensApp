@@ -41,22 +41,20 @@ class JoinGameDetails : Fragment() {
         val view = inflater.inflate(R.layout.join_game_details_fragment, container, false)
         val selected = viewModel.chosenJoinGame.value
 
-        val username = view.findViewById<TextView>(R.id.joinGameName)
-        val mid = view.findViewById<TextView>(R.id.joinGameMatchId)
+        val mid = view.findViewById<TextView>(R.id.joinGameName)
+        val username = view.findViewById<TextView>(R.id.joinGameMatchId)
 
         val acceptmatchbtn : Button = view.findViewById(R.id.joinGameAccept)
         val rejectmatchbtn : Button = view.findViewById(R.id.joinGameReject)
 
         if (selected != null) {
-            username.text = selected.invitor
+            username.text = "Invited by: " + selected.invitor
             mid.text = selected.matchid
         }
 
 
         acceptmatchbtn.setOnClickListener {
             val inviteid = selected?.id
-            //val invitedusr = userViewModel.uname
-
             val invite = APIAcceptMatchInvite(inviteid.toString())
 
             viewModel.acceptMatchInviteAPI(invite,activity,view)
@@ -71,7 +69,6 @@ class JoinGameDetails : Fragment() {
 
         rejectmatchbtn.setOnClickListener {
             val inviteid = selected?.id
-
             val invite = APIRejectInvite(inviteid.toString())
 
             viewModel.rejectMatchInviteAPI(invite,activity,view)
@@ -86,6 +83,4 @@ class JoinGameDetails : Fragment() {
 
         return view
     }
-
-
 }

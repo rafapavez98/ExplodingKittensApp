@@ -35,6 +35,7 @@
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/userName" />
+
         <TextView
             android:id="@+id/userAtribute2"
             android:layout_width="70dp"
