@@ -15,6 +15,7 @@
         android:layout_marginTop="80dp"
         android:gravity="center_horizontal"
         android:text="Username"
+        android:textColor="@color/black"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

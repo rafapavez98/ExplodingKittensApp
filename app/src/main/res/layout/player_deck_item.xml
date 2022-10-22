@@ -6,23 +6,27 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    app:cardBackgroundColor="#B5DBDF"
+    app:cardBackgroundColor="@color/buttonback"
     app:cardCornerRadius="12dp"
     app:cardElevation="3dp"
     app:contentPadding="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/playerdeckrelativeLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="88dp"
+        android:layout_height="135dp"
         android:padding="16dp">
 
         <TextView
             android:id="@+id/userName"
             android:layout_width="70dp"
             android:layout_height="20dp"
+            android:layout_marginTop="5dp"
             android:text="Nombre"
-            android:textSize="15sp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,17 +34,25 @@
             android:id="@+id/cardAtribute1"
             android:layout_width="70dp"
             android:layout_height="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:text="Atributo1"
-            android:textSize="15sp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/userName" />
+
         <TextView
             android:id="@+id/cardAtribute2"
             android:layout_width="70dp"
             android:layout_height="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:text="Atributo2"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardAtribute1" />
 
