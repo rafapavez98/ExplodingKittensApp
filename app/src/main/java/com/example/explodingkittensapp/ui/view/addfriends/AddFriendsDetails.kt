@@ -57,12 +57,10 @@ class AddFriendsDetails : Fragment() {
 
             addFriendsViewModel.createInviteAPI(newInvite,activity,view)
 
-            for (item: UserModel in addFriendsViewModel.addfriends) {
-                if (item.id == selected?.id){
-                    addFriendsViewModel.addfriends.remove(item)
-                    addFriendsViewModel.addFriendsLiveData.value = addFriendsViewModel.addfriends
-                }
-            }
+            addFriendsViewModel.addfriends.remove(selected)
+
+            addFriendsViewModel.addFriendsLiveData.value = addFriendsViewModel.addfriends
+
         }
         return view
     }

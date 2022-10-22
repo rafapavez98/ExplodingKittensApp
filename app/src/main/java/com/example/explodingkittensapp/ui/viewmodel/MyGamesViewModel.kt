@@ -93,6 +93,7 @@ class MyGamesViewModel(application: Application) : AndroidViewModel(application)
                 if(response.body() != null){
                     val myGamesAPI = response.body() //revisar si cambiar
                     if (myGamesAPI != null) {
+                        myGames.clear()
                         for (user in myGamesAPI){
                             if (!myGames.contains(user)){
                                 myGames.add(user)

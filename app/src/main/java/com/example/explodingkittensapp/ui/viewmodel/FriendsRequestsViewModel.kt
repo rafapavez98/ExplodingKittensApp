@@ -121,6 +121,7 @@ class FriendsRequestsViewModel(application: Application) : AndroidViewModel(appl
                 if(response.body() != null){
                     val friendsAPI = response.body()
                     if (friendsAPI != null) {
+                        friendsRequests.clear()
                         for (invite in friendsAPI){
                             if (!friendsRequests.contains(invite)){
                                 friendsRequests.add(invite)

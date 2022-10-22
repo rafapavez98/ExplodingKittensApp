@@ -102,6 +102,7 @@ class NewGameViewModel(application: Application) : AndroidViewModel(application)
                 if(response.body() != null){
                     val friendsAPI = response.body()
                     if (friendsAPI != null) {
+                        newGame.clear()
                         for (user in friendsAPI){
                             if (!newGame.contains(user)){
                                 newGame.add(user)

@@ -101,6 +101,7 @@ class JoinGameViewModel(application: Application) : AndroidViewModel(application
                     val friendsAPI = response.body()
                     if (friendsAPI != null) {
                         for (user in friendsAPI){
+                            joinGame.clear()
                             if (!joinGame.contains(user)){
                                 joinGame.add(user)
                                 //saveFriend(user)

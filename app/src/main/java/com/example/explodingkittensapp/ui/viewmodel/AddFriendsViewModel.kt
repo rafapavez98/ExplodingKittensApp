@@ -94,6 +94,7 @@ class AddFriendsViewModel(application: Application) : AndroidViewModel(applicati
                 if(response.body() != null){
                     val friendsAPI = response.body()
                     if (friendsAPI != null) {
+                        addfriends.clear()
                         for (user in friendsAPI){
                             if (!addfriends.contains(user)){
                                 addfriends.add(user)

@@ -80,6 +80,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                 if(response.body() != null){
                     val playersAPI = response.body()
                     if (playersAPI != null) {
+                        players.clear()
                         for (user in playersAPI){
                             if (!players.contains(user)){
                                 players.add(user)
