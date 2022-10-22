@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
@@ -75,24 +76,39 @@ class NewGameFragment : Fragment(), OnClickListener {
 
             val invites = newGameViewModel.invites
 
-            val newMatch = APIMatch(nameedittext.text.toString(),userViewModel.uname,settings, participants)
-            viewModel.createMatchAPI(newMatch, activity, view)
-
-            for (username in invites){
-                var newInvite = APIMinvite(nameedittext.text.toString(), username, userViewModel.uname)
-                newGameViewModel.createInviteMatchAPI(newInvite)
+            if(nameedittext.text.isEmpty()){
+                nameedittext.error = "Game Name required required"
+                nameedittext.requestFocus()
+                return@setOnClickListener
             }
+            else{
+                val newMatch = APIMatch(nameedittext.text.toString(),userViewModel.uname,settings, participants)
+                viewModel.createMatchAPI(newMatch, activity, view)
+
+                for (username in invites){
+                    var newInvite = APIMinvite(nameedittext.text.toString(), username, userViewModel.uname)
+                    newGameViewModel.createInviteMatchAPI(newInvite)
+                }
+            }
+
+
         }
 
         return view
     }
     override fun onClickItem(item: Any) {
         if (item is UserModel){
-            newGameViewModel.invites.add(item.username)
-            newGameViewModel.newGame.remove(item)
-            newGameViewModel.newGameLiveData.value = newGameViewModel.newGame
-            //newGameViewModel.selectNewGame(item)
-            //newGameViewModel.navigator.navigateToNewGameDetail()
+            if(newGameViewModel.invites.size < 4){
+                newGameViewModel.invites.add(item.username)
+                newGameViewModel.newGame.remove(item)
+                newGameViewModel.newGameLiveData.value = newGameViewModel.newGame
+                //newGameViewModel.selectNewGame(item)
+                //newGameViewModel.navigator.navigateToNewGameDetail()
+            }
+            else{
+                Toast.makeText(activity, "Can not invite more than 4 players", Toast.LENGTH_LONG).show()
+            }
+
         }
     }
 
