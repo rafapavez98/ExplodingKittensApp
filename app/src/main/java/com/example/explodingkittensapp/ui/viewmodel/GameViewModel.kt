@@ -22,13 +22,14 @@ import java.util.concurrent.Executors
 class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     val app = application
-    var game: MutableList<CardModel> = mutableListOf()
+    var cards: MutableList<CardModel> = mutableListOf()
+    var players: MutableList<UserModel> = mutableListOf()
     var gameLiveData = MutableLiveData<MutableList<CardModel>>()
+    var playersLiveData = MutableLiveData<MutableList<UserModel>>()
     val chosenGame = MutableLiveData<CardModel>()
 
     lateinit var navigator: Navigator
 
-    private val executor: ExecutorService = Executors.newSingleThreadExecutor()
 
     init{
 
@@ -43,14 +44,14 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
 
     fun loadGame() {
-        if(game.size != 0) {
-            gameLiveData.postValue(game)
+        if(cards.size != 0) {
+            gameLiveData.postValue(cards)
         }
     }
 
 
 
-    fun gameAPI(username: String){
+    fun cardsAPI(username: String){
         val service = getRetrofit().create(UsersRemoteRepository::class.java)
         val call =  service.getUserCards(username)
         call.enqueue(object : Callback<List<CardModel>> {
@@ -59,16 +60,38 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
             }
             override fun onResponse(call: Call<List<CardModel>>, response: Response<List<CardModel>>) {
                 if(response.body() != null){
-                    val gameAPI = response.body() //revisar si cambiar
-                    if (gameAPI != null) {
-                        for (user in gameAPI){
-                            if (!game.contains(user)){
-                                game.add(user)
-                                //saveFriend(user)
+                    val cardsAPI = response.body()
+                    if (cardsAPI != null) {
+                        cards.clear()
+                        for (user in cardsAPI){
+                            cards.add(user)
+                        }
+                        if(cards.size != 0) {
+                            gameLiveData.postValue(cards)
+                        }
+                    }
+                }
+            }
+        })
+    }
+    fun playersAPI(username: String){
+        val service = getRetrofit().create(UsersRemoteRepository::class.java)
+        val call =  service.getFriends(username)
+        call.enqueue(object : Callback<List<UserModel>> {
+            override fun onFailure(call: Call<List<UserModel>>, t: Throwable) {
+                println(t.message)
+            }
+            override fun onResponse(call: Call<List<UserModel>>, response: Response<List<UserModel>>) {
+                if(response.body() != null){
+                    val playersAPI = response.body()
+                    if (playersAPI != null) {
+                        for (user in playersAPI){
+                            if (!players.contains(user)){
+                                players.add(user)
                             }
                         }
-                        if(game.size != 0) {
-                            gameLiveData.postValue(game)
+                        if(players.size != 0) {
+                            playersLiveData.value =(players)
                         }
                     }
                 }

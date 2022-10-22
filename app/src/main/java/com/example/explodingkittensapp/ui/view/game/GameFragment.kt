@@ -13,24 +13,24 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.explodingkittensapp.R
 import com.example.explodingkittensapp.activities.MainActivity
 import com.example.explodingkittensapp.activities.OnClickListener
-import com.example.explodingkittensapp.ui.view.mygames.MyGamesRecyclerViewAdapter
 import com.example.explodingkittensapp.ui.viewmodel.GameViewModel
-import com.example.explodingkittensapp.ui.viewmodel.MyGamesViewModel
 import com.example.explodingkittensapp.ui.viewmodel.UserViewModel
 
 
 class GameFragment : Fragment(), OnClickListener {
 
-    lateinit var gameAdapter: GameRecyclerViewAdapter
+    lateinit var gameAdapter: PlayerDeckRecyclerViewAdapter
     lateinit var otherPlayersadapter: OtherPlayersRecyclerViewAdapter
     lateinit var recyclerView1: RecyclerView
     lateinit var recyclerView2: RecyclerView
-    private val gameViewModel: GameViewModel by activityViewModels()
+    private val cardsGameViewModel: GameViewModel by activityViewModels()
+    private val playersGameViewModel: GameViewModel by activityViewModels()
     private val userViewModel: UserViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        gameViewModel.setNavigator(activity as MainActivity)
+        cardsGameViewModel.setNavigator(activity as MainActivity)
+
     }
 
     override fun onCreateView(
@@ -40,25 +40,26 @@ class GameFragment : Fragment(), OnClickListener {
 
         val uname = userViewModel.uname
         val view = inflater.inflate(R.layout.fragment_game, container, false)
-        gameViewModel.gameAPI(uname)
+        cardsGameViewModel.cardsAPI(uname)
+        playersGameViewModel.playersAPI(uname)
 
         recyclerView1 = view.findViewById(R.id.playerDeckRecyclerView)
-        gameAdapter = GameRecyclerViewAdapter(this)
+        gameAdapter = PlayerDeckRecyclerViewAdapter(this)
         recyclerView1.adapter = gameAdapter
         recyclerView1.layoutManager = GridLayoutManager(activity,1, LinearLayoutManager.HORIZONTAL,false)
 
-        gameViewModel.gameLiveData.observe(viewLifecycleOwner, Observer {
+        cardsGameViewModel.gameLiveData.observe(viewLifecycleOwner, Observer {
             gameAdapter.set(it)
         })
 
-        /*recyclerView2 = view.findViewById(R.id.otherPlayersRecyclerView)
+        recyclerView2 = view.findViewById(R.id.otherPlayersRecyclerView)
         otherPlayersadapter = OtherPlayersRecyclerViewAdapter(this)
         recyclerView2.adapter = otherPlayersadapter
         recyclerView2.layoutManager = GridLayoutManager(activity,1, LinearLayoutManager.HORIZONTAL,false)
 
-        gameViewModel.gameLiveData.observe(viewLifecycleOwner, Observer {
+        playersGameViewModel.playersLiveData.observe(viewLifecycleOwner, Observer {
             otherPlayersadapter.set(it)
-        })*/
+        })
 
         return view
     }

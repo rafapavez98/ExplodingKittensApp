@@ -10,7 +10,7 @@ import com.example.explodingkittensapp.activities.AdapterView
 import com.example.explodingkittensapp.activities.OnClickListener
 import com.example.explodingkittensapp.model.CardModel
 
-class GameRecyclerViewAdapter(override val onClickListener: OnClickListener): RecyclerView.Adapter<GameRecyclerViewAdapter.UserViewHolder>(),
+class PlayerDeckRecyclerViewAdapter(override val onClickListener: OnClickListener): RecyclerView.Adapter<PlayerDeckRecyclerViewAdapter.UserViewHolder>(),
     AdapterView {
     var data = listOf<CardModel>()
     override fun onCreateViewHolder(
