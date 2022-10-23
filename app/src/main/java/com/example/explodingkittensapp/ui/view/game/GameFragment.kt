@@ -105,24 +105,26 @@ class GameFragment : Fragment(), OnClickListener {
         drawbtn.setOnClickListener{
             println("CLICK")
 
-            if (cardsGameViewModel.myturn != gameViewModel.chosenMyGames.value?.turn.toString()){ // fix my turn para que este actualizada desde un principio con el valor
-                drawbtn.isClickable = false
-            }
+            // (cardsGameViewModel.myturn != gameViewModel.chosenMyGames.value?.turn.toString()){ // fix my turn para que este actualizada desde un principio con el valor
+            //    drawbtn.isClickable = false
+            //}
             //Draw 1, verificar exploding kitten y si tiene defuse, de lo contrario pasar de turno o eliminar el jugador y pasar de turno
             //Si aparece exploding kitten sin defuse mandar a una nueva vista que se vea la carta exploding kitten
         }
-
         return view
     }
 
     override fun onClickItem(item: Any) {
         if (item is CardModel){
-            if (cardsGameViewModel.myturn != gameViewModel.chosenMyGames.value?.turn.toString()) { // fix my turn para que este actualizada desde un principio con el valor
-                item.isClickable = false
-            }
+            //if (cardsGameViewModel.myturn != gameViewModel.chosenMyGames.value?.turn.toString()) { // fix my turn para que este actualizada desde un principio con el valor
+            //    item.isClickable = false
+            //}
             //Jugar una carta
             val play = APIPlay(item.id, userViewModel.uname, gameViewModel.gamename)
             cardsGameViewModel.playCard(play)
+
+            cardsGameViewModel.cards.remove(item)
+            cardsGameViewModel.gameLiveData.value = cardsGameViewModel.cards
 
         }
         else{
