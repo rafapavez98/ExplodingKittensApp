@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.explodingkittensapp.APImodels.Bodies.APIGameParticipants
 import com.example.explodingkittensapp.APImodels.Bodies.APIMyturn
+import com.example.explodingkittensapp.APImodels.Bodies.APIPlay
+import com.example.explodingkittensapp.APImodels.Bodies.APIRejectInvite
 import com.example.explodingkittensapp.R
 import com.example.explodingkittensapp.activities.MainActivity
 import com.example.explodingkittensapp.activities.OnClickListener
@@ -76,8 +78,6 @@ class GameFragment : Fragment(), OnClickListener {
             lastcardimageview.setImageResource(defusecard)
         }
 
-
-
         cardsGameViewModel.cardsAPI(uname)
 
         //cards recyclerview
@@ -108,6 +108,8 @@ class GameFragment : Fragment(), OnClickListener {
             if (cardsGameViewModel.myturn != gameViewModel.chosenMyGames.value?.turn.toString()){ // fix my turn para que este actualizada desde un principio con el valor
                 drawbtn.isClickable = false
             }
+            //Draw 1, verificar exploding kitten y si tiene defuse, de lo contrario pasar de turno o eliminar el jugador y pasar de turno
+            //Si aparece exploding kitten sin defuse mandar a una nueva vista que se vea la carta exploding kitten
         }
 
         return view
@@ -115,7 +117,13 @@ class GameFragment : Fragment(), OnClickListener {
 
     override fun onClickItem(item: Any) {
         if (item is CardModel){
-            //playcard
+            if (cardsGameViewModel.myturn != gameViewModel.chosenMyGames.value?.turn.toString()) { // fix my turn para que este actualizada desde un principio con el valor
+                item.isClickable = false
+            }
+            //Jugar una carta
+            val play = APIPlay(item.id, userViewModel.uname, gameViewModel.gamename)
+            cardsGameViewModel.playCard(play)
+
         }
         else{
             TODO("Not yet implemented")

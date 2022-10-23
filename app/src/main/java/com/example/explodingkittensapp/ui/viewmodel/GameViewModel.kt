@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.explodingkittensapp.APImodels.Bodies.APIGameParticipants
 import com.example.explodingkittensapp.APImodels.Bodies.APIMyturn
+import com.example.explodingkittensapp.APImodels.Bodies.APIPlay
 import com.example.explodingkittensapp.APImodels.Responses.APIMessageResponse
 import com.example.explodingkittensapp.activities.MainActivity
 import com.example.explodingkittensapp.model.CardModel
@@ -103,6 +104,25 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                     val messageAPI = response.body()
                     if (messageAPI != null) {
                         myturn = messageAPI.msg
+                        //println(myturn)
+                    }
+                }
+            }
+        })
+    }
+
+    fun playCard(apiPlay: APIPlay) {
+        val service = getRetrofit().create(UsersRemoteRepository::class.java)
+        val call =  service.playCard(apiPlay)
+        call.enqueue(object : Callback<APIMessageResponse> {
+            override fun onFailure(call: Call<APIMessageResponse>, t: Throwable) {
+                println(t.message)
+            }
+            override fun onResponse(call: Call<APIMessageResponse>, response: Response<APIMessageResponse>) {
+                if(response.body() != null){
+                    val messageAPI = response.body()
+                    if (messageAPI != null) {
+                        //myturn = messageAPI.msg
                         //println(myturn)
                     }
                 }

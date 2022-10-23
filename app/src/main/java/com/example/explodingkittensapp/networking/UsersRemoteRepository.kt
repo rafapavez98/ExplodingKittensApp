@@ -1,9 +1,6 @@
 package com.example.explodingkittensapp.networking
 
-import com.example.explodingkittensapp.APImodels.Bodies.APIGameParticipants
-import com.example.explodingkittensapp.APImodels.Bodies.APILogin
-import com.example.explodingkittensapp.APImodels.Bodies.APIMyturn
-import com.example.explodingkittensapp.APImodels.Bodies.APIUser
+import com.example.explodingkittensapp.APImodels.Bodies.*
 import com.example.explodingkittensapp.APImodels.Responses.APILoginResponse
 import com.example.explodingkittensapp.APImodels.Responses.APIMessageResponse
 import com.example.explodingkittensapp.APImodels.Responses.APISigninResponse
@@ -39,4 +36,7 @@ interface UsersRemoteRepository {
 
     @POST("myturn/")
     fun getMyTurn(@Body turn: APIMyturn): Call<APIMessageResponse>
+
+    @POST("playcard")
+    fun playCard(@Body play: APIPlay): Call<APIMessageResponse>
 }
