@@ -27,6 +27,9 @@ class PlayerDeckRecyclerViewAdapter(override val onClickListener: OnClickListene
     ) {
         val item = data[position]
         holder.bindView(item)
+        holder.itemView.setOnClickListener{
+            onClickListener.onClickItem(item)
+        }
 
     }
 

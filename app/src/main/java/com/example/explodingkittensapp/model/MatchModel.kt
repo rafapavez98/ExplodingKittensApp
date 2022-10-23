@@ -9,5 +9,7 @@ data class MatchModel(
     var gamename: String,
     var creator: String,
     var settings: List<String>,
-    var participants: List<String>
+    var participants: List<String>,
+    var lastcard: String,
+    var turn: Int
 ): Parcelable

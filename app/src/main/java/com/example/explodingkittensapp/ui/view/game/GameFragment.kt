@@ -1,19 +1,23 @@
 package com.example.explodingkittensapp.ui.view.game
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.explodingkittensapp.APImodels.Bodies.APIGameParticipants
+import com.example.explodingkittensapp.APImodels.Bodies.APIMyturn
 import com.example.explodingkittensapp.R
 import com.example.explodingkittensapp.activities.MainActivity
 import com.example.explodingkittensapp.activities.OnClickListener
+import com.example.explodingkittensapp.model.CardModel
 import com.example.explodingkittensapp.ui.viewmodel.GameViewModel
 import com.example.explodingkittensapp.ui.viewmodel.MyGamesViewModel
 import com.example.explodingkittensapp.ui.viewmodel.UserViewModel
@@ -33,7 +37,11 @@ class GameFragment : Fragment(), OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         cardsGameViewModel.setNavigator(activity as MainActivity)
+        val aux = gameViewModel.chosenMyGames.value?.let { APIMyturn(it.gamename, userViewModel.uname) }
 
+        if (aux != null) {
+            cardsGameViewModel.getMyTurn(aux)
+        }
     }
 
     override fun onCreateView(
@@ -43,11 +51,34 @@ class GameFragment : Fragment(), OnClickListener {
 
         val uname = userViewModel.uname
         val gamename = gameViewModel.gamename
+
+        val participants = gameViewModel.chosenMyGames.value?.participants
+        val lastcard = gameViewModel.chosenMyGames.value?.lastcard
+        //val turn = gameViewModel.chosenMyGames.value?.turn
+
         val view = inflater.inflate(R.layout.fragment_game, container, false)
+
+        val drawbtn : Button = view.findViewById(R.id.drawbtn)
+        val lastcardimageview : ImageView = view.findViewById(R.id.lastCardImageView)
+
+        val skipcard = R.drawable.skip
+        val defusecard = R.drawable.defuse
+        val kittencard = R.drawable.kitten1
+
+        // agregar cada caso de cartas a medida que se van implementando mas cartas
+        if (lastcard == "5GKopmheJVBVJwcEMWtI") { // kitten
+            lastcardimageview.setImageResource(kittencard)
+        }
+        else if (lastcard == "PHKvNq2afTrKUHYznI1W"){
+            lastcardimageview.setImageResource(skipcard)
+        }
+        else if (lastcard == "5VYvZ4k72Y2fbfEmGdiV"){
+            lastcardimageview.setImageResource(defusecard)
+        }
+
 
 
         cardsGameViewModel.cardsAPI(uname)
-
 
         //cards recyclerview
         recyclerView1 = view.findViewById(R.id.playerDeckRecyclerView)
@@ -71,11 +102,25 @@ class GameFragment : Fragment(), OnClickListener {
             otherPlayersadapter.set(it)
         })
 
+        drawbtn.setOnClickListener{
+            println("CLICK")
+
+            if (cardsGameViewModel.myturn != gameViewModel.chosenMyGames.value?.turn.toString()){ // fix my turn para que este actualizada desde un principio con el valor
+                drawbtn.isClickable = false
+            }
+        }
+
         return view
     }
 
     override fun onClickItem(item: Any) {
-        TODO("Not yet implemented")
+        if (item is CardModel){
+            //playcard
+        }
+        else{
+            TODO("Not yet implemented")
+        }
+
     }
 
 

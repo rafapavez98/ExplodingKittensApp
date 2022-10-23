@@ -4,6 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.explodingkittensapp.APImodels.Bodies.APIGameParticipants
+import com.example.explodingkittensapp.APImodels.Bodies.APIMyturn
+import com.example.explodingkittensapp.APImodels.Responses.APIMessageResponse
 import com.example.explodingkittensapp.activities.MainActivity
 import com.example.explodingkittensapp.model.CardModel
 import com.example.explodingkittensapp.model.UserModel
@@ -22,6 +24,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     var gameLiveData = MutableLiveData<MutableList<CardModel>>()
     var playersLiveData = MutableLiveData<MutableList<UserModel>>()
     val chosenGame = MutableLiveData<CardModel>()
+    var myturn = ""
 
     lateinit var navigator: Navigator
 
@@ -82,6 +85,25 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                         if(players.size != 0) {
                             playersLiveData.value =(players)
                         }
+                    }
+                }
+            }
+        })
+    }
+
+    fun getMyTurn(apiMyturn: APIMyturn) {
+        val service = getRetrofit().create(UsersRemoteRepository::class.java)
+        val call =  service.getMyTurn(apiMyturn)
+        call.enqueue(object : Callback<APIMessageResponse> {
+            override fun onFailure(call: Call<APIMessageResponse>, t: Throwable) {
+                println(t.message)
+            }
+            override fun onResponse(call: Call<APIMessageResponse>, response: Response<APIMessageResponse>) {
+                if(response.body() != null){
+                    val messageAPI = response.body()
+                    if (messageAPI != null) {
+                        myturn = messageAPI.msg
+                        //println(myturn)
                     }
                 }
             }
