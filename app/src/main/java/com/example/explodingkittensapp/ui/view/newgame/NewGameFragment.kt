@@ -81,6 +81,8 @@ class NewGameFragment : Fragment(), OnClickListener {
                     var newInvite = APIMinvite(nameedittext.text.toString(), username, userViewModel.uname)
                     newGameViewModel.createInviteMatchAPI(newInvite)
                 }
+
+                viewModel.getDealCardsAPI(userViewModel.uname)
             }
 
 

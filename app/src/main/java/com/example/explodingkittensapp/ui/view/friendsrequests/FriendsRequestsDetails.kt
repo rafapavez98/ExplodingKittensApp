@@ -53,12 +53,9 @@ class FriendsRequestsDetails : Fragment() {
 
             viewModel.acceptInviteAPI(invite,activity,view)
 
-            for (item: FriendInviteModel in viewModel.friendsRequests) {
-                if (item.id == selected?.id){
-                    viewModel.friendsRequests.remove(item)
-                    viewModel.friendsRequestsLiveData.value = viewModel.friendsRequests
-                }
-            }
+            viewModel.friendsRequests.remove(selected)
+            viewModel.friendsRequestsLiveData.value = viewModel.friendsRequests
+
         }
 
         rejectfriendbtn.setOnClickListener {

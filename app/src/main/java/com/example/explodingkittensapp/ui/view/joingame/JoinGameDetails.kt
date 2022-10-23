@@ -59,12 +59,14 @@ class JoinGameDetails : Fragment() {
 
             viewModel.acceptMatchInviteAPI(invite,activity,view)
 
-            for (item: MatchInviteModel in viewModel.joinGame) {
-                if (item.id == selected?.id){
-                    viewModel.joinGame.remove(item)
-                    viewModel.joinGameLiveData.value = viewModel.joinGame
-                }
+            viewModel.joinGame.remove(selected)
+            viewModel.joinGameLiveData.value = viewModel.joinGame
+            val username = selected?.invited
+            if (username != null) {
+                viewModel.getDealCardsAPI(username)
             }
+
+
         }
 
         rejectmatchbtn.setOnClickListener {
@@ -73,12 +75,9 @@ class JoinGameDetails : Fragment() {
 
             viewModel.rejectMatchInviteAPI(invite,activity,view)
 
-            for (item: MatchInviteModel in viewModel.joinGame) {
-                if (item.id == selected?.id){
-                    viewModel.joinGame.remove(item)
-                    viewModel.joinGameLiveData.value = viewModel.joinGame
-                }
-            }
+            viewModel.joinGame.remove(selected)
+            viewModel.joinGameLiveData.value = viewModel.joinGame
+
         }
 
         return view

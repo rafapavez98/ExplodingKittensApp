@@ -33,7 +33,7 @@
             android:id="@+id/editTextSearchMyGames"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Filter Friends"
+            android:hint="Filter Games"
             android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/myGamesRecyclerView"
             app:layout_constraintEnd_toEndOf="parent"

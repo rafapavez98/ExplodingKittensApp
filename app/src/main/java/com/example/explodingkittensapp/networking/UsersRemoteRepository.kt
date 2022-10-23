@@ -4,6 +4,7 @@ import com.example.explodingkittensapp.APImodels.Bodies.APIGameParticipants
 import com.example.explodingkittensapp.APImodels.Bodies.APILogin
 import com.example.explodingkittensapp.APImodels.Bodies.APIUser
 import com.example.explodingkittensapp.APImodels.Responses.APILoginResponse
+import com.example.explodingkittensapp.APImodels.Responses.APIMessageResponse
 import com.example.explodingkittensapp.APImodels.Responses.APISigninResponse
 import com.example.explodingkittensapp.model.CardModel
 import com.example.explodingkittensapp.model.UserModel
@@ -31,4 +32,7 @@ interface UsersRemoteRepository {
 
     @GET("cards/{username}")
     fun getUserCards(@Path("username") username: String): Call<List<CardModel>>
+
+    @GET("draw5/{username}")
+    fun getdealcards(@Path("username") username: String): Call<APIMessageResponse>
 }

@@ -155,4 +155,22 @@ class JoinGameViewModel(application: Application) : AndroidViewModel(application
             }
         })
     }
+
+    fun getDealCardsAPI(username: String) {
+        val service = getRetrofit().create(UsersRemoteRepository::class.java)
+        val call =  service.getdealcards(username)
+        call.enqueue(object : Callback<APIMessageResponse> {
+            override fun onFailure(call: Call<APIMessageResponse>, t: Throwable) {
+                println(t.message)
+            }
+            override fun onResponse(call: Call<APIMessageResponse>, response: Response<APIMessageResponse>) {
+                if(response.body() != null){
+                    val userAPI = response.body()
+                    if (userAPI != null) {
+
+                    }
+                }
+            }
+        })
+    }
 }
