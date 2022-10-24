@@ -55,8 +55,8 @@ class OtherPlayersRecyclerViewAdapter(override val onClickListener: OnClickListe
             val handTextView: TextView = view.findViewById(R.id.userAtribute1)
             val handTextView2: TextView = view.findViewById(R.id.userAtribute2)
             userNameTextView.text = item.username
-            handTextView.text = item.cards.size.toString()
-            handTextView2.text = item.total_matches.toString()
+            handTextView.text = "Cards: "+item.cards.size.toString()
+            handTextView2.text = "Wins: "+item.wins.toString()
         }
 
     }
