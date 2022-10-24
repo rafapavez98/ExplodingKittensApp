@@ -44,7 +44,7 @@ class GameFragment : Fragment(), OnClickListener {
 
     var handler: Handler = Handler()
     var runnable: Runnable? = null
-    var delay = 5000
+    var delay = 2000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

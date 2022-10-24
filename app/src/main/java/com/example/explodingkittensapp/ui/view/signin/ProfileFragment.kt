@@ -22,7 +22,7 @@ class ProfileFragment : Fragment() {
 
     var handler: Handler = Handler()
     var runnable: Runnable? = null
-    var delay = 5000
+    var delay = 1000
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
