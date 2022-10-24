@@ -195,6 +195,26 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         })
     }
 
+    fun wingame(username: String) {
+        val service = getRetrofit().create(UsersRemoteRepository::class.java)
+        val call =  service.win(username)
+        call.enqueue(object : Callback<APIMessageResponse> {
+            override fun onFailure(call: Call<APIMessageResponse>, t: Throwable) {
+                println(t.message)
+            }
+            override fun onResponse(call: Call<APIMessageResponse>, response: Response<APIMessageResponse>) {
+                if(response.body() != null){
+                    val messageAPI = response.body()
+                    if (messageAPI != null) {
+
+                        var msg = messageAPI.msg
+                        println(msg)
+                    }
+                }
+            }
+        })
+    }
+
     fun selectGame(item: CardModel){
         chosenGame.value = item
         println(chosenGame)

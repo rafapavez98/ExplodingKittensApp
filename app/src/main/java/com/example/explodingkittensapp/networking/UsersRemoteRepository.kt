@@ -45,4 +45,7 @@ interface UsersRemoteRepository {
 
     @GET("draw/{username}")
     fun draw(@Path("username") username: String): Call<APIMessageResponse>
+
+    @GET("win/{username}")
+    fun win(@Path("username") username: String): Call<APIMessageResponse>
 }

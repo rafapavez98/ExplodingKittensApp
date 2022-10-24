@@ -213,9 +213,8 @@ class GameFragment : Fragment(), OnClickListener {
                 Toast.makeText(activity, "Congratulations, You Won", Toast.LENGTH_LONG).show()
                 if (view != null) {
                     Navigation.findNavController(view).popBackStack()
-                }
-                if (view != null) {
                     Navigation.findNavController(view).popBackStack()
+                    cardsGameViewModel.wingame(userViewModel.uname)
                 }
             }
 
