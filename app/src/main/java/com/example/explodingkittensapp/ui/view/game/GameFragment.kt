@@ -93,8 +93,8 @@ class GameFragment : Fragment(), OnClickListener {
 
         //cards recyclerview
         recyclerView1 = view.findViewById(R.id.playerDeckRecyclerView)
-        recyclerView1.isClickable = false
         gameAdapter = PlayerDeckRecyclerViewAdapter(this)
+        gameAdapter.isClickable = false
         recyclerView1.adapter = gameAdapter
         recyclerView1.layoutManager = GridLayoutManager(activity,1, LinearLayoutManager.HORIZONTAL,false)
 
@@ -114,15 +114,12 @@ class GameFragment : Fragment(), OnClickListener {
             otherPlayersadapter.set(it)
         })
 
-        drawbtn.setOnClickListener{
-            println("CLICK")
-
-            // (cardsGameViewModel.myturn != gameViewModel.chosenMyGames.value?.turn.toString()){ // fix my turn para que este actualizada desde un principio con el valor
-            //    drawbtn.isClickable = false
-            //}
-            //Draw 1, verificar exploding kitten y si tiene defuse, de lo contrario pasar de turno o eliminar el jugador y pasar de turno
-            //Si aparece exploding kitten sin defuse mandar a una nueva vista que se vea la carta exploding kitten
+        if (!drawbtn.isClickable){
+            drawbtn.setOnClickListener{
+                println("CLICK")
+            }
         }
+
         return view
     }
 
@@ -182,9 +179,14 @@ class GameFragment : Fragment(), OnClickListener {
             // actualizo si el botton de draw card se puede usar
             if ((gameViewModel.turn % (playersGameViewModel.players.size + 1)).toString() == cardsGameViewModel.myturn){
                 drawbtn?.isClickable = true
-            }
-            else{
+            }else{
                 drawbtn?.isClickable = false
+            }
+
+            if ((gameViewModel.turn % (playersGameViewModel.players.size + 1)).toString() == cardsGameViewModel.myturn){
+                gameAdapter.isClickable = true
+            }else{
+                gameAdapter.isClickable = false
             }
 
 
