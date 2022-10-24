@@ -116,7 +116,7 @@ class GameFragment : Fragment(), OnClickListener {
 
         if (!drawbtn.isClickable){
             drawbtn.setOnClickListener{
-                cardsGameViewModel.drawCard(gamename,activity)
+                cardsGameViewModel.drawCard(uname, gamename, activity)
             }
         }
 

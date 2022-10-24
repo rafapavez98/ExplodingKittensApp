@@ -153,9 +153,9 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         })
     }
 
-    fun drawCard(gamename: String, activity: FragmentActivity?) {
+    fun drawCard(uname: String, gamename: String, activity: FragmentActivity?) {
         val service = getRetrofit().create(UsersRemoteRepository::class.java)
-        val call =  service.draw(gamename)
+        val call =  service.draw(uname)
         call.enqueue(object : Callback<APIMessageResponse> {
             override fun onFailure(call: Call<APIMessageResponse>, t: Throwable) {
                 println(t.message)
