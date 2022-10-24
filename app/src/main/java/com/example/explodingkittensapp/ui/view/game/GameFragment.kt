@@ -176,6 +176,7 @@ class GameFragment : Fragment(), OnClickListener {
             val defusecard = R.drawable.defuse
             val kittencard = R.drawable.kitten1
             val backcard = R.drawable.backcard
+            val attack = R.drawable.attack
 
             // agregar cada caso de cartas a medida que se van implementando mas cartas
             if (gameViewModel.lastcard == "5GKopmheJVBVJwcEMWtI") { // kitten
@@ -190,22 +191,25 @@ class GameFragment : Fragment(), OnClickListener {
             else if (gameViewModel.lastcard == ""){ // none
                 lastcardimageview?.setImageResource(backcard)
             }
+            else if (gameViewModel.lastcard == "vvqEBQusOvfprXO7eB7S"){ // attack
+                lastcardimageview?.setImageResource(attack)
+            }
 
             val textturn = view?.findViewById<TextView>(R.id.gameName)
             // actualizo si el botton de draw card se puede usar
             if ((gameViewModel.turn % (playersGameViewModel.players.size + 1)).toString() == cardsGameViewModel.myturn){
                 drawbtn?.isClickable = true
                 if (textturn != null) {
-                    textturn.text = "your turn"
+                    textturn.text = "Is Your Turn"
                 }
             }else{
                 drawbtn?.isClickable = false
                 if (textturn != null) {
-                    textturn.text = "wait for your turn"
+                    textturn.text = "Wait For Your Turn"
                 }
             }
 
-            if ((gameViewModel.turn % (playersGameViewModel.players.size + 1)).toString() == cardsGameViewModel.myturn){
+            if ((gameViewModel.turn % (playersGameViewModel.players.size + 1)).toString() == cardsGameViewModel.myturn && gameViewModel.lastcard != "vvqEBQusOvfprXO7eB7S"){
                 gameAdapter.isClickable = true
             }else{
                 gameAdapter.isClickable = false
