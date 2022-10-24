@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -60,8 +62,6 @@ class GameFragment : Fragment(), OnClickListener {
 
         val uname = userViewModel.uname
         val gamename = gameViewModel.gamename
-
-        val participants = gameViewModel.chosenMyGames.value?.participants
         val lastcard = gameViewModel.lastcard
         //val turn = gameViewModel.chosenMyGames.value?.turn
 
@@ -69,6 +69,12 @@ class GameFragment : Fragment(), OnClickListener {
 
         val drawbtn : Button = view.findViewById(R.id.drawbtn)
         val lastcardimageview : ImageView = view.findViewById(R.id.lastCardImageView)
+        val textturn : TextView = view.findViewById(R.id.gameName)
+
+        if (gameViewModel.turn != null){
+            textturn.text = "Player " + playersGameViewModel.players[gameViewModel.turn] + " Turn"
+        }
+
 
         val skipcard = R.drawable.skip
         val defusecard = R.drawable.defuse
@@ -157,6 +163,7 @@ class GameFragment : Fragment(), OnClickListener {
             // actualizo la ultima carta utilizada
             val drawbtn = view?.findViewById<Button>(R.id.drawbtn)
             val lastcardimageview = view?.findViewById<ImageView>(R.id.lastCardImageView)
+            val textturn = view?.findViewById<TextView>(R.id.gameName)
 
             val skipcard = R.drawable.skip
             val defusecard = R.drawable.defuse
@@ -188,6 +195,14 @@ class GameFragment : Fragment(), OnClickListener {
                 gameAdapter.isClickable = true
             }else{
                 gameAdapter.isClickable = false
+            }
+
+            if (gameViewModel.turn != null){
+                textturn?.text = "Player " + playersGameViewModel.players[gameViewModel.turn] + " Turn"
+            }
+
+            if (textturn?.text == userViewModel.uname && playersGameViewModel.players.size == 0){
+                Toast.makeText(activity, "Congratulations, You Won", Toast.LENGTH_LONG).show()
             }
 
 
