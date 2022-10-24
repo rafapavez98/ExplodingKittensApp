@@ -14,6 +14,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -210,6 +211,12 @@ class GameFragment : Fragment(), OnClickListener {
 
             if (playersGameViewModel.players.size == 0){
                 Toast.makeText(activity, "Congratulations, You Won", Toast.LENGTH_LONG).show()
+                if (view != null) {
+                    Navigation.findNavController(view).popBackStack()
+                }
+                if (view != null) {
+                    Navigation.findNavController(view).popBackStack()
+                }
             }
 
 
