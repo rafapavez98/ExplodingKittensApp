@@ -59,6 +59,7 @@
             android:layout_width="141dp"
             android:layout_height="204dp"
             android:background="@color/buttonback"
+            android:clickable="false"
             android:foreground="@drawable/unknown"
             android:text="draw"
             android:textIsSelectable="false"

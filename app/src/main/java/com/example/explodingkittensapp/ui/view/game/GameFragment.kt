@@ -75,6 +75,17 @@ class GameFragment : Fragment(), OnClickListener {
         val kittencard = R.drawable.kitten1
         val backcard = R.drawable.backcard
 
+        val textturn = view.findViewById<TextView>(R.id.gameName)
+        // actualizo si el botton de draw card se puede usar
+        if ((gameViewModel.turn % (playersGameViewModel.players.size + 1)).toString() == cardsGameViewModel.myturn){
+            drawbtn?.isClickable = true
+            textturn.text = "your turn"
+
+        }else{
+            drawbtn?.isClickable = false
+            textturn.text = "wait for your turn"
+        }
+
         // agregar cada caso de cartas a medida que se van implementando mas cartas
         if (lastcard == "5GKopmheJVBVJwcEMWtI") { // kitten
             lastcardimageview.setImageResource(kittencard)
@@ -157,7 +168,6 @@ class GameFragment : Fragment(), OnClickListener {
             // actualizo la ultima carta utilizada
             val drawbtn = view?.findViewById<Button>(R.id.drawbtn)
             val lastcardimageview = view?.findViewById<ImageView>(R.id.lastCardImageView)
-            val textturn = view?.findViewById<TextView>(R.id.gameName)
 
             val skipcard = R.drawable.skip
             val defusecard = R.drawable.defuse
@@ -178,11 +188,18 @@ class GameFragment : Fragment(), OnClickListener {
                 lastcardimageview?.setImageResource(backcard)
             }
 
+            val textturn = view?.findViewById<TextView>(R.id.gameName)
             // actualizo si el botton de draw card se puede usar
             if ((gameViewModel.turn % (playersGameViewModel.players.size + 1)).toString() == cardsGameViewModel.myturn){
                 drawbtn?.isClickable = true
+                if (textturn != null) {
+                    textturn.text = "your turn"
+                }
             }else{
                 drawbtn?.isClickable = false
+                if (textturn != null) {
+                    textturn.text = "wait for your turn"
+                }
             }
 
             if ((gameViewModel.turn % (playersGameViewModel.players.size + 1)).toString() == cardsGameViewModel.myturn){
@@ -190,11 +207,12 @@ class GameFragment : Fragment(), OnClickListener {
             }else{
                 gameAdapter.isClickable = false
             }
-
+            /*
             TODO() // mostrar el player que le toca jugar la lista players no esta en orden... hacer una call en la api que los entregue en orden?
             var tplayers = playersGameViewModel.players
             textturn?.text = gameViewModel.turn.toString()
             //textturn?.text = "Player " + playersGameViewModel.players[gameViewModel.turn].username + " Turn"
+            */
 
             if (textturn?.text == userViewModel.uname && playersGameViewModel.players.size == 0){
                 Toast.makeText(activity, "Congratulations, You Won", Toast.LENGTH_LONG).show()
