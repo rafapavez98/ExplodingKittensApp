@@ -31,8 +31,8 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     var playersLiveData = MutableLiveData<MutableList<UserModel>>()
     val chosenGame = MutableLiveData<CardModel>()
 
-    var myturn : String = ""
-    var myturnLiveData = MutableLiveData<String>()
+    var myturn : String? = null
+    var myturnLiveData = MutableLiveData<String?>()
 
     lateinit var navigator: Navigator
 
