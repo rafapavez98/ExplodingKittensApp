@@ -207,14 +207,8 @@ class GameFragment : Fragment(), OnClickListener {
             }else{
                 gameAdapter.isClickable = false
             }
-            /*
-            TODO() // mostrar el player que le toca jugar la lista players no esta en orden... hacer una call en la api que los entregue en orden?
-            var tplayers = playersGameViewModel.players
-            textturn?.text = gameViewModel.turn.toString()
-            //textturn?.text = "Player " + playersGameViewModel.players[gameViewModel.turn].username + " Turn"
-            */
 
-            if (textturn?.text == userViewModel.uname && playersGameViewModel.players.size == 0){
+            if (playersGameViewModel.players.size == 0){
                 Toast.makeText(activity, "Congratulations, You Won", Toast.LENGTH_LONG).show()
             }
 
