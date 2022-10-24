@@ -177,6 +177,7 @@ class GameFragment : Fragment(), OnClickListener {
             val kittencard = R.drawable.kitten1
             val backcard = R.drawable.backcard
             val attack = R.drawable.attack
+            val shuffle = R.drawable.shuffle
 
             // agregar cada caso de cartas a medida que se van implementando mas cartas
             if (gameViewModel.lastcard == "5GKopmheJVBVJwcEMWtI") { // kitten
@@ -193,6 +194,9 @@ class GameFragment : Fragment(), OnClickListener {
             }
             else if (gameViewModel.lastcard == "vvqEBQusOvfprXO7eB7S"){ // attack
                 lastcardimageview?.setImageResource(attack)
+            }
+            else if (gameViewModel.lastcard == "xwFAlcipGg6wXHryomoG"){ // shuffle
+                lastcardimageview?.setImageResource(shuffle)
             }
 
             val textturn = view?.findViewById<TextView>(R.id.gameName)
