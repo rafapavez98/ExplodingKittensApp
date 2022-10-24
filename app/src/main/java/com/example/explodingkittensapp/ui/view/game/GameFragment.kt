@@ -44,7 +44,7 @@ class GameFragment : Fragment(), OnClickListener {
 
     var handler: Handler = Handler()
     var runnable: Runnable? = null
-    var delay = 2000
+    var delay = 4000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,11 +71,6 @@ class GameFragment : Fragment(), OnClickListener {
         val drawbtn : Button = view.findViewById(R.id.drawbtn)
         val lastcardimageview : ImageView = view.findViewById(R.id.lastCardImageView)
 
-        val skipcard = R.drawable.skip
-        val defusecard = R.drawable.defuse
-        val kittencard = R.drawable.kitten1
-        val backcard = R.drawable.backcard
-
         val textturn = view.findViewById<TextView>(R.id.gameName)
         // actualizo si el botton de draw card se puede usar
         if ((gameViewModel.turn % (playersGameViewModel.players.size + 1)).toString() == cardsGameViewModel.myturn){
@@ -88,17 +83,8 @@ class GameFragment : Fragment(), OnClickListener {
         }
 
         // agregar cada caso de cartas a medida que se van implementando mas cartas
-        if (lastcard == "5GKopmheJVBVJwcEMWtI") { // kitten
-            lastcardimageview.setImageResource(kittencard)
-        }
-        else if (lastcard == "PHKvNq2afTrKUHYznI1W"){
-            lastcardimageview.setImageResource(skipcard)
-        }
-        else if (lastcard == "5VYvZ4k72Y2fbfEmGdiV"){
-            lastcardimageview.setImageResource(defusecard)
-        }
-        else if (lastcard == ""){
-            lastcardimageview.setImageResource(backcard)
+        if (lastcard == ""){
+            lastcardimageview.setImageResource(R.drawable.backcard)
         }
 
         cardsGameViewModel.cardsAPI(uname)
@@ -172,31 +158,25 @@ class GameFragment : Fragment(), OnClickListener {
             val drawbtn = view?.findViewById<Button>(R.id.drawbtn)
             val lastcardimageview = view?.findViewById<ImageView>(R.id.lastCardImageView)
 
-            val skipcard = R.drawable.skip
-            val defusecard = R.drawable.defuse
-            val kittencard = R.drawable.kitten1
-            val backcard = R.drawable.backcard
-            val attack = R.drawable.attack
-            val shuffle = R.drawable.shuffle
 
             // agregar cada caso de cartas a medida que se van implementando mas cartas
             if (gameViewModel.lastcard == "5GKopmheJVBVJwcEMWtI") { // kitten
-                lastcardimageview?.setImageResource(kittencard)
+                lastcardimageview?.setImageResource(R.drawable.kitten1)
             }
             else if (gameViewModel.lastcard == "PHKvNq2afTrKUHYznI1W"){ // skip
-                lastcardimageview?.setImageResource(skipcard)
+                lastcardimageview?.setImageResource(R.drawable.skip)
             }
             else if (gameViewModel.lastcard == "5VYvZ4k72Y2fbfEmGdiV"){ // defuse
-                lastcardimageview?.setImageResource(defusecard)
+                lastcardimageview?.setImageResource(R.drawable.defuse)
             }
             else if (gameViewModel.lastcard == ""){ // none
-                lastcardimageview?.setImageResource(backcard)
+                lastcardimageview?.setImageResource(R.drawable.backcard)
             }
             else if (gameViewModel.lastcard == "vvqEBQusOvfprXO7eB7S"){ // attack
-                lastcardimageview?.setImageResource(attack)
+                lastcardimageview?.setImageResource(R.drawable.attack)
             }
             else if (gameViewModel.lastcard == "xwFAlcipGg6wXHryomoG"){ // shuffle
-                lastcardimageview?.setImageResource(shuffle)
+                lastcardimageview?.setImageResource(R.drawable.shuffle)
             }
 
             val textturn = view?.findViewById<TextView>(R.id.gameName)
