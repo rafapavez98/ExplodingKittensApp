@@ -115,6 +115,10 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
                         profile.username = userAPI.username
                         profile.winrate = userAPI.winrate
                         profile.total_matches = userAPI.total_matches
+                        profile.wins = userAPI.wins
+                        profile.loses = userAPI.loses
+                        profile.defuses = userAPI.defuses
+
                     }
                 }
             }
