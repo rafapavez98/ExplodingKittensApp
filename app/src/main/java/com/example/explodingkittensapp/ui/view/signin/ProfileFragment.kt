@@ -2,6 +2,7 @@ package com.example.explodingkittensapp.ui.view.signin
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,13 +20,16 @@ class ProfileFragment : Fragment() {
 
     private val viewModel: UserViewModel by activityViewModels()
 
+    var handler: Handler = Handler()
+    var runnable: Runnable? = null
+    var delay = 5000
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
-
 
         val email : TextView = view.findViewById(R.id.profileEmail)
         val profileusername : TextView = view.findViewById(R.id.profileUserName)
@@ -46,5 +50,37 @@ class ProfileFragment : Fragment() {
         return view
     }
 
+    // para que corra cada 5 segundos
+    override fun onResume() {
+        handler.postDelayed(Runnable {
+            handler.postDelayed(runnable!!, delay.toLong())
+            //updatea los participantes
+            val uname = viewModel.uname
+            viewModel.getProfileAPI(uname)
+
+            val email = view?.findViewById<TextView>(R.id.profileEmail)
+            val profileusername = view?.findViewById<TextView>(R.id.profileUserName)
+            val profilematches = view?.findViewById<TextView>(R.id.profileMatches)
+            val profilewinrate = view?.findViewById<TextView>(R.id.profileWinrate)
+            val profilewins = view?.findViewById<TextView>(R.id.profileWins)
+            val profileloses = view?.findViewById<TextView>(R.id.profileLoses)
+            val profiledefuses = view?.findViewById<TextView>(R.id.profileDefuses)
+
+            email?.text = "Email: "+ viewModel.profile.email
+            profileusername?.text = viewModel.profile.username
+            profilematches?.text = "Total Matches: "+ viewModel.profile.total_matches
+            profilewinrate?.text = "WinRate: "+ viewModel.profile.winrate
+            profilewins?.text = "Wins: "+ viewModel.profile.wins
+            profileloses?.text = "Loses: "+ viewModel.profile.loses
+            profiledefuses?.text = "Defuses: "+ viewModel.profile.defuses
+
+        }.also { runnable = it }, delay.toLong())
+        super.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        handler.removeCallbacks(runnable!!)
+    }
 
 }

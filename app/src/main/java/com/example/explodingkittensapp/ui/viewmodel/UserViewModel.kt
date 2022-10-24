@@ -118,7 +118,6 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
                         profile.wins = userAPI.wins
                         profile.loses = userAPI.loses
                         profile.defuses = userAPI.defuses
-
                     }
                 }
             }

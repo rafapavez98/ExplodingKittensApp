@@ -77,7 +77,7 @@ class MyGamesViewModel(application: Application) : AndroidViewModel(application)
                             }
                         }
                         if(myGames.size != 0) {
-                            myGamesLiveData.postValue(myGames)
+                            myGamesLiveData.value = myGames
                         }
                         //friends2 = friendsAPI
                     }

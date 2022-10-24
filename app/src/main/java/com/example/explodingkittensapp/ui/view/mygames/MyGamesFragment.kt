@@ -54,11 +54,6 @@ class MyGamesFragment : Fragment(), OnClickListener {
         myGamesViewModel.myGamesLiveData.observe(viewLifecycleOwner, Observer {
             adapter.set(it)
         })
-        val toGamebtn : Button = view.findViewById(R.id.temporaltogamebtn)
-
-        toGamebtn.setOnClickListener {
-            myGamesViewModel.navigator.navigateToGame()
-        }
 
         return view
     }
