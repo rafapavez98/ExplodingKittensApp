@@ -69,7 +69,6 @@ class GameFragment : Fragment(), OnClickListener {
         val view = inflater.inflate(R.layout.fragment_game, container, false)
 
         val drawbtn : Button = view.findViewById(R.id.drawbtn)
-        val lastcardimageview : ImageView = view.findViewById(R.id.lastCardImageView)
 
         val textturn = view.findViewById<TextView>(R.id.gameName)
         // actualizo si el botton de draw card se puede usar
@@ -80,11 +79,6 @@ class GameFragment : Fragment(), OnClickListener {
         }else{
             drawbtn?.isClickable = false
             textturn.text = "wait for your turn"
-        }
-
-        // agregar cada caso de cartas a medida que se van implementando mas cartas
-        if (lastcard == ""){
-            lastcardimageview.setImageResource(R.drawable.backcard)
         }
 
         cardsGameViewModel.cardsAPI(uname)
@@ -193,7 +187,7 @@ class GameFragment : Fragment(), OnClickListener {
                 }
             }
 
-            if ((gameViewModel.turn % (playersGameViewModel.players.size + 1)).toString() == cardsGameViewModel.myturn && gameViewModel.lastcard != "vvqEBQusOvfprXO7eB7S"){
+            if ((gameViewModel.turn % (playersGameViewModel.players.size + 1)).toString() == cardsGameViewModel.myturn){
                 gameAdapter.isClickable = true
             }else{
                 gameAdapter.isClickable = false
