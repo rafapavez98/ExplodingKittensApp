@@ -1,10 +1,12 @@
 package com.example.explodingkittensapp.ui.viewmodel
 
 import android.app.Application
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.Navigation
 import com.example.explodingkittensapp.APImodels.Bodies.APIGameParticipants
 import com.example.explodingkittensapp.APImodels.Bodies.APIMyturn
 import com.example.explodingkittensapp.APImodels.Bodies.APIPlay
@@ -153,7 +155,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         })
     }
 
-    fun drawCard(uname: String, gamename: String, activity: FragmentActivity?) {
+    fun drawCard(uname: String, gamename: String, activity: FragmentActivity?, view: View) {
         val service = getRetrofit().create(UsersRemoteRepository::class.java)
         val call =  service.draw(uname)
         call.enqueue(object : Callback<APIMessageResponse> {
@@ -169,6 +171,8 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                         if (msg == "Lose"){
                             // cambiar alguna variable
                             Toast.makeText(activity, "Exploding Kitten, You Lose", Toast.LENGTH_LONG).show()
+                            Navigation.findNavController(view).popBackStack()
+                            Navigation.findNavController(view).popBackStack()
                         }
                         else if (msg == "Using Defuse"){
                             // cambiar alguna variable

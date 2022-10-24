@@ -116,7 +116,7 @@ class GameFragment : Fragment(), OnClickListener {
 
         if (!drawbtn.isClickable){
             drawbtn.setOnClickListener{
-                cardsGameViewModel.drawCard(uname, gamename, activity)
+                cardsGameViewModel.drawCard(uname, gamename, activity, view)
             }
         }
 
@@ -151,6 +151,7 @@ class GameFragment : Fragment(), OnClickListener {
             //updatea el juego que se esta jugando para ver el turno en el que esta y la ultima carta
             gameViewModel.myGamesAPI(userViewModel.uname) //actualiza los games para el jugador
             gameViewModel.updateMyGames(gameViewModel.gamename) //actualiza turn y lastcard del game actual
+            cardsGameViewModel.getMyTurn(APIMyturn(gameViewModel.gamename,userViewModel.uname))
 
             val view = view
             // actualizo la ultima carta utilizada
