@@ -110,8 +110,14 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                 if(response.body() != null){
                     val messageAPI = response.body()
                     if (messageAPI != null) {
-                        myturn = messageAPI.msg
-                        myturnLiveData.value = myturn
+                        if(messageAPI.msg == "null"){
+                            println("kick")
+                        }
+                        else{
+                            myturn = messageAPI.msg
+                            myturnLiveData.value = myturn
+                        }
+
                     }
                 }
             }
