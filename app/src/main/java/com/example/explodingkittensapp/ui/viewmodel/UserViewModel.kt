@@ -32,7 +32,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     var usersLiveData = MutableLiveData<MutableList<UserModel>>()
     lateinit var uname: String
     lateinit var id: String
-    var profile = UserModel("", "", "", "", 0, 0, listOf(), listOf(), "")
+    var profile = UserModel("", "", "", "", 0, 0, listOf(), listOf(), "", 0, 0, 0)
 
     var database: UserDao
     private val executor: ExecutorService = Executors.newSingleThreadExecutor()

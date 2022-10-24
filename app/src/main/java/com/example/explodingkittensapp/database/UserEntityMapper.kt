@@ -14,6 +14,9 @@ class UserEntityMapper : EntityMapper<UserEntity, UserModel> {
             type.friends,
             type.cards,
             type.lastgame,
+            type.wins,
+            type.loses,
+            type.defuses
         )
     }
 
@@ -28,6 +31,9 @@ class UserEntityMapper : EntityMapper<UserEntity, UserModel> {
             type.friends as MutableList<String>,
             type.cards as MutableList<String>,
             type.lastgame,
+            type.wins,
+            type.loses,
+            type.defuses
         )
     }
 }

@@ -13,5 +13,8 @@ data class UserModel(
     var winrate: Int,
     var friends: List<String>,
     var cards: List<String>,
-    var lastgame: String
+    var lastgame: String,
+    var wins: Int,
+    var loses: Int,
+    var defuses: Int,
 ): Parcelable

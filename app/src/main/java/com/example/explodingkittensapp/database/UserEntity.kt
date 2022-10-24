@@ -15,7 +15,10 @@ data class UserEntity(
     @ColumnInfo(name = "winrate") var winrate: Int,
     @ColumnInfo(name = "friends") var friends: MutableList<String>,
     @ColumnInfo(name = "cards") var cards: MutableList<String>,
-    @ColumnInfo(name = "lastgame") var lastgame: String
+    @ColumnInfo(name = "lastgame") var lastgame: String,
+    @ColumnInfo(name = "wins") var wins: Int,
+    @ColumnInfo(name = "loses") var loses: Int,
+    @ColumnInfo(name = "defuses") var defuses: Int,
 
 )
 

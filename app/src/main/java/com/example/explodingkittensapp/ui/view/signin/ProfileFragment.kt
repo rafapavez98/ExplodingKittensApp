@@ -31,11 +31,17 @@ class ProfileFragment : Fragment() {
         val profileusername : TextView = view.findViewById(R.id.profileUserName)
         val profilematches : TextView = view.findViewById(R.id.profileMatches)
         val profilewinrate : TextView = view.findViewById(R.id.profileWinrate)
+        val profilewins : TextView = view.findViewById(R.id.profileWins)
+        val profileloses : TextView = view.findViewById(R.id.profileLoses)
+        val profiledefuses : TextView = view.findViewById(R.id.profileDefuses)
 
         email.text = "Email: "+ viewModel.profile.email
         profileusername.text = viewModel.profile.username
         profilematches.text = "Total Matches: "+ viewModel.profile.total_matches
         profilewinrate.text = "WinRate: "+ viewModel.profile.winrate
+        profilewins.text = "Wins: "+ viewModel.profile.wins
+        profileloses.text = "Loses: "+ viewModel.profile.loses
+        profiledefuses.text = "Defuses: "+ viewModel.profile.defuses
 
         return view
     }
