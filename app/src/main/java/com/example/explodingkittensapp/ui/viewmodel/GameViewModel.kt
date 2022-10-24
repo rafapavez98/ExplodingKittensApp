@@ -168,10 +168,11 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                         var msg = messageAPI.msg
                         if (msg == "Lose"){
                             // cambiar alguna variable
-                            Toast.makeText(activity, "Exploding Kitten, You Lost", Toast.LENGTH_LONG).show()
+                            Toast.makeText(activity, "Exploding Kitten, You Lose", Toast.LENGTH_LONG).show()
                         }
                         else if (msg == "Using Defuse"){
                             // cambiar alguna variable
+                            nextTurn(gamename)
                             Toast.makeText(activity, "Exploding Kitten, Using Defuse", Toast.LENGTH_LONG).show()
                         }
                         else{
