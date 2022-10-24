@@ -19,6 +19,9 @@ data class UserEntity(
     @ColumnInfo(name = "wins") var wins: Int,
     @ColumnInfo(name = "loses") var loses: Int,
     @ColumnInfo(name = "defuses") var defuses: Int,
+    @ColumnInfo(name = "shuffles") var shuffles: Int,
+    @ColumnInfo(name = "attacks") var attacks: Int,
+    @ColumnInfo(name = "skips") var skips: Int,
 
 )
 

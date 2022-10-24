@@ -32,7 +32,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     var usersLiveData = MutableLiveData<MutableList<UserModel>>()
     lateinit var uname: String
     lateinit var id: String
-    var profile = UserModel("", "", "", "", 0, 0.0, listOf(), listOf(), "", 0, 0, 0)
+    var profile = UserModel("", "", "", "", 0, 0.0, listOf(), listOf(), "", 0, 0, 0,0,0,0)
 
     var database: UserDao
     private val executor: ExecutorService = Executors.newSingleThreadExecutor()
@@ -118,6 +118,9 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
                         profile.wins = userAPI.wins
                         profile.loses = userAPI.loses
                         profile.defuses = userAPI.defuses
+                        profile.shuffles = userAPI.shuffles
+                        profile.attacks = userAPI.attacks
+                        profile.skips = userAPI.skips
                     }
                 }
             }

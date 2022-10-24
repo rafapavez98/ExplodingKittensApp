@@ -47,6 +47,9 @@ class SigninFragment : Fragment() {
             var swins = 0
             var sloses = 0
             var sdefuses = 0
+            var sshuffles = 0
+            var sattacks = 0
+            var sskips = 0
 
             if(semail.isEmpty()){
                 signinmail.error = "Email required"
@@ -73,7 +76,7 @@ class SigninFragment : Fragment() {
                 signinpassword2.requestFocus()
                 return@setOnClickListener
             }
-            val newAPIUser = APIUser(semail,susername,spassword,stotal_matches,swinrate,sfriends,scards,swins,sloses,sdefuses)
+            val newAPIUser = APIUser(semail,susername,spassword,stotal_matches,swinrate,sfriends,scards,swins,sloses,sdefuses,sshuffles,sattacks,sskips)
             viewModel.addUserAPI(newAPIUser)
             Toast.makeText(activity, "User Created", Toast.LENGTH_LONG).show()
             Navigation.findNavController(view).navigate(R.id.action_signinFragment_to_loginFragment)

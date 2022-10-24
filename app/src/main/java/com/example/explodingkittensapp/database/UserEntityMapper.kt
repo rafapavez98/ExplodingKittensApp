@@ -16,7 +16,10 @@ class UserEntityMapper : EntityMapper<UserEntity, UserModel> {
             type.lastgame,
             type.wins,
             type.loses,
-            type.defuses
+            type.defuses,
+            type.shuffles,
+            type.attacks,
+            type.skips
         )
     }
 
@@ -33,7 +36,10 @@ class UserEntityMapper : EntityMapper<UserEntity, UserModel> {
             type.lastgame,
             type.wins,
             type.loses,
-            type.defuses
+            type.defuses,
+            type.shuffles,
+            type.attacks,
+            type.skips
         )
     }
 }

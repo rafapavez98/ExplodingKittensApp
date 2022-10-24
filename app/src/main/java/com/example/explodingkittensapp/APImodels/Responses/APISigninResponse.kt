@@ -12,5 +12,8 @@ data class APISigninResponse(
     var lastgame: String,
     val wins: Int,
     val loses: Int,
-    val defuses: Int
+    val defuses: Int,
+    var shuffles: Int,
+    var attacks: Int,
+    var skips: Int
 )

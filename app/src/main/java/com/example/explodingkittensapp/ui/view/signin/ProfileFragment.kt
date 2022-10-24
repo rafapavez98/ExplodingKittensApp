@@ -65,6 +65,9 @@ class ProfileFragment : Fragment() {
             val profilewins = view?.findViewById<TextView>(R.id.profileWins)
             val profileloses = view?.findViewById<TextView>(R.id.profileLoses)
             val profiledefuses = view?.findViewById<TextView>(R.id.profileDefuses)
+            val profileshuffles = view?.findViewById<TextView>(R.id.profileShuffle)
+            val profileattacks = view?.findViewById<TextView>(R.id.profileAttacks)
+            val profileskips = view?.findViewById<TextView>(R.id.profileSkip)
 
             email?.text = "Email: "+ viewModel.profile.email
             profileusername?.text = viewModel.profile.username
@@ -73,6 +76,9 @@ class ProfileFragment : Fragment() {
             profilewins?.text = "Wins: "+ viewModel.profile.wins
             profileloses?.text = "Loses: "+ viewModel.profile.loses
             profiledefuses?.text = "Defuses: "+ viewModel.profile.defuses
+            profileshuffles?.text = "Shuffles: "+ viewModel.profile.shuffles
+            profileattacks?.text = "Attacks: "+ viewModel.profile.attacks
+            profileskips?.text = "Skips: "+ viewModel.profile.skips
 
         }.also { runnable = it }, delay.toLong())
         super.onResume()

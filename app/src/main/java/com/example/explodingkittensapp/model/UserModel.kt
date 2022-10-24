@@ -17,4 +17,7 @@ data class UserModel(
     var wins: Int,
     var loses: Int,
     var defuses: Int,
+    var shuffles: Int,
+    var attacks: Int,
+    var skips: Int
 ): Parcelable
