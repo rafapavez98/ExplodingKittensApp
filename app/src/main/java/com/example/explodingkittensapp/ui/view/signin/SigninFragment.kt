@@ -41,7 +41,7 @@ class SigninFragment : Fragment() {
             val spassword = signinpassword.text.toString()
             val spassword2 = signinpassword2.text.toString()
             val stotal_matches = 0
-            val swinrate = 100
+            val swinrate = 100.0
             val sfriends = mutableListOf<String>()
             val scards = mutableListOf<String>()
             var swins = 0

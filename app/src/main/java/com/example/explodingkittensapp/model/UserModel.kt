@@ -10,7 +10,7 @@ data class UserModel(
     var username: String,
     var password: String,
     var total_matches: Int,
-    var winrate: Int,
+    var winrate: Double,
     var friends: List<String>,
     var cards: List<String>,
     var lastgame: String,

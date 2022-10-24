@@ -9,7 +9,7 @@ data class APIUser(
     var username: String,
     var password: String,
     var total_matches: Int,
-    var winrate: Int,
+    var winrate: Double,
     var friends: MutableList<String>,
     var cards: MutableList<String>,
     var wins: Int,

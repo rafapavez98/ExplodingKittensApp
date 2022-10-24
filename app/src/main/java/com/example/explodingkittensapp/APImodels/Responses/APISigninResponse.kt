@@ -6,9 +6,10 @@ data class APISigninResponse(
     val username: String,
     val password: String,
     val total_matches: Int,
-    val winrate: Int,
+    val winrate: Double,
     val friends: MutableList<String>,
     val cards: MutableList<String>,
+    var lastgame: String,
     val wins: Int,
     val loses: Int,
     val defuses: Int

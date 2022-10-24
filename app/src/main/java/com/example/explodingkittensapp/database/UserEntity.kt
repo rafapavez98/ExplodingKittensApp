@@ -12,7 +12,7 @@ data class UserEntity(
     @ColumnInfo(name = "username") var username: String,
     @ColumnInfo(name = "password") var password: String,
     @ColumnInfo(name = "total_matches") var total_matches: Int,
-    @ColumnInfo(name = "winrate") var winrate: Int,
+    @ColumnInfo(name = "winrate") var winrate: Double,
     @ColumnInfo(name = "friends") var friends: MutableList<String>,
     @ColumnInfo(name = "cards") var cards: MutableList<String>,
     @ColumnInfo(name = "lastgame") var lastgame: String,
