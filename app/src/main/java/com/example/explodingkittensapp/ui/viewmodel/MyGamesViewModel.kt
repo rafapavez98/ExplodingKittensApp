@@ -76,9 +76,9 @@ class MyGamesViewModel(application: Application) : AndroidViewModel(application)
                                 //saveFriend(user)
                             }
                         }
-                        if(myGames.size != 0) {
-                            myGamesLiveData.value = myGames
-                        }
+
+                        myGamesLiveData.value = myGames
+
                         //friends2 = friendsAPI
                     }
                 }
