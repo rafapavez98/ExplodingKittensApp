@@ -1,11 +1,14 @@
 package com.example.explodingkittensapp.ui.view.game
 
+import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -36,6 +39,10 @@ class GameFragment : Fragment(), OnClickListener {
     private val userViewModel: UserViewModel by activityViewModels()
     private val gameViewModel: MyGamesViewModel by activityViewModels()
 
+    var handler: Handler = Handler()
+    var runnable: Runnable? = null
+    var delay = 5000
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         cardsGameViewModel.setNavigator(activity as MainActivity)
@@ -55,7 +62,7 @@ class GameFragment : Fragment(), OnClickListener {
         val gamename = gameViewModel.gamename
 
         val participants = gameViewModel.chosenMyGames.value?.participants
-        val lastcard = gameViewModel.chosenMyGames.value?.lastcard
+        val lastcard = gameViewModel.lastcard
         //val turn = gameViewModel.chosenMyGames.value?.turn
 
         val view = inflater.inflate(R.layout.fragment_game, container, false)
@@ -66,6 +73,7 @@ class GameFragment : Fragment(), OnClickListener {
         val skipcard = R.drawable.skip
         val defusecard = R.drawable.defuse
         val kittencard = R.drawable.kitten1
+        val backcard = R.drawable.backcard
 
         // agregar cada caso de cartas a medida que se van implementando mas cartas
         if (lastcard == "5GKopmheJVBVJwcEMWtI") { // kitten
@@ -77,11 +85,15 @@ class GameFragment : Fragment(), OnClickListener {
         else if (lastcard == "5VYvZ4k72Y2fbfEmGdiV"){
             lastcardimageview.setImageResource(defusecard)
         }
+        else if (lastcard == ""){
+            lastcardimageview.setImageResource(backcard)
+        }
 
         cardsGameViewModel.cardsAPI(uname)
 
         //cards recyclerview
         recyclerView1 = view.findViewById(R.id.playerDeckRecyclerView)
+        recyclerView1.isClickable = false
         gameAdapter = PlayerDeckRecyclerViewAdapter(this)
         recyclerView1.adapter = gameAdapter
         recyclerView1.layoutManager = GridLayoutManager(activity,1, LinearLayoutManager.HORIZONTAL,false)
@@ -116,9 +128,6 @@ class GameFragment : Fragment(), OnClickListener {
 
     override fun onClickItem(item: Any) {
         if (item is CardModel){
-            //if (cardsGameViewModel.myturn != gameViewModel.chosenMyGames.value?.turn.toString()) { // fix my turn para que este actualizada desde un principio con el valor
-            //    item.isClickable = false
-            //}
             //Jugar una carta
             val play = APIPlay(item.id, userViewModel.uname, gameViewModel.gamename)
             cardsGameViewModel.playCard(play)
@@ -131,6 +140,65 @@ class GameFragment : Fragment(), OnClickListener {
             TODO("Not yet implemented")
         }
 
+    }
+
+    // para que corra cada 5 segundos
+    override fun onResume() {
+        handler.postDelayed(Runnable {
+            handler.postDelayed(runnable!!, delay.toLong())
+            //updatea los participantes
+            var apipart = APIGameParticipants(userViewModel.uname, gameViewModel.gamename)
+            playersGameViewModel.playersAPI(apipart) //actualiza playerslivedata
+            //updatea las cartas de la mano                         y la postea a la api
+            cardsGameViewModel.cardsAPI(userViewModel.uname) //actualiza gamelivedata
+            //updatea el juego que se esta jugando para ver el turno en el que esta y la ultima carta
+            gameViewModel.myGamesAPI(userViewModel.uname) //actualiza los games para el jugador
+            gameViewModel.updateMyGames(gameViewModel.gamename) //actualiza turn y lastcard del game actual
+
+            val view = view
+            // actualizo la ultima carta utilizada
+            val drawbtn = view?.findViewById<Button>(R.id.drawbtn)
+            val lastcardimageview = view?.findViewById<ImageView>(R.id.lastCardImageView)
+
+            val skipcard = R.drawable.skip
+            val defusecard = R.drawable.defuse
+            val kittencard = R.drawable.kitten1
+            val backcard = R.drawable.backcard
+
+            // agregar cada caso de cartas a medida que se van implementando mas cartas
+            if (gameViewModel.lastcard == "5GKopmheJVBVJwcEMWtI") { // kitten
+                lastcardimageview?.setImageResource(kittencard)
+            }
+            else if (gameViewModel.lastcard == "PHKvNq2afTrKUHYznI1W"){ // skip
+                lastcardimageview?.setImageResource(skipcard)
+            }
+            else if (gameViewModel.lastcard == "5VYvZ4k72Y2fbfEmGdiV"){ // defuse
+                lastcardimageview?.setImageResource(defusecard)
+            }
+            else if (gameViewModel.lastcard == ""){ // none
+                lastcardimageview?.setImageResource(backcard)
+            }
+
+            // actualizo si el botton de draw card se puede usar
+            if ((gameViewModel.turn % (playersGameViewModel.players.size + 1)).toString() == cardsGameViewModel.myturn){
+                drawbtn?.isClickable = true
+                var recyclerView1 = view?.findViewById<RecyclerView>(R.id.playerDeckRecyclerView)
+                recyclerView1?.isClickable = true
+            }
+            else{
+                drawbtn?.isClickable = false
+                var recyclerView1 = view?.findViewById<RecyclerView>(R.id.playerDeckRecyclerView)
+                recyclerView1?.isClickable = false
+            }
+
+
+        }.also { runnable = it }, delay.toLong())
+        super.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        handler.removeCallbacks(runnable!!)
     }
 
 

@@ -39,4 +39,7 @@ interface UsersRemoteRepository {
 
     @POST("playcard")
     fun playCard(@Body play: APIPlay): Call<APIMessageResponse>
+
+    @GET("drawgame/{gamename}")
+    fun nextTurn(@Path("gamename") gamename: String): Call<APIMessageResponse>
 }

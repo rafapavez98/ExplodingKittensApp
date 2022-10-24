@@ -9,6 +9,7 @@ import com.example.explodingkittensapp.APImodels.Bodies.APIPlay
 import com.example.explodingkittensapp.APImodels.Responses.APIMessageResponse
 import com.example.explodingkittensapp.activities.MainActivity
 import com.example.explodingkittensapp.model.CardModel
+import com.example.explodingkittensapp.model.MatchModel
 import com.example.explodingkittensapp.model.UserModel
 import com.example.explodingkittensapp.navigation.Navigator
 import com.example.explodingkittensapp.networking.UsersRemoteRepository
@@ -25,7 +26,9 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     var gameLiveData = MutableLiveData<MutableList<CardModel>>()
     var playersLiveData = MutableLiveData<MutableList<UserModel>>()
     val chosenGame = MutableLiveData<CardModel>()
-    var myturn = ""
+
+    var myturn : String = ""
+    var myturnLiveData = MutableLiveData<String>()
 
     lateinit var navigator: Navigator
 
@@ -104,7 +107,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                     val messageAPI = response.body()
                     if (messageAPI != null) {
                         myturn = messageAPI.msg
-                        //println(myturn)
+                        myturnLiveData.value = myturn
                     }
                 }
             }
@@ -114,6 +117,26 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     fun playCard(apiPlay: APIPlay) {
         val service = getRetrofit().create(UsersRemoteRepository::class.java)
         val call =  service.playCard(apiPlay)
+        call.enqueue(object : Callback<APIMessageResponse> {
+            override fun onFailure(call: Call<APIMessageResponse>, t: Throwable) {
+                println(t.message)
+            }
+            override fun onResponse(call: Call<APIMessageResponse>, response: Response<APIMessageResponse>) {
+                if(response.body() != null){
+                    val messageAPI = response.body()
+                    if (messageAPI != null) {
+                        //myturn = messageAPI.msg
+                        var gamename = apiPlay.gamename
+                        nextTurn(gamename)
+                    }
+                }
+            }
+        })
+    }
+
+    fun nextTurn(gamename: String) {
+        val service = getRetrofit().create(UsersRemoteRepository::class.java)
+        val call =  service.nextTurn(gamename)
         call.enqueue(object : Callback<APIMessageResponse> {
             override fun onFailure(call: Call<APIMessageResponse>, t: Throwable) {
                 println(t.message)

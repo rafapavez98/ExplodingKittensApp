@@ -29,9 +29,12 @@ class MyGamesViewModel(application: Application) : AndroidViewModel(application)
     val chosenMyGames = MutableLiveData<MatchModel>()
     lateinit var gamename: String
 
-    lateinit var navigator: Navigator
+    var turn : Int = 0
+    lateinit var lastcard : String
 
-    //lateinit var navigator: Navigator
+
+
+    lateinit var navigator: Navigator
 
     //var database: UserDao
     private val executor: ExecutorService = Executors.newSingleThreadExecutor()
@@ -86,6 +89,17 @@ class MyGamesViewModel(application: Application) : AndroidViewModel(application)
     fun selectMyGames(item: MatchModel){
         chosenMyGames.value = item
         gamename = item.gamename
-        println(chosenMyGames)
+        turn = item.turn
+        lastcard = item.lastcard
+    }
+
+    fun updateMyGames(gamename: String){
+        for (game in myGames){
+            if (game.gamename == gamename){
+                chosenMyGames.value = game
+                turn = game.turn
+                lastcard = game.lastcard
+            }
+        }
     }
 }
