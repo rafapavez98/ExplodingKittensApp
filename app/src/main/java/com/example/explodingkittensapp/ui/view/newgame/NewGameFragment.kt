@@ -77,6 +77,8 @@ class NewGameFragment : Fragment(), OnClickListener {
                 val newMatch = APIMatch(nameedittext.text.toString(),userViewModel.uname,settings, participants)
                 viewModel.createMatchAPI(newMatch, activity, view)
 
+                Thread.sleep(2000)
+
                 for (username in invites){
                     var newInvite = APIMinvite(nameedittext.text.toString(), username, userViewModel.uname)
                     newGameViewModel.createInviteMatchAPI(newInvite)
