@@ -1,6 +1,8 @@
 package com.example.explodingkittensapp.ui.viewmodel
 
 import android.app.Application
+import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.explodingkittensapp.APImodels.Bodies.APIGameParticipants
@@ -126,8 +128,6 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                     val messageAPI = response.body()
                     if (messageAPI != null) {
                         //myturn = messageAPI.msg
-                        var gamename = apiPlay.gamename
-                        nextTurn(gamename)
                     }
                 }
             }
@@ -147,6 +147,37 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                     if (messageAPI != null) {
                         //myturn = messageAPI.msg
                         //println(myturn)
+                    }
+                }
+            }
+        })
+    }
+
+    fun drawCard(gamename: String, activity: FragmentActivity?) {
+        val service = getRetrofit().create(UsersRemoteRepository::class.java)
+        val call =  service.draw(gamename)
+        call.enqueue(object : Callback<APIMessageResponse> {
+            override fun onFailure(call: Call<APIMessageResponse>, t: Throwable) {
+                println(t.message)
+            }
+            override fun onResponse(call: Call<APIMessageResponse>, response: Response<APIMessageResponse>) {
+                if(response.body() != null){
+                    val messageAPI = response.body()
+                    if (messageAPI != null) {
+
+                        var msg = messageAPI.msg
+                        if (msg == "Lose"){
+                            // cambiar alguna variable
+                            Toast.makeText(activity, "Exploding Kitten, You Lost", Toast.LENGTH_LONG).show()
+                        }
+                        else if (msg == "Using Defuse"){
+                            // cambiar alguna variable
+                            Toast.makeText(activity, "Exploding Kitten, Using Defuse", Toast.LENGTH_LONG).show()
+                        }
+                        else{
+                            nextTurn(gamename)
+                            Toast.makeText(activity, "Turn Ended", Toast.LENGTH_LONG).show()
+                        }
                     }
                 }
             }

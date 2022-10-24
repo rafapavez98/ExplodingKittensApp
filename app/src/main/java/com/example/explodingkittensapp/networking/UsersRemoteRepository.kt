@@ -42,4 +42,7 @@ interface UsersRemoteRepository {
 
     @GET("drawgame/{gamename}")
     fun nextTurn(@Path("gamename") gamename: String): Call<APIMessageResponse>
+
+    @GET("draw/{username}")
+    fun draw(@Path("username") username: String): Call<APIMessageResponse>
 }
