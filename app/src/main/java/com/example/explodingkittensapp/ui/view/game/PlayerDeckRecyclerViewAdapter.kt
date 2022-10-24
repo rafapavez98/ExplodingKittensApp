@@ -13,6 +13,7 @@ import com.example.explodingkittensapp.model.CardModel
 class PlayerDeckRecyclerViewAdapter(override val onClickListener: OnClickListener): RecyclerView.Adapter<PlayerDeckRecyclerViewAdapter.UserViewHolder>(),
     AdapterView {
     var data = listOf<CardModel>()
+    var isClickable = true
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

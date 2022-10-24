@@ -182,13 +182,9 @@ class GameFragment : Fragment(), OnClickListener {
             // actualizo si el botton de draw card se puede usar
             if ((gameViewModel.turn % (playersGameViewModel.players.size + 1)).toString() == cardsGameViewModel.myturn){
                 drawbtn?.isClickable = true
-                var recyclerView1 = view?.findViewById<RecyclerView>(R.id.playerDeckRecyclerView)
-                recyclerView1?.isClickable = true
             }
             else{
                 drawbtn?.isClickable = false
-                var recyclerView1 = view?.findViewById<RecyclerView>(R.id.playerDeckRecyclerView)
-                recyclerView1?.isClickable = false
             }
 
 

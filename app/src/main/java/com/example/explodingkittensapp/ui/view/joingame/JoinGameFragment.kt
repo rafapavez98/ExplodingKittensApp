@@ -1,6 +1,7 @@
 package com.example.explodingkittensapp.ui.view.joingame
 
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -33,6 +34,10 @@ class JoinGameFragment : Fragment(), OnClickListener {
     private val joinGameViewModel: JoinGameViewModel by activityViewModels()
     private val userViewModel: UserViewModel by activityViewModels()
 
+    var handler: Handler = Handler()
+    var runnable: Runnable? = null
+    var delay = 5000
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         joinGameViewModel.setNavigator(activity as MainActivity)
@@ -64,5 +69,22 @@ class JoinGameFragment : Fragment(), OnClickListener {
             joinGameViewModel.selectJoinGame(item)
             joinGameViewModel.navigator.navigateToJoinGameDetail()
         }
+    }
+
+    // para que corra cada 5 segundos
+    override fun onResume() {
+        handler.postDelayed(Runnable {
+            handler.postDelayed(runnable!!, delay.toLong())
+            //updatea los participantes
+            val uname = userViewModel.uname
+            joinGameViewModel.joinGameAPI(uname)
+
+        }.also { runnable = it }, delay.toLong())
+        super.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        handler.removeCallbacks(runnable!!)
     }
 }

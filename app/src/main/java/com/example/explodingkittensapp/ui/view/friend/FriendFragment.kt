@@ -1,6 +1,7 @@
 package com.example.explodingkittensapp.ui.view.friend
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.*
 import android.widget.Button
 import androidx.fragment.app.Fragment
@@ -24,6 +25,10 @@ class FriendFragment : Fragment(), OnClickListener {
     lateinit var recyclerView: RecyclerView
     private val friendViewModel: FriendViewModel by activityViewModels()
     private val userViewModel: UserViewModel by activityViewModels()
+
+    var handler: Handler = Handler()
+    var runnable: Runnable? = null
+    var delay = 5000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,5 +71,22 @@ class FriendFragment : Fragment(), OnClickListener {
             friendViewModel.selectFriend(item)
             friendViewModel.navigator.navigateToFriendDetail()
         }
+    }
+
+    // para que corra cada 5 segundos
+    override fun onResume() {
+        handler.postDelayed(Runnable {
+            handler.postDelayed(runnable!!, delay.toLong())
+            //updatea los participantes
+            val uname = userViewModel.uname
+            friendViewModel.friendsAPI(uname)
+
+        }.also { runnable = it }, delay.toLong())
+        super.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        handler.removeCallbacks(runnable!!)
     }
 }
